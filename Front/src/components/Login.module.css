@@ -1,0 +1,51 @@
+/* Login.module.css */
+/* Estilo del contenedor principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e5ddd5; /* Color de fondo similar a WhatsApp */
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+  }
+  
+  /* Estilo del título */
+  .h1 {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #128c7e; /* Color verde característico de WhatsApp */
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Estilo del contenedor de los campos de texto y botón */
+  .form-group {
+    display: flex;
+    width: 100%;
+    max-width: 400px; /* Tamaño máximo del contenedor */
+  }
+  
+  /* Estilo de los campos de texto */
+  .usuario, .password, .button {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .usuario input, .password input {
+    padding: 12px;
+    border: 1px solid #ced4da; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1rem;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+  .usuario label, .password label {
+    display: flex;
+    margin-bottom: 0.5rem;
+    color: #495057; /* Color gris oscuro para el texto */
+  }
+  
