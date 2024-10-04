@@ -5,6 +5,8 @@ import styles from "./Login.module.css";
 import Button from './Button';
 import Text from './Text';
 import { Red_Rose } from "next/font/google";
+import ButtonChat from "./ButtonChat";
+import ButtonMensaje from "./ButtonMensaje";
 
 export default function Login() {
     const [usuario, setUsuario] = useState('');
@@ -69,10 +71,15 @@ export default function Login() {
     function redirigir(){
         location.href = "/home?idUsuario=" + localStorage.getItem("idUsuario")
     }
+
+    function registro(){
+        router.replace("registro")
+    }
     
     return (
         <div className={styles.container}>
-            <h1 className={styles.h1}>BIENVENIDO, INICIE SESIÓN</h1>
+            <h1 className={styles.h1}>BIENVENIDO A 5411 ESTATE</h1>
+            <h1 className={styles.h1}>INICIE SESIÓN</h1>
 
             <div className={styles.formGroup}>
                 <div className={styles.usuario}>
@@ -83,6 +90,10 @@ export default function Login() {
                 </div>
                 <div className={styles.button}>
                     <Button className={styles.button} onClick={handleClick} text="Iniciar sesión" />
+                </div>
+                <div className={styles.usuario}>
+                    <h3>¿No tienes una cuenta?</h3>
+                    <ButtonMensaje className={styles.buttonMensaje} onClick={registro} text="Regístrate" />
                 </div>
             </div>
         </div>
