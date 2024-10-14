@@ -77,25 +77,28 @@ export default function Login() {
     }
     
     return (
-        <div className={styles.container}>
-            <h1 className={styles.h1}>BIENVENIDO A 5411 ESTATE</h1>
-            <h1 className={styles.h1}>INICIE SESIÓN</h1>
+        <>
+            <img src=""
+            <div className={styles.container}>
+                <h1 className={styles.h1}>BIENVENIDO A 5411 ESTATE</h1>
+                <h1 className={styles.h1}>INICIE SESIÓN</h1>
 
-            <div className={styles.formGroup}>
-                <div className={styles.usuario}>
-                    <Text textoH2="Usuario" placeholder="Nombre de Usuario" onChange={setUsuario}/>
-                </div>
-                <div className={styles.password}>
-                    <Text textoH2="Contraseña" placeholder="Contraseña" onChange={setContraseña}/>
-                </div>
-                <div className={styles.button}>
-                    <Button className={styles.button} onClick={handleClick} text="Iniciar sesión" />
-                </div>
-                <div className={styles.usuario}>
-                    <h3>¿No tienes una cuenta?</h3>
-                    <ButtonMensaje className={styles.buttonMensaje} onClick={registro} text="Regístrate" />
+                <div className={styles.formGroup}>
+                    <div className={styles.usuario}>
+                        <Text textoH2="Usuario" placeholder="Nombre de Usuario" onChange={setUsuario}/>
+                    </div>
+                    <div className={styles.password}>
+                        <Text textoH2="Contraseña" placeholder="Contraseña" onChange={setContraseña}/>
+                    </div>
+                    <div className={styles.button}>
+                        <Button className={styles.button} onClick={handleClick} text="Iniciar sesión" />
+                    </div>
+                    <div className={styles.usuario}>
+                        <h3>¿No tienes una cuenta?</h3>
+                        <ButtonMensaje className={styles.buttonMensaje} onClick={registro} text="Regístrate" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
