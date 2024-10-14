@@ -6,10 +6,12 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /*background-color: #69645f93; /* Color de fondo similar a WhatsApp */
+    /* background-color: #69645f;/* Color de fondo similar a WhatsApp */
     padding: 2rem;
     font-family: 'Roboto', sans-serif; /* Tipografía moderna */
-    background-image: url('/Front/public/EdificioFondo.jpg');
+    height: 100%;
+    width: 100%;
+    background-image: url('/EdificioFondo.jpg');
   }
   
   /* Estilo del título */
@@ -27,6 +29,7 @@
     display: flex;
     width: 100%;
     max-width: 400px; /* Tamaño máximo del contenedor */
+    background-color: #69645f;
   }
   
   /* Estilo de los campos de texto */
