@@ -6,9 +6,10 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #fff9f3; /* Color de fondo similar a WhatsApp */
+    /*background-color: #69645f93; /* Color de fondo similar a WhatsApp */
     padding: 2rem;
     font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+    background-image: url('/Front/public/EdificioFondo.jpg');
   }
   
   /* Estilo del título */
@@ -16,7 +17,7 @@
     display: flex;
     font-size: 2rem;
     font-weight: 700;
-    color: #128c7e; /* Color verde característico de WhatsApp */
+    color: #ebebeb; /* Color verde característico de WhatsApp */
     margin-bottom: 2rem;
     text-align: center;
   }
@@ -32,20 +33,20 @@
   .usuario, .password, .button {
     text-align: center;
     margin-bottom: 1rem;
+    color: #ebebeb;
   }
   
   .usuario input, .password input {
     padding: 12px;
-    border: 1px solid #ced4da; /* Borde gris claro */
+    border: 1px solid #69645f; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     font-size: 1rem;
     width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    box-shadow: 0 2px 4px #302e2c; /* Sombra ligera */
   }
   
   .usuario label, .password label {
     display: flex;
     margin-bottom: 0.5rem;
-    color: #495057; /* Color gris oscuro para el texto */
+    color: #ebebeb; /* Color gris oscuro para el texto */
   }
-  

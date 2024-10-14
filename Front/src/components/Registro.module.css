@@ -2,27 +2,29 @@
 
 /* Estilo del contenedor principal */
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #797068; /* Color de fondo similar a WhatsApp */
-    padding: 2rem;
-    font-family: 'Roboto', sans-serif; /* Tipografía moderna */
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /*background-color: #69645f93; /* Color de fondo similar a WhatsApp */
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+  background-image: url('/Front/public/EdificioFondo.jpg');
+}
   
   /* Estilo del título */
   .h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #128c7e; /* Color verde característico de WhatsApp */
+    color: #ebebeb; /* Color verde característico de WhatsApp */
     margin-bottom: 2rem;
     text-align: center;
   }
   
   /* Estilo del contenedor de los campos de texto y botón */
   .form-group {
+    display: flex;
     width: 100%;
     max-width: 400px; /* Tamaño máximo del contenedor */
   }
@@ -30,20 +32,22 @@
   /* Estilo de los campos de texto */
   .usuario, .password {
     margin-bottom: 1rem;
+    margin-bottom: 1rem;
+    color: #ebebeb;
   }
   
   .usuario input, .password input {
     padding: 12px;
-    border: 1px solid #ced4da; /* Borde gris claro */
+    border: 1px solid #69645f; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
     font-size: 1rem;
     width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    box-shadow: 0 2px 4px #302e2c; /* Sombra ligera */
   }
   
   .usuario label, .password label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #495057; /* Color gris oscuro para el texto */
+    color: #ebebeb; /* Color gris oscuro para el texto */
   }
   

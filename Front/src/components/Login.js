@@ -73,12 +73,12 @@ export default function Login() {
     }
 
     function registro(){
-        router.replace("registro")
+        router.push("registro")
     }
-    
+
     return (
         <>
-            <img src=""
+            
             <div className={styles.container}>
                 <h1 className={styles.h1}>BIENVENIDO A 5411 ESTATE</h1>
                 <h1 className={styles.h1}>INICIE SESIÓN</h1>
