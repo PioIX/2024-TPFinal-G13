@@ -9,7 +9,7 @@
 
 /* Estilo del encabezado */
 .header {
-  background-color: #25d366; /* Color verde característico de WhatsApp */
+  background-color: #50350dc9; /* Color verde característico de WhatsApp */
   color: #fff;
   padding: 1rem;
   text-align: center;
@@ -28,7 +28,7 @@
 .contactos {
   flex: 1;
   max-width: 300px; /* Ancho máximo para la sección de contactos */
-  background-color: #f1f1f1; /* Color de fondo claro */
+  background-color: #662020; /* Color de fondo claro */
   overflow-y: auto; /* Desplazamiento vertical si es necesario */
   border-right: 1px solid #000000; /* Borde para separar de la sección de chat */
   padding: 1rem;
@@ -37,7 +37,7 @@
 /* Estilo del contenedor de chat */
 .chatContainer {
   flex: 3;
-  background-color: #fff; /* Fondo blanco para la sección de chat */
+  background-color: #855959; /* Fondo blanco para la sección de chat */
   overflow-y: auto; /* Desplazamiento vertical si es necesario */
   padding: 1rem;
 }

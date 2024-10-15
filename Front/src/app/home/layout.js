@@ -1,7 +1,7 @@
 // componentes funcionales
 "use client"
 import { useEffect, useState } from "react"
-import styles from "../page.module.css";
+import styles from "./home.modules.css";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import ButtonChat from "../../components/ButtonChat";
@@ -107,8 +107,19 @@ export default function layoutHome({children}) {
       <> 
         <div>
           <header className={styles.header}>
-                <h1>BIENVENIDO A WHATSAPP</h1>
-        </header> {children}
+            <div class="logo">
+            <a href="index.html">
+                <img src='5411estate.jfif' alt="Logo"></img>
+            </a>
+            </div>
+            <nav>
+            <ul>
+                <li><a href="equipo.html">Equipo</a></li>
+                <li><a href="propiedades.html">Propiedades</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            </nav>
+          </header> {children}
         </div>
           
         <div className={styles.container}>

@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+.logo img {
+    width: 100px; /* Ajusta el tamaño de la imagen del logo */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    border-bottom: 2px solid #fff;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
