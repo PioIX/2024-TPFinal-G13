@@ -25,14 +25,7 @@
 }
 
 /* Estilo del contenedor de contactos */
-.contactos {
-  flex: 1;
-  max-width: 300px; /* Ancho máximo para la sección de contactos */
-  background-color: #662020; /* Color de fondo claro */
-  overflow-y: auto; /* Desplazamiento vertical si es necesario */
-  border-right: 1px solid #000000; /* Borde para separar de la sección de chat */
-  padding: 1rem;
-}
+
 
 /* Estilo del contenedor de chat */
 .chatContainer {

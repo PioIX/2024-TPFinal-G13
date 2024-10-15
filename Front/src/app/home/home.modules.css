@@ -6,6 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
 }
 
 header {
@@ -19,6 +20,7 @@ header {
 
 .logo img {
     width: 100px; /* Ajusta el tamaño de la imagen del logo */
+    
 }
 
 nav ul {
@@ -41,9 +43,47 @@ nav ul li a {
 
 nav ul li a:hover {
     border-bottom: 2px solid #fff;
+    transform: scale(1.1);
 }
 
 main {
     padding: 20px;
     text-align: center;
+}
+
+.contactos {
+    flex: 1;
+    max-width: 300px; /* Ancho máximo para la sección de contactos */
+    background-color: #662020; /* Color de fondo claro */
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+    border-right: 1px solid #000000; /* Borde para separar de la sección de chat */
+    padding: 1rem;
+}     
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+.info {
+    flex: 1;
+}
+
+.social-media {
+    display: flex;
+    gap: 15px;
+}
+
+.social-media img {
+    width: 40px; /* Cambia el tamaño según necesites */
+    height: auto;
+    transition: transform 0.2s;
+}
+
+.social-media img:hover {
+    transform: scale(1.1); /* Efecto al pasar el mouse */
 }

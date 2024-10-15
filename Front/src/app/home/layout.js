@@ -1,6 +1,7 @@
 // componentes funcionales
 "use client"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation";
 import styles from "./home.modules.css";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
@@ -102,38 +103,94 @@ const contacts = [
 export default function layoutHome({children}) {
   
     const [variant, serVariant] = useState("login")
-  
+
+    const router = useRouter();
+
     return (
       <> 
         <div>
           <header className={styles.header}>
             <div class="logo">
-            <a href="index.html">
+            <a href={"home?idUsuario=" + localStorage.getItem("idUsuario")}>
                 <img src='5411estate.jfif' alt="Logo"></img>
             </a>
             </div>
             <nav>
             <ul>
-                <li><a href="equipo.html">Equipo</a></li>
+                <li><a href={"equipo?idUsuario=" + localStorage.getItem("idUsuario")}>Equipo</a></li>
                 <li><a href="propiedades.html">Propiedades</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="contacto.html">Chats</a></li>
             </ul>
             </nav>
           </header> {children}
         </div>
           
         <div className={styles.container}>
-          
-          <div className={styles.contactos}>
+          <h3>Conectando personas con sus lugares perfectos.
+          </h3>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          {/*<div className={styles.contactos}>
             {contacts.map((contact) => (
               <ChatList name={contact.name}></ChatList>
             ))}
-          </div>
+          </div>*/}
           {/* <div className={styles.chatContainer}>
             <Text textoH2="Mensaje" placeholder="Escribir..."></Text>
             <Button text="Enviar" />
           </div> */}
         </div>
+        <footer>
+          <div class="info">
+              <p>Tu breve información aquí. Puedes hablar sobre tu negocio o sitio web.</p>
+          </div>
+          <div class="social-media">
+              <a href="https://www.instagram.com" target="_blank">
+                  <img class="redes" src="instagram-icon.png" alt="Instagram" />
+              </a>
+              <a href="https://www.facebook.com" target="_blank">
+                  <img class="redes" src="facebook-icon.png" alt="Facebook" />
+              </a>
+              <a href="https://wa.me/1234567890" target="_blank">
+                  <img class="redes" src="whatsapp-icon.png" alt="WhatsApp"/>
+              </a>
+          </div>
+        </footer>
       </>
     );
   }
