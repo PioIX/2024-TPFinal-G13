@@ -10,7 +10,7 @@ import Registro from "../components/Registro";
 
 export default function App() {
   
-  const [variant, setVariant] = useState("login")
+  /*const [variant, setVariant] = useState("login")*/
 
   return (
     <main className={styles.main}>

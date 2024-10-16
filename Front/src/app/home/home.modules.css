@@ -18,6 +18,22 @@ header {
     color: white;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /*background-color: #69645f;/* Color de fondo similar a WhatsApp */
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+    background-image: url('/EdificioFondo.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
 .logo img {
     width: 100px; /* Ajusta el tamaño de la imagen del logo */
     

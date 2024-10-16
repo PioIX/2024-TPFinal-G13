@@ -11,7 +11,7 @@ import Text from "../../../components/Text";
 import ButtonMensaje from "../../../components/ButtonMensaje";
 import Chat from "../../../components/Chat";
 
-export default function mensajes() {
+export default function equipo() {
   
   const router = useRouter();
 
@@ -19,9 +19,6 @@ export default function mensajes() {
       //Metodo push para registrar en el historial el cambio de pantalla
       //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
   }
-  
-  const [variant, serVariant] = useState("login")
-
   return (
     //<>
     //<div className={styles.chatContainer}>
@@ -29,7 +26,7 @@ export default function mensajes() {
     //</div>
     //</>
     <>
-      
+      <h1>hola</h1>
     </>
   );
 }

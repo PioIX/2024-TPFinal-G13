@@ -111,69 +111,19 @@ export default function layoutHome({children}) {
         <div>
           <header className={styles.header}>
             <div class="logo">
-            <a href={"home?idUsuario=" + localStorage.getItem("idUsuario")}>
+            <a href={"http://localhost:3000/home?idUsuario=" + localStorage.getItem("idUsuario")}>
                 <img src='5411estate.jfif' alt="Logo"></img>
             </a>
             </div>
             <nav>
             <ul>
-                <li><a href={"equipo?idUsuario=" + localStorage.getItem("idUsuario")}>Equipo</a></li>
+                <li><a href={"http://localhost:3000/home/equipo?idUsuario=" + localStorage.getItem("idUsuario")}>Equipo</a></li>
                 <li><a href="propiedades.html">Propiedades</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="contacto.html">Chats</a></li>
             </ul>
             </nav>
           </header> {children}
-        </div>
-          
-        <div className={styles.container}>
-          <h3>Conectando personas con sus lugares perfectos.
-          </h3>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          {/*<div className={styles.contactos}>
-            {contacts.map((contact) => (
-              <ChatList name={contact.name}></ChatList>
-            ))}
-          </div>*/}
-          {/* <div className={styles.chatContainer}>
-            <Text textoH2="Mensaje" placeholder="Escribir..."></Text>
-            <Button text="Enviar" />
-          </div> */}
         </div>
         <footer>
           <div class="info">
