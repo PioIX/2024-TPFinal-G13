@@ -130,7 +130,7 @@ export default function layoutHome({children}) {
               <p>Tu breve información aquí. Puedes hablar sobre tu negocio o sitio web.</p>
           </div>
           <div class="social-media">
-              <a href="https://www.instagram.com" target="_blank">
+              <a href="https://www.instagram.com/5411estateok?igsh=c2RueW5rb3kyenB3" target="_blank">
                   <img class="redes" src="instagram-icon.png" alt="Instagram" />
               </a>
               <a href="https://www.facebook.com" target="_blank">
