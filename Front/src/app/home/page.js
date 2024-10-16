@@ -1,7 +1,7 @@
 // componentes funcionales
 "use client"
 import { useEffect, useState } from "react"
-import styles from "../page.module.css";
+import styles from "... @/app/home/page.modules.css"
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import ButtonChat from "../../components/ButtonChat";
@@ -11,6 +11,7 @@ import { Chicle } from "next/font/google";
 export default function layoutHome({children}) {
     return (
       <div className={styles.container}>
+        <div className={styles.claseDiv}>
         <h3>Conectando personas con sus lugares perfectos.
         </h3>
         <br></br>
@@ -58,6 +59,7 @@ export default function layoutHome({children}) {
           <Text textoH2="Mensaje" placeholder="Escribir..."></Text>
           <Button text="Enviar" />
         </div> */}
+        </div>
       </div>
     );
   }
