@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Colocar todos los perfiles en columna */
+    gap: 20px; /* Espacio entre los perfiles */
+    padding: 20px;
+}
+
+.perfil {
+    display: flex; /* Usar flexbox para colocar imagen y texto lado a lado */
+    background-color: #f9f9f9; /* Fondo ligero para cada perfil */
+    border: 1px solid #ddd; /* Bordes sutiles */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que nada se desborde */
+    transition: transform 0.3s; /* Animación al pasar el mouse */
+}
+
+.perfil:hover {
+    transform: scale(1.05); /* Aumentar ligeramente al pasar el mouse */
+}
+
+.perfil img {
+    width: 150px; /* Ancho fijo para las imágenes */
+    height: auto; /* Mantener proporción de la imagen */
+    object-fit: cover; /* Recortar imágenes para mantener proporciones */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column; /* Colocar texto en columna */
+    justify-content: center; /* Centrar verticalmente el texto */
+    padding: 10px; /* Espaciado para el texto */
+}
+
+.perfil h3 {
+    margin: 5px 0; /* Espaciado para el título */
+    font-size: 1.2em; /* Tamaño del texto */
+}
+
+.perfil p {
+    margin: 0; /* Eliminar margen para un mejor espaciado */
+    font-size: 0.9em; /* Tamaño de la descripción */
+    color: #555; /* Color de texto más suave */
+}
+
