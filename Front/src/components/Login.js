@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./Login.module.css";
+import styles from "./Sesión.module.css";
 import Button from './Button';
 import Text from './Text';
 import { Red_Rose } from "next/font/google";

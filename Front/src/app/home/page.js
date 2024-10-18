@@ -11,9 +11,8 @@ import { Chicle } from "next/font/google";
 export default function layoutHome({children}) {
     return (
       <div className={styles.container}>
-        <div className={styles.claseDiv}>
-        <h3>Conectando personas con sus lugares perfectos.
-        </h3>
+        <h1 className={styles.h1}>Conectando personas con sus lugares perfectos.
+        </h1>
         <br></br>
         <br></br>
         <br></br>
@@ -59,7 +58,6 @@ export default function layoutHome({children}) {
           <Text textoH2="Mensaje" placeholder="Escribir..."></Text>
           <Button text="Enviar" />
         </div> */}
-        </div>
       </div>
     );
   }
