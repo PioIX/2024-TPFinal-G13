@@ -1,4 +1,3 @@
-// componentes funcionales
 "use client"
 import { useEffect, useState } from "react"
 import styles from "... @/app/home/page.modules.css"
@@ -9,55 +8,21 @@ import ChatList from "../../components/ChatList";
 import { Chicle } from "next/font/google";
 
 export default function layoutHome({children}) {
-    return (
-      <div className={styles.container}>
-        <h1 className={styles.h1}>Conectando personas con sus lugares perfectos.
-        </h1>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        {/*<div className={styles.contactos}>
-          {contacts.map((contact) => (
-            <ChatList name={contact.name}></ChatList>
-          ))}
-        </div>*/}
-        {/* <div className={styles.chatContainer}>
-          <Text textoH2="Mensaje" placeholder="Escribir..."></Text>
-          <Button text="Enviar" />
-        </div> */}
+    
+  function redirigir(){
+    location.href = "/home/propiedades?idUsuario=" + localStorage.getItem("idUsuario")
+  }
+
+  return (
+      <div className={styles.div}>
+        <div className={styles.container}>
+        <h1>Conectando personas</h1>
+        <h1>con sus lugares</h1>
+        <h1>perfectos.</h1>
+        <div className={styles.button}>
+          <Button className={styles.button} onClick={redirigir} text="Iniciar sesión" />
+        </div>
+        </div>
       </div>
     );
-  }
+}
