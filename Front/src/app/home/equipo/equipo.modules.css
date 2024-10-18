@@ -1,44 +1,55 @@
-.container {
-    display: flex;
-    flex-direction: column; /* Colocar todos los perfiles en columna */
-    gap: 20px; /* Espacio entre los perfiles */
-    padding: 20px;
+.perfil .nombre {
+    font-weight: bold; /* Hacer el nombre más fuerte */
+    font-size: 1.8em; /* Aumentar el tamaño del nombre para destacar */
+    margin-bottom: 15px; /* Añadir más espacio debajo del nombre */
+    text-align: left; /* Mantener el nombre alineado a la izquierda */
+    color: #fff; /* Color blanco para contraste con el fondo */
+    text-transform: uppercase; /* Transformar el texto a mayúsculas */
+    letter-spacing: 1.5px; /* Añadir espacio entre las letras para elegancia */
+    font-family: 'Montserrat', sans-serif; /* Usar una fuente más elegante */
 }
 
 .perfil {
-    display: flex; /* Usar flexbox para colocar imagen y texto lado a lado */
-    background-color: #f9f9f9; /* Fondo ligero para cada perfil */
-    border: 1px solid #ddd; /* Bordes sutiles */
-    border-radius: 8px; /* Bordes redondeados */
-    overflow: hidden; /* Asegura que nada se desborde */
-    transition: transform 0.3s; /* Animación al pasar el mouse */
+    display: flex;
+    flex-direction: row; /* Mostrar imagen y texto en fila (horizontalmente) */
+    background-color: #000;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%; /* El perfil ocupa todo el ancho disponible */
+    height: 200px; /* Reducir la altura total del perfil */
+    align-items: center; /* Centrar verticalmente el contenido */
 }
 
 .perfil:hover {
-    transform: scale(1.05); /* Aumentar ligeramente al pasar el mouse */
+    transform: scale(1.02); /* Efecto de aumento suave al pasar el mouse */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Efecto de brillo */
 }
 
 .perfil img {
-    width: 150px; /* Ancho fijo para las imágenes */
-    height: auto; /* Mantener proporción de la imagen */
-    object-fit: cover; /* Recortar imágenes para mantener proporciones */
+    width: 200px; /* Imagen con ancho fijo */
+    height: 100%; /* La imagen ocupa toda la altura del perfil */
+    object-fit: cover; /* Mantener la proporción de la imagen */
+    margin-right: 20px; /* Espacio entre la imagen y el texto */
+    border-radius: 8px;
 }
 
 .text-container {
+    width: 100%; /* El texto ocupa todo el espacio restante */
     display: flex;
-    flex-direction: column; /* Colocar texto en columna */
-    justify-content: center; /* Centrar verticalmente el texto */
-    padding: 10px; /* Espaciado para el texto */
-}
-
-.perfil h3 {
-    margin: 5px 0; /* Espaciado para el título */
-    font-size: 1.2em; /* Tamaño del texto */
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente el contenido */
 }
 
 .perfil p {
-    margin: 0; /* Eliminar margen para un mejor espaciado */
-    font-size: 0.9em; /* Tamaño de la descripción */
-    color: #555; /* Color de texto más suave */
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+    background-color: #000000;
+    padding: 10px;
+    border-radius: 8px;
 }
 

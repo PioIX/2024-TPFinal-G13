@@ -28,9 +28,9 @@ const App = () => {
         <div className="container">
             {perfiles.map((perfil) => (
                 <Perfil
-                    key={perfil}
+                    key={perfil.nombre}
                     imgSrc={perfil.imgSrc}
-                    Text={perfil.Text}
+                    nombre={perfil.nombre} // Asegúrate de pasar el nombre aquí
                     descripcion={perfil.descripcion}
                 />
             ))}

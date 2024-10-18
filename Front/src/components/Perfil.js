@@ -1,8 +1,8 @@
 "use client"
-export default function Perfil ({nombre, imgSrc, Text, descripcion}){
+export default function Perfil ({nombre, imgSrc, descripcion}){
     return (
         <div className="perfil">
-            <img src={imgSrc} alt={Text} />
+            <img src={imgSrc} />
             <h3>{nombre}</h3>
             <p>{descripcion}</p>
         </div>
