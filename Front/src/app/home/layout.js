@@ -1,8 +1,7 @@
-// componentes funcionales
 "use client"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation";
-import styles from "./home.modules.css";
+import styles from "./page.modules.css";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import ButtonChat from "../../components/ButtonChat";
@@ -112,15 +111,15 @@ export default function layoutHome({children}) {
           <header className={styles.header}>
             <div class="logo">
             <a href={"http://localhost:3000/home?idUsuario=" + localStorage.getItem("idUsuario")}>
-                <img src='5411estate.jfif' alt="Logo"></img>
+                <img src='/5411estate.jfif' alt="Logo"></img>
             </a>
             </div>
             <nav>
             <ul>
                 <li><a href={"http://localhost:3000/home/equipo?idUsuario=" + localStorage.getItem("idUsuario")}>Equipo</a></li>
-                <li><a href="propiedades.html">Propiedades</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="contacto.html">Chats</a></li>
+                <li><a href={"http://localhost:3000/home/propiedades?idUsuario=" + localStorage.getItem("idUsuario")}>Propiedades</a></li>
+                <li><a href={"http://localhost:3000/home/contacto?idUsuario=" + localStorage.getItem("idUsuario")}>Contacto</a></li>
+                <li><a href={"http://localhost:3000/home/chat?idUsuario=" + localStorage.getItem("idUsuario")}>Chats</a></li>
             </ul>
             </nav>
           </header> {children}
@@ -131,13 +130,13 @@ export default function layoutHome({children}) {
           </div>
           <div class="social-media">
               <a href="https://www.instagram.com/5411estateok?igsh=c2RueW5rb3kyenB3" target="_blank">
-                  <img class="redes" src="instagram-icon.png" alt="Instagram" />
+                  <img class="redes" src="/instagram-icon.png" alt="Instagram" />
               </a>
-              <a href="https://www.facebook.com" target="_blank">
-                  <img class="redes" src="facebook-icon.png" alt="Facebook" />
+              <a href="https://www.facebook.com/5411Estate/" target="_blank">
+                  <img class="redes" src="/facebook-icon.png" alt="Facebook" />
               </a>
-              <a href="https://wa.me/1234567890" target="_blank">
-                  <img class="redes" src="whatsapp-icon.png" alt="WhatsApp"/>
+              <a href="https://www.google.com/search?q=culo&rlz=1C1GCEU_esAR1106AR1106&oq=culo&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIJCAEQABgKGIAE0gEINTk0MmowajeoAgCwAgA&sourceid=chrome&ie=U" target="_blank">
+                  <img class="redes" src="/whatsapp-icon.png" alt="WhatsApp"/>
               </a>
           </div>
         </footer>

@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: url('/EdificioFondo.jpg'); /* Verifica la ruta de la imagen */
+    height: 100vh; /* Ajusta la imagen a toda la altura de la pantalla */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(51, 51, 51, 0.8); /* Fondo semitransparente */
+    color: white;
+    margin-bottom: 100px;
+}
+
+.logo img {
+    width: 90px; /* Tamaño del logo ajustado */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    border-bottom: 2px solid #fff;
+    transform: scale(1.1);
+}
+
+.container {
+    position: absolute;
+    top: 50%; /* Puedes ajustar esta posición para que esté centrado verticalmente */
+    left: 0;  /* Lo alinea al borde izquierdo */
+    transform: translateY(-50%); /* Para centrarlo verticalmente */
+    width: 200px; /* Ajusta el ancho como prefieras */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mayor visibilidad */
+    color: white;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 4rem; /* Ajusta el tamaño del título */
+    margin-bottom: 10px;
+    color: white;
+    margin-left: 120px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+p {
+    font-size: 0.8rem; /* Tamaño del subtítulo */
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 40px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+    margin-left: 120px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(51, 51, 51, 0.8); /* Fondo semitransparente */
+    color: white;
+    padding: 20px;
+    margin-top: 150px;
+}
+
+.social-media {
+    display: flex;
+    gap: 15px;
+}
+
+.social-media img {
+    width: 40px;
+    height: auto;
+    transition: transform 0.2s;
+}
+
+.social-media img:hover {
+    transform: scale(1.1);
+}

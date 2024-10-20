@@ -1,6 +1,8 @@
 /* page.module.css */
 
 /* Estilo general para el contenedor principal */
+
+
 .main {
   display: flex;
   flex-direction: column;
