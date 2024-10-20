@@ -25,7 +25,7 @@ const App = () => {
     ];
 
     return (
-        <div className="container">
+        <div className={styles.perfil}>
             {perfiles.map((perfil) => (
                 <Perfil
                     key={perfil.nombre}
