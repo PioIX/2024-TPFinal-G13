@@ -20,7 +20,7 @@ export default function layoutHome({children}) {
         <h1>con sus lugares</h1>
         <h1>perfectos.</h1>
         <div className={styles.button}>
-          <Button className={styles.button} onClick={redirigir} text="Iniciar sesión" />
+          <Button className={styles.button} onClick={redirigir} text="VER MÁS" />
         </div>
         </div>
       </div>
