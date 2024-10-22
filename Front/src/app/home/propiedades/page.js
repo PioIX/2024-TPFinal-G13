@@ -19,6 +19,7 @@ export default function equipo() {
       //Metodo push para registrar en el historial el cambio de pantalla
       //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
   }
+  
   return (
     //<>
     //<div className={styles.chatContainer}>
