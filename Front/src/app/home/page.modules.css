@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-image: url('/EdificioFondo.jpg'); /* Verifica la ruta de la imagen */
+    background-image: url('/EdificioLucas.jpg'); /* Verifica la ruta de la imagen */
     height: 100vh; /* Ajusta la imagen a toda la altura de la pantalla */
     background-position: center;
     background-repeat: no-repeat;

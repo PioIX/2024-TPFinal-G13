@@ -1,0 +1,113 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #f4f4f4;
+  }
+  
+  /* Contact Section */
+  .contacto {
+    padding: 50px 0;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .contacto .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .titulocolFormDeContact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .titulocolFormDeContact h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .titulocolFormDeContact form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .titulocolFormDeContact input,
+  .titulocolFormDeContact textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #555;
+    transition: border-color 0.3s ease;
+  }
+  
+  .titulocolFormDeContact input:focus,
+  .titulocolFormDeContact textarea:focus {
+    border-color: #333;
+  }
+  
+  .titulocolFormDeContact button {
+    padding: 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .titulocolFormDeContact button:hover {
+    background-color: #f39c12;
+  }
+  
+  .colExpand {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .colExpand iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .contacto .container-fluid {
+      flex-direction: column;
+    }
+  
+    .titulocolFormDeContact {
+      padding: 10px;
+      align-items: center;
+    }
+  
+    .titulocolFormDeContact form {
+      max-width: 100%;
+    }
+  
+    .colExpand iframe {
+      height: 400px;
+    }
+  }
+  
