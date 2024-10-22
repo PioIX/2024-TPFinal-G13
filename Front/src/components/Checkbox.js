@@ -4,6 +4,8 @@ import clsx from 'clsx';
 
 export default function Checkbox ({onChange}){
     return(
-        <input type="checkbox" onChange={onChange}></input>
+        <div className={styles.checkbox}>
+            <input type="checkbox" onChange={onChange}></input>
+        </div>
     )
 }

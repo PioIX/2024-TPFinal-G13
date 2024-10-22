@@ -15,19 +15,18 @@ export default function equipo() {
   
   const router = useRouter();
 
-  function handleClick(){ //Links con logica
-      //Metodo push para registrar en el historial el cambio de pantalla
-      //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
+  function redirigir(){
+    location.href = "/home/propiedades/crearPropiedad?idUsuario=" + localStorage.getItem("idUsuario")
   }
-  
+
   return (
     //<>
     //<div className={styles.chatContainer}>
     //  <Chat></Chat>
     //</div>
     //</>
-    <>
-      <h1>hola</h1>
-    </>
+    <div className={styles.button}>
+      <Button className={styles.button} onClick={redirigir} text="Agregar Propiedad" />
+    </div>
   );
 }

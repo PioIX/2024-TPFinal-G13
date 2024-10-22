@@ -72,3 +72,22 @@ app.post('/login', async function(req,res) {
     }
 })
 
+app.post('/addPropiedad', async function(req,res) {
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0
+    }
+    let propiedad = await MySql.realizarQuery(`select * from Propiedades where nombre = '${req.body.nombre}'`);
+    if (propiedad.length != 0) {
+        res.send(respuesta.success);
+    } else {
+        await MySql.realizarQuery(`INSERT INTO Propiedades (tipoVivienda, precio, direccion, ambientes, zona, alquiler, descripcion, idUsuarios)
+        VALUES ('${req.body.tipoVivienda}', ${req.body.precio}, '${req.body.direccion}', ${req.body.ambientes}, '${req.body.zona}', false, '${req.body.descripcion}', ${req.body.idUsuarios})`);
+        let propiedad = await MySql.realizarQuery(`select * from Propiedades  WHERE direccion='${req.body.direccion}' and  precio=${req.body.precio}`);
+        console.log(propiedad)
+        respuesta.id = propiedad[0].idpropiedades;
+        respuesta.success = true;
+        res.send(respuesta);     
+    }
+})
