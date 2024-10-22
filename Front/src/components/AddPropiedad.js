@@ -5,7 +5,7 @@ import Button from './Button';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../components/AddPropiedad.modules.css";
-import Input from './inputs';
+import Input from './Inputs';
 import Checkbox from './Checkbox';
 
 
@@ -69,7 +69,7 @@ const AddPropiedad = () => {
             ambientes: ambientes,
             zona: zona,
             descripcion: descripcion,
-            idUsuarios: localStorage.getItem("idUsuario"),
+            idUsuario: localStorage.getItem("idUsuario"),
         };
         console.log(data)
 
@@ -101,66 +101,66 @@ const AddPropiedad = () => {
         <h1 className={styles.h1}>AGREGAR PROPIEDAD</h1>
         
             <div className={styles.formGroup}>
-            <div className={styles.usuario}>
-                <h3>Tipo de vivienda:</h3>
-                <Input 
-                    type="text" 
-                    placeholder="Tipo de vivienda" 
-                    onChange={setTipoVivienda} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>Tipo de vivienda:</h3>
+                    <Input 
+                        type="text" 
+                        placeholder="Tipo de vivienda" 
+                        onChange={setTipoVivienda} 
+                    />
+                </div>
 
-            <div className={styles.usuario}>
-                <h3>Precio en Dólares:</h3>
-                <Input 
-                    type="number" 
-                    placeholder="Precio" 
-                    onChange={setPrecio} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>Precio en Dólares:</h3>
+                    <Input 
+                        type="number" 
+                        placeholder="Precio" 
+                        onChange={setPrecio} 
+                    />
+                </div>
 
-            <div className={styles.usuario}>
-                <h3>Dirección:</h3>
-                <Input 
-                    type="text" 
-                    placeholder="Dirección" 
-                    onChange={setDireccion} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>Dirección:</h3>
+                    <Input 
+                        type="text" 
+                        placeholder="Dirección" 
+                        onChange={setDireccion} 
+                    />
+                </div>
 
-            <div className={styles.usuario}>
-                <h3>¿Es alquiler?</h3>
-                <Checkbox 
-                    onChange={setAlquiler} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>¿Es alquiler?</h3>
+                    <Checkbox 
+                        onChange={setAlquiler} 
+                    />
+                </div>
 
-            <div className={styles.usuario}>
-                <h3>Cantidad de ambientes:</h3>
-                <Input 
-                    type="number" 
-                    placeholder="Ambientes" 
-                    onChange={setAmbientes} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>Cantidad de ambientes:</h3>
+                    <Input 
+                        type="number" 
+                        placeholder="Ambientes" 
+                        onChange={setAmbientes} 
+                    />
+                </div>
 
-            <div className={styles.usuario}>
-                <h3>Zona:</h3>
-                <Input 
-                    type="text" 
-                    placeholder="Zona" 
-                    onChange={setZona} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>Zona:</h3>
+                    <Input 
+                        type="text" 
+                        placeholder="Zona" 
+                        onChange={setZona} 
+                    />
+                </div>
 
-            <div className={styles.usuario}>
-                <h3>Descripción:</h3>
-                <Input 
-                    type="text" 
-                    placeholder="Descripción" 
-                    onChange={setDescripcion} 
-                />
-            </div>
+                <div className={styles.usuario}>
+                    <h3>Descripción:</h3>
+                    <Input 
+                        type="text" 
+                        placeholder="Descripción" 
+                        onChange={setDescripcion} 
+                    />
+                </div>
 
                 <Button className={styles.boton} onClick={handleClick} text="Publicar"/>
             </div>

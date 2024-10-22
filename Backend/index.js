@@ -4,7 +4,7 @@ const cors = require('cors');
 const MySql = require('./modulos/mysql')
 
 var app = express(); //Inicializo express
-var port = process.env.PORT || 4000; //Ejecuto el servidor en el puerto 3000
+var port = process.env.PORT || 4000; //Ejecuto el servidor en el puerto 4000
 
 // Convierte una petición recibida (POST-GET...) a objeto JSON
 app.use(bodyParser.urlencoded({extended:false}));
@@ -78,12 +78,12 @@ app.post('/addPropiedad', async function(req,res) {
         success: false,
         id: 0
     }
-    let propiedad = await MySql.realizarQuery(`select * from Propiedades where nombre = '${req.body.nombre}'`);
+    let propiedad = await MySql.realizarQuery(`select * from Propiedades where direccion = '${req.body.direccion}'`);
     if (propiedad.length != 0) {
         res.send(respuesta.success);
     } else {
-        await MySql.realizarQuery(`INSERT INTO Propiedades (tipoVivienda, precio, direccion, ambientes, zona, alquiler, descripcion, idUsuarios)
-        VALUES ('${req.body.tipoVivienda}', ${req.body.precio}, '${req.body.direccion}', ${req.body.ambientes}, '${req.body.zona}', false, '${req.body.descripcion}', ${req.body.idUsuarios})`);
+        await MySql.realizarQuery(`INSERT INTO Propiedades (tipoVivienda, precio, direccion, ambientes, zona, alquiler, descripcion, idUsuario)
+        VALUES ('${req.body.tipoVivienda}', ${req.body.precio}, '${req.body.direccion}', ${req.body.ambientes}, '${req.body.zona}', false, '${req.body.descripcion}', ${req.body.idUsuario})`);
         let propiedad = await MySql.realizarQuery(`select * from Propiedades  WHERE direccion='${req.body.direccion}' and  precio=${req.body.precio}`);
         console.log(propiedad)
         respuesta.id = propiedad[0].idpropiedades;
