@@ -1,0 +1,120 @@
+/* contacto.module.css */
+.body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.contacto {
+  padding: 50px 0;
+}
+
+.container {
+  display: flex; /* Usa Flexbox para organizar el layout */
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.mapContainer {
+  flex: 1; /* El mapa ocupa la mitad del espacio */
+  padding-right: 20px;
+  min-width: 45%;
+}
+
+.formContainer {
+  flex: 1; /* El formulario ocupa la otra mitad */
+  padding-left: 20px;
+  min-width: 45%;
+  text-align: center; /* Centra el contenido dentro del contenedor */
+}
+
+.heading {
+  padding: 8px; /* Reduce el padding para hacerlo más compacto */
+  background-color: green;
+  color: #fff;
+  margin-right: 50px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem; /* Reduce el tamaño de la fuente */
+  font-weight: bold;
+  margin-bottom: 10px; /* Reduce el margen inferior */
+  text-align: center; /* Centra el texto */
+}
+
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alinea los elementos del formulario en el centro */
+}
+
+.inputField {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #555555;
+  font-family: 'Roboto', sans-serif;
+}
+
+.inputField:focus {
+  border-color: #333;
+  outline: none;
+}
+
+.textareaField {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #555;
+  font-family: 'Roboto', sans-serif;
+  min-height: 150px;
+}
+
+.textareaField:focus {
+  border-color: #333;
+  outline: none;
+}
+
+.submitButton {
+  padding: 12px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* Añade un margen para separar el botón del textarea */
+  width: 50%; /* Centra el botón con un ancho relativo */
+}
+
+.submitButton:hover {
+  background-color: rgb(7, 192, 7);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+  }
+
+  .mapContainer, .formContainer {
+    padding: 0;
+    width: 100%; /* Ocuparán el 100% en pantallas pequeñas */
+  }
+
+  .iframe {
+    height: 400px;
+  }
+
+  .submitButton {
+    width: 100%; /* El botón ocupará el 100% en pantallas pequeñas */
+  }
+}
