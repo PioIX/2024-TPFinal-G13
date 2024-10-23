@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import Image from "next/image";
-import styles from "../../page.module.css";
+import styles from "../page.modules.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Registro from "../../../components/Registro";
@@ -52,15 +52,15 @@ export default function propiedades() {
     //  <Chat></Chat>
     //</div>
     //</>
-    <>
-    {
-        vector.map(propiedad => (
-            <Propiedad idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
-          ))
-    }
-    <div className={styles.button}>
-      <Button className={styles.button} onClick={redirigir} text="Agregar Propiedad" />
+    <div className={styles.container}>
+      {
+          vector.map(propiedad => (
+              <Propiedad idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
+            ))
+      }
+      <div className={styles.button}>
+        <Button className={styles.button} onClick={redirigir} text="Agregar Propiedad" />
+      </div>
     </div>
-    </>
   );
 }

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import styles from "../components/AddPropiedad.module.css";
 import Input from './Inputs';
 import Checkbox from './Checkbox';
+import InputImagen from './InputsImagenes';
 
 
 /*export default function Button (props){
@@ -24,7 +25,37 @@ const AddPropiedad = () => {
     const [ambientes, setAmbientes] = useState('');
     const [zona, setZona] = useState('');
     const [descripcion, setDescripcion] = useState('');
-    const [imagenPrincipal, setImagenPrincipal] = useState('');
+    const [imagenes, setImagenes] = useState([]);
+
+    const subirImagenes = (event) => {
+        if (event.target && event.target.files) {
+            const archivos = Array.from(event.target.files);
+            setImagenes(archivos);
+            
+            // Convertir cada imagen a base64
+        const promises = archivos.map((archivo) => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(archivo);
+            });
+        });
+
+        // Almacenar las imágenes en base64 cuando se resuelvan todas las promesas
+        Promise.all(promises)
+            .then((base64Array) => {
+                setImagenesBase64(base64Array);
+            })
+            .catch((error) => {
+                console.error("Error al convertir las imágenes a base64:", error);
+            });
+
+        } else {
+            console.error("No se pudo acceder a los archivos");
+        }
+        console.log(imagenes)
+    };
 
     // function ponerUsuario (evento){
     //     const valor = evento.target.value;
@@ -167,15 +198,17 @@ const AddPropiedad = () => {
                     />
                 </div>
 
-                {<div className={styles.usuario}>
-                    <h2>Subir imagen principal:</h2>
-                    <Input 
-                        type="file" 
-                        placeholder="Imagen principal" 
-                        accept="image/*"
-                        onChange={setImagenPrincipal} 
-                    />
-                </div>}
+                <div className={styles.usuario}>
+                    <h2>Subir imagenes:</h2>
+                        <InputImagen onChange={subirImagenes}/>
+                </div>
+                {imagenes.length > 0 ? (
+                    imagenes.map((img, index) => (
+                        <p key={index}>{img.name}</p>
+                    ))
+                ) : (
+                    <p>No hay imágenes seleccionadas.</p>
+                )}
 
                 <Button className={styles.boton} onClick={handleClick} text="Publicar"/>
             </div>
