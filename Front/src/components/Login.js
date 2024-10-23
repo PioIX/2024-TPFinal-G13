@@ -55,7 +55,7 @@ export default function Login() {
             let respuesta = await response.json();
             /*if (respuesta == "administrador"){
                 alert("Administrador logueado")
-                window.location.replace("./index3.html");
+                redirigir();
             }
             else*/ 
             localStorage.setItem("idUsuario", respuesta.id)
