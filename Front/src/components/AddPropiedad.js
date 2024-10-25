@@ -4,9 +4,10 @@ import clsx from 'clsx';
 import Button from './Button';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "../components/AddPropiedad.modules.css";
+import styles from "../components/AddPropiedad.module.css";
 import Input from './Inputs';
 import Checkbox from './Checkbox';
+import InputImagen from './InputsImagenes';
 
 
 /*export default function Button (props){
@@ -24,6 +25,37 @@ const AddPropiedad = () => {
     const [ambientes, setAmbientes] = useState('');
     const [zona, setZona] = useState('');
     const [descripcion, setDescripcion] = useState('');
+    const [imagenes, setImagenes] = useState([]);
+
+    const subirImagenes = (event) => {
+        if (event.target && event.target.files) {
+            const archivos = Array.from(event.target.files);
+            setImagenes(archivos);
+            
+            // Convertir cada imagen a base64
+        const promises = archivos.map((archivo) => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(archivo);
+            });
+        });
+
+        // Almacenar las imágenes en base64 cuando se resuelvan todas las promesas
+        Promise.all(promises)
+            .then((base64Array) => {
+                setImagenesBase64(base64Array);
+            })
+            .catch((error) => {
+                console.error("Error al convertir las imágenes a base64:", error);
+            });
+
+        } else {
+            console.error("No se pudo acceder a los archivos");
+        }
+        console.log(imagenes)
+    };
 
     // function ponerUsuario (evento){
     //     const valor = evento.target.value;
@@ -54,7 +86,10 @@ const AddPropiedad = () => {
     //     [] //Como esta vacio, se ejecuta al principio
     // )
 
-
+    function checkValue(event){
+        const value = event.target.checked;
+        setAlquiler(value)
+    }
 
     const router = useRouter();
 
@@ -97,12 +132,13 @@ const AddPropiedad = () => {
     }
 
     return(
+
         <div className={styles.container}>
         <h1 className={styles.h1}>AGREGAR PROPIEDAD</h1>
         
             <div className={styles.formGroup}>
                 <div className={styles.usuario}>
-                    <h3>Tipo de vivienda:</h3>
+                    <h2>Tipo de vivienda:</h2>
                     <Input 
                         type="text" 
                         placeholder="Tipo de vivienda" 
@@ -111,7 +147,7 @@ const AddPropiedad = () => {
                 </div>
 
                 <div className={styles.usuario}>
-                    <h3>Precio en Dólares:</h3>
+                    <h2>Precio en Dólares:</h2>
                     <Input 
                         type="number" 
                         placeholder="Precio" 
@@ -120,7 +156,7 @@ const AddPropiedad = () => {
                 </div>
 
                 <div className={styles.usuario}>
-                    <h3>Dirección:</h3>
+                    <h2>Dirección:</h2>
                     <Input 
                         type="text" 
                         placeholder="Dirección" 
@@ -129,14 +165,14 @@ const AddPropiedad = () => {
                 </div>
 
                 <div className={styles.usuario}>
-                    <h3>¿Es alquiler?</h3>
+                    <h2>¿Es alquiler?</h2>
                     <Checkbox 
-                        onChange={setAlquiler} 
+                        onChange={checkValue} 
                     />
                 </div>
 
                 <div className={styles.usuario}>
-                    <h3>Cantidad de ambientes:</h3>
+                    <h2>Cantidad de ambientes:</h2>
                     <Input 
                         type="number" 
                         placeholder="Ambientes" 
@@ -145,7 +181,7 @@ const AddPropiedad = () => {
                 </div>
 
                 <div className={styles.usuario}>
-                    <h3>Zona:</h3>
+                    <h2>Zona:</h2>
                     <Input 
                         type="text" 
                         placeholder="Zona" 
@@ -154,13 +190,25 @@ const AddPropiedad = () => {
                 </div>
 
                 <div className={styles.usuario}>
-                    <h3>Descripción:</h3>
+                    <h2>Descripción:</h2>
                     <Input 
                         type="text" 
                         placeholder="Descripción" 
                         onChange={setDescripcion} 
                     />
                 </div>
+
+                <div className={styles.usuario}>
+                    <h2>Subir imagenes:</h2>
+                        <InputImagen onChange={subirImagenes}/>
+                </div>
+                {imagenes.length > 0 ? (
+                    imagenes.map((img, index) => (
+                        <p key={index}>{img.name}</p>
+                    ))
+                ) : (
+                    <p>No hay imágenes seleccionadas.</p>
+                )}
 
                 <Button className={styles.boton} onClick={handleClick} text="Publicar"/>
             </div>
