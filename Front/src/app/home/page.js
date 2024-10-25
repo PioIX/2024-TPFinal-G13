@@ -10,7 +10,7 @@ import { Chicle } from "next/font/google";
 export default function layoutHome({children}) {
     
   function redirigir(){
-    location.href = "/home/propiedades?idUsuario=" + localStorage.getItem("idUsuario")
+    location.href = "/home/propiedades"
   }
 
   return (
