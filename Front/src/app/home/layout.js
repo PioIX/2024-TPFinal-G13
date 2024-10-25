@@ -110,16 +110,16 @@ export default function layoutHome({children}) {
         <div>
           <header className={styles.header}>
             <div class="logo">
-            <a href={"http://localhost:3000/home?idUsuario=" + localStorage.getItem("idUsuario")}>
+            <a href={"http://localhost:3000/home"}>
                 <img src='/5411estate.jfif' alt="Logo"></img>
             </a>
             </div>
             <nav>
             <ul>
-                <li><a href={"http://localhost:3000/home/equipo?idUsuario=" + localStorage.getItem("idUsuario")}>Equipo</a></li>
-                <li><a href={"http://localhost:3000/home/propiedades?idUsuario=" + localStorage.getItem("idUsuario")}>Propiedades</a></li>
-                <li><a href={"http://localhost:3000/home/contacto?idUsuario=" + localStorage.getItem("idUsuario")}>Contacto</a></li>
-                <li><a href={"http://localhost:3000/home/chat?idUsuario=" + localStorage.getItem("idUsuario")}>Chats</a></li>
+                <li><a href={"http://localhost:3000/home/equipo"}>Equipo</a></li>
+                <li><a href={"http://localhost:3000/home/propiedades"}>Propiedades</a></li>
+                <li><a href={"http://localhost:3000/home/contacto"}>Contacto</a></li>
+                <li><a href={"http://localhost:3000/home/chat"}>Chats</a></li>
             </ul>
             </nav>
           </header> {children}

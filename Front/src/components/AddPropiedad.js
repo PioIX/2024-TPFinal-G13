@@ -128,7 +128,7 @@ const AddPropiedad = () => {
     } //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
 
     function redirigir(){
-        location.href = "/home/propiedades?idUsuario=" + localStorage.getItem("idUsuario")
+        location.href = "/home/propiedades"
     }
 
     return(

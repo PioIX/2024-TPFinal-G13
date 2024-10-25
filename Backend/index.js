@@ -97,3 +97,19 @@ app.get('/propiedades', async function(req,res){
     let propiedades = await MySql.realizarQuery(`select * from Propiedades`);
     res.send(propiedades)
 })
+
+app.post('/addComentario', async function(req,res) {
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0
+    }
+    await MySql.realizarQuery(`INSERT INTO Comentarios (idUsuario, texto, nombreApellido, mail, asunto)
+    VALUES (${req.body.idUsuario}, '${req.body.texto}', '${req.body.nombreApellido}', '${req.body.mail}', '${req.body.asunto}')`);
+    let comentario = await MySql.realizarQuery(`select * from Comentarios  WHERE idUsuario='${req.body.idUsuario}' and  nombreApellido=${req.body.nombreApellido}`);
+    console.log(comentario)
+    respuesta.id = comentario[0].idComentario;
+    respuesta.success = true;
+    res.send(respuesta);     
+    
+})

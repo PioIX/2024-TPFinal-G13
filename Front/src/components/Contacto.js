@@ -3,13 +3,53 @@ import React from "react";
 import styles from './Contacto.module.css';
 import Input from "... @/components/Inputs";
 import Button from "./Button";
+import Textarea from "./Textarea";
+import { useEffect, useState } from "react";
 
 // App Component (Main Entry)
 export default function ContactForm(){
     
-    function redirigir(){
+  function redirigir(){
+    location.href = "/home/contacto"
+  }
+
+    const [nombreApellido, setNombreApellido] = useState('');
+    const [mail, setMail] = useState('');
+    const [asunto, setAsunto] = useState('');
+    const [texto, setTexto] = useState('');
+
+
+
+    const handleClick = async () => { //Links con lógica
+        //Metodo push para registrar en el historial el cambio de pantalla
+        console.log("inicio function")
+        const data = {
+            nombreApellido: nombreApellido,
+            mail: mail,
+            asunto: asunto,
+            texto: texto,
+            idUsuario: localStorage.getItem("idUsuario"),
+        };
+        console.log(data)
+
+        const response = await fetch('http://localhost:4000/addComentario',{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+                },
+            body:JSON.stringify(data),
+        })
         
-    }
+        console.log(response)
+        let respuesta = await response.json();
+        console.log(respuesta)
+        if (respuesta.success == true){
+            alert("Comentario agregado")
+            redirigir()
+        } else {
+            alert("Comentario no agregado")
+        }  
+    } //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
 
     return(
         // for i in chats
@@ -32,20 +72,19 @@ export default function ContactForm(){
             <h1 className={styles.heading}>Dejanos tu contacto</h1>
             <form className={styles.formGroup}>
             <div className={styles.usuario}>
-            <Input placeholder="Nombre y apellido" /> 
+            <Input type="text" placeholder="Nombre y apellido" onChange={setNombreApellido}/> 
             </div>
             <div className={styles.usuario}>
-            <Input placeholder="Teléfono" />
+            <Input type="text" placeholder="Asunto" onChange={setAsunto}/>
             </div>
             <div className={styles.usuario}>
-            <Input placeholder="Email" />
+            <Input type="email" placeholder="Mail" onChange={setMail}/>
             </div>
             
             
-            
-            <textarea className={styles.textareaField} placeholder="Dejanos tus comentarios" required></textarea>
+            <Textarea placeholder="Dejanos tu comentario" onChange={setTexto}/>
             <div className={styles.button}>
-                <Button className={styles.button} onClick={redirigir} text="Enviar comentario" />
+                <Button className={styles.button} onClick={handleClick} text="Enviar comentario" />
             </div>
         </form>
         </div>

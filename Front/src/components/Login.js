@@ -69,7 +69,7 @@ export default function Login() {
     }
 
     function redirigir(){
-        location.href = "/home?idUsuario=" + localStorage.getItem("idUsuario")
+        location.href = "/home"
     }
 
     function registro(){
