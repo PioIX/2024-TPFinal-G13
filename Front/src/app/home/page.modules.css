@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-image: url('/EdificioFondo.jpg'); /* Verifica la ruta de la imagen */
+    background-image: url('/EdificiosNy.jpg'); /* Verifica la ruta de la imagen */
     height: 100vh; /* Ajusta la imagen a toda la altura de la pantalla */
     background-position: center;
     background-repeat: no-repeat;
@@ -35,7 +35,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     padding: 10px 15px;
     border-bottom: 2px solid transparent;
@@ -55,7 +55,7 @@ nav ul li a:hover {
     width: 200px; /* Ajusta el ancho como prefieras */
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mayor visibilidad */
-    color: white;
+    color: rgb(255, 255, 255);
     margin-bottom: 15px;
 }
 
@@ -97,8 +97,8 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(51, 51, 51, 0.8); /* Fondo semitransparente */
-    color: white;
+    background-color: rgb(51, 51, 51); /* Fondo semitransparente */
+    color: rgb(255, 255, 255);
     padding: 20px;
     margin-top: 150px;
 }

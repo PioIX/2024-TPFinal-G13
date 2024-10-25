@@ -1,0 +1,31 @@
+/* Estilos globales para el input */
+.input {
+    width: 100%; /* Se ajusta al ancho del contenedor padre */
+    padding: 12px 20px; /* Espaciado interno cómodo */
+    margin: 8px 0; /* Espaciado externo entre otros elementos */
+    box-sizing: border-box; /* Incluye el padding y el border dentro del width */
+    border: 2px solid #ddd; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de texto legible */
+    font-family: 'Roboto', sans-serif; /* Fuente limpia y moderna */
+    transition: border-color 0.3s ease; /* Transición suave al hacer hover o focus */
+    outline: none; /* Elimina el contorno por defecto */
+  }
+  
+  /* Cambia el borde cuando el input está en foco */
+  .input:focus {
+    border-color: #333; /* Cambia el color del borde a gris oscuro en foco */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Añade un pequeño resplandor */
+  }
+  
+  /* Estilo al hover */
+  .input:hover {
+    border-color: #999; /* Color del borde al pasar el mouse por encima */
+  }
+  
+  /* Estilo para los textos de marcador de posición */
+  .input::placeholder {
+    color: #999; /* Color más tenue para el placeholder */
+    font-style: italic; /* Opción para destacar el placeholder con estilo */
+  }
+  
