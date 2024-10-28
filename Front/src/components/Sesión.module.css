@@ -21,12 +21,17 @@
   
   /* Estilo del título */
   .h1 {
-    display: flex;
+    display: inline-block; /* Hace que el borde se ajuste al tamaño del texto */
     font-size: 2rem;
     font-weight: 700;
     color: #ebebeb; /* Color verde característico de WhatsApp */
     margin-bottom: 2rem;
     text-align: center;
+    text-shadow: 
+                1px 1px 0 black,   /* Sombra a la derecha */
+                -1px -1px 0 black, /* Sombra a la izquierda */
+                1px -1px 0 black,  /* Sombra arriba derecha */
+                -1px 1px 0 black;  /* Sombra abajo izquierda */
   }
   
   /* Estilo del contenedor de los campos de texto y botón */

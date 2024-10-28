@@ -46,6 +46,11 @@ export default function propiedades() {
       }
   },[]);
 
+  function handleClickPropiedad(idPropiedad) {
+    console.log(idPropiedad);
+    router.push("propiedades/propiedad?idPropiedad=" + idPropiedad);
+  }
+
   return (
     //<>
     //<div className={styles.chatContainer}>
@@ -55,7 +60,10 @@ export default function propiedades() {
     <div className={styles.container}>
       {
           vector.map(propiedad => (
-              <Propiedad idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
+              <>
+                <Propiedad onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}} idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} ambientes={propiedad.ambientes} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
+                <br></br>
+              </>
             ))
       }
       <div className={styles.button}>

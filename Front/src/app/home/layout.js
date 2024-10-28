@@ -126,7 +126,11 @@ export default function layoutHome({children}) {
         </div>
         <footer>
           <div class="info">
-              <p>Tu breve información aquí. Puedes hablar sobre tu negocio o sitio web.</p>
+              <p>En 5411 Estate, estamos dedicados a ayudarte a encontrar el hogar de tus sueños.</p>
+              <p>Con un equipo de expertos en el mercado inmobiliario de América Latina, ofrecemos servicios</p> 
+              <p>personalizados de compra, venta y alquiler de propiedades. Tu satisfacción es nuestra</p> 
+              <p>prioridad, así que no dudes en contactarnos para más información y descubre cómo</p>
+              <p>podemos hacer realidad tus proyectos inmobiliarios.</p>
           </div>
           <div class="social-media">
               <a href="https://www.instagram.com/5411estateok?igsh=c2RueW5rb3kyenB3" target="_blank">
