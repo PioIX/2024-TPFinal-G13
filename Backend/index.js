@@ -98,11 +98,29 @@ app.get('/propiedades', async function(req,res){
     res.send(propiedades)
 })
 
-app.get('/propiedad', async function(req,res){
-    //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
-    let propiedades = await MySql.realizarQuery(`select * from Propiedades where idPropiedad = '${req}'`);
-    res.send(propiedades)
-})
+app.get('/propiedad', async function(req, res) {
+    try {
+        // Asegúrate de que se está recibiendo el parámetro `id`
+        if (!req.query.id) {
+            return res.status(400).send({ error: 'ID de propiedad es requerido' });
+        }
+
+        // Realiza la consulta a la base de datos
+        let propiedades = await MySql.realizarQuery(`SELECT * FROM Propiedades WHERE idPropiedad = ${req.query.id}`);
+
+        // Verifica si se encontraron propiedades
+        if (propiedades.length === 0) {
+            return res.status(404).send({ error: 'Propiedad no encontrada' });
+        }
+
+        // Enviar las propiedades como respuesta
+        res.send(propiedades);
+    } catch (error) {
+        console.error('Error al obtener propiedades:', error); // Log del error para depuración
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
 
 app.post('/addComentario', async function(req,res) {
     console.log(req.body);
