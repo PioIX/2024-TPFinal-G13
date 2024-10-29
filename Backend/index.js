@@ -72,6 +72,22 @@ app.post('/login', async function(req,res) {
     }
 })
 
+app.get('/nombreUser', async function(req,res) {
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0
+    }
+    let usuario = await MySql.realizarQuery(`select nombre from Usuarios where idUsuario = '${req.body.idUsuario}' `);
+    if (usuario.length != 0) {
+        respuesta.id = usuario[0].idUsuario;
+        respuesta.success = true;
+        res.send(respuesta);
+    } else {
+        res.send(respuesta);  
+    }
+})
+
 app.post('/addPropiedad', async function(req,res) {
     console.log(req.body);
     let respuesta = {

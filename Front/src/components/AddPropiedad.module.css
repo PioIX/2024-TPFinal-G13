@@ -20,11 +20,11 @@
 }
 
 /* Estilo del título */
-.h2 {
+.h1 {
   display: flex;
-  font-size: 2rem;
   font-weight: 700;
   color: #ebebeb; /* Color verde característico de WhatsApp */
+  margin-top: 30px;
   margin-bottom: 100px;
   text-align: center;
 }

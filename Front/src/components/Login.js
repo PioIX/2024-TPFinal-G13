@@ -69,7 +69,7 @@ export default function Login() {
     }
 
     function redirigir(){
-        location.href = "/home"
+        router.replace("home")
     }
 
     function registro(){

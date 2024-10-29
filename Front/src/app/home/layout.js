@@ -101,9 +101,36 @@ const contacts = [
 
 export default function layoutHome({children}) {
   
-    const [variant, serVariant] = useState("login")
-
     const router = useRouter();
+    const [vector, setVector] = useState([])
+    let isLoaded = false
+
+
+    const getVector = async () => {
+      const data = {
+          idUsuario : localStorage.getItem("idUsuario")
+      }  
+      console.log(data)
+      const response = await fetch('http://localhost:4000/nombreUser',{
+          method:"GET",
+          headers: {
+              "Content-Type": "application/json",
+            },
+      })
+      
+      console.log(response)
+      //Tengo que usar el await porque la respuesta del servidor es lenta
+      const result = await response.json()
+      console.log(result)
+      setVector(result)
+  }
+
+  useEffect(() => {
+    if(!isLoaded){
+        getVector();
+        isLoaded = true;
+    }
+  },[]);
 
     return (
       <> 
@@ -120,6 +147,12 @@ export default function layoutHome({children}) {
                 <li><a href={"http://localhost:3000/home/propiedades"}>Propiedades</a></li>
                 <li><a href={"http://localhost:3000/home/contacto"}>Contacto</a></li>
                 <li><a href={"http://localhost:3000/home/chat"}>Chats</a></li>
+                <div class="user">
+                <a href={""}>
+                <img src='/imagenUsuario.png' alt="User"></img>
+                </a>
+                </div>
+                <li><a href={""}>Hola, {vector.nombre}!</a></li>
             </ul>
             </nav>
           </header> {children}
@@ -147,3 +180,5 @@ export default function layoutHome({children}) {
       </>
     );
   }
+
+  //se vende toda la pagina alibvaba por 78 camellos arabenses. AL hU Li aBa🧔🐫

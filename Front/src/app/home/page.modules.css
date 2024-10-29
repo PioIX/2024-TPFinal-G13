@@ -28,6 +28,21 @@ header {
     width: 90px; /* Tamaño del logo ajustado */
 }
 
+.logo img:hover{
+    transform: scale(1.1);
+}
+
+.user img {
+    width: 40px;
+    height: auto;
+    transition: transform 0.2s;
+    margin-right: -30px;
+}
+
+.user img:hover{
+    transform: scale(1.1);
+}
+
 nav ul {
     list-style: none;
     display: flex;
