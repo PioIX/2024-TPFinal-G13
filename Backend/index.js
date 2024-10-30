@@ -154,3 +154,44 @@ app.get('/getImagen', async function(req,res){
     let imagenes = await MySql.realizarQuery(`select * from Imagenes where idPropiedad = ${req.query.idPropiedad}`);
     res.send(imagenes)
 })
+
+
+
+//whatsapp 
+io.on("connection", (socket) => {
+	const req = socket.request;
+
+	socket.on('joinRoom', data => {
+		console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
+		if (req.session.room != undefined && req.session.room.length > 0)
+			socket.leave(req.session.room);
+		req.session.room = data.room;
+		socket.join(req.session.room);
+
+		io.to(req.session.room).emit('chat-messages', { user: req.session.user, room: req.session.room });
+	});
+
+	socket.on('leaveRoom', data => {
+		req.session.room = data.room;
+		socket.leave(req.session.room)
+	})
+
+	socket.on('pingAll', data => {
+		console.log("PING ALL: ", data);
+		io.emit('pingAll', { event: "Ping to all", message: data });
+	});
+
+	socket.on('newRoom', data => {
+		req.session.username = data.username
+		console.log("New Room: ", data);
+		io.emit('newRoom', { event: "New Room Created", user: req.session.username });
+	});
+
+	socket.on('sendMessage', data => {
+		io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+	});
+
+	socket.on('disconnect', () => {
+		console.log("Disconnect");
+	})
+});
