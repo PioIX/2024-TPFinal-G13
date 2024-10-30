@@ -138,3 +138,19 @@ app.post('/addComentario', async function(req,res) {
     respuesta.success = true;
     res.send(respuesta);     
 })
+
+app.post('/addImagen', async function(req,res) {
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0
+    }
+    await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
+    VALUES (${req.body.idPropiedad}, '${req.body.imagen}')`);
+})
+
+app.get('/getImagen', async function(req,res){
+    //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
+    let imagenes = await MySql.realizarQuery(`select * from Imagenes where idPropiedad = ${req.query.idPropiedad}`);
+    res.send(imagenes)
+})
