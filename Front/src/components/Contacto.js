@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import styles from './Contacto.module.css';
-import Input from "... @/components/Inputs";
+import Input from "... @/components/Input";
 import Button from "./Button";
 import Textarea from "./Textarea";
 import { useEffect, useState } from "react";
