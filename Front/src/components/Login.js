@@ -58,7 +58,9 @@ export default function Login() {
                 redirigir();
             }
             else*/ 
+            console.log(respuesta)
             localStorage.setItem("idUsuario", respuesta.id)
+            localStorage.setItem("nombreUsuario", respuesta.nombre)
             if (respuesta.success == true){
                 alert("Usuario logueado")
                 redirigir()

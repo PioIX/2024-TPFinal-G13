@@ -105,33 +105,6 @@ export default function layoutHome({children}) {
     const [vector, setVector] = useState([])
     let isLoaded = false
 
-
-    const getVector = async () => {
-      const data = {
-          idUsuario : localStorage.getItem("idUsuario")
-      }  
-      console.log(data)
-      const response = await fetch('http://localhost:4000/nombreUser',{
-          method:"GET",
-          headers: {
-              "Content-Type": "application/json",
-            },
-      })
-      
-      console.log(response)
-      //Tengo que usar el await porque la respuesta del servidor es lenta
-      const result = await response.json()
-      console.log(result)
-      setVector(result)
-  }
-
-  useEffect(() => {
-    if(!isLoaded){
-        getVector();
-        isLoaded = true;
-    }
-  },[]);
-
     return (
       <> 
         <div>
@@ -152,7 +125,7 @@ export default function layoutHome({children}) {
                 <img src='/imagenUsuario.png' alt="User"></img>
                 </a>
                 </div>
-                <li><a href={""}>Hola, {vector.nombre}!</a></li>
+                <li><a href={""}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
             </ul>
             </nav>
           </header> {children}

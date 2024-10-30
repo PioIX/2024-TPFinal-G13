@@ -60,28 +60,14 @@ app.post('/login', async function(req,res) {
     console.log(req.body);
     let respuesta = {
         success: false,
-        id: 0
+        id: 0,
+        nombre: ""
     }
     let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}' and contraseña = '${req.body.contraseña}'`);
     if (usuario.length != 0) {
         respuesta.id = usuario[0].idUsuario;
         respuesta.success = true;
-        res.send(respuesta);
-    } else {
-        res.send(respuesta);  
-    }
-})
-
-app.get('/nombreUser', async function(req,res) {
-    console.log(req.body);
-    let respuesta = {
-        success: false,
-        id: 0
-    }
-    let usuario = await MySql.realizarQuery(`select nombre from Usuarios where idUsuario = '${req.body.idUsuario}' `);
-    if (usuario.length != 0) {
-        respuesta.id = usuario[0].idUsuario;
-        respuesta.success = true;
+        respuesta.nombre = usuario[0].nombre
         res.send(respuesta);
     } else {
         res.send(respuesta);  
