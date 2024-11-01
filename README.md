@@ -15,8 +15,6 @@ Bienvenido a **5411 Estate**, la inmobiliaria diseñada para facilitar el proces
 - **Búsqueda Avanzada**: Permite a los usuarios buscar propiedades por ubicación, precio y tipo de casa, haciendo el proceso más ágil y efectivo.
 
 ## Tecnologías Utilizadas
-
-- HTML
 - CSS
 - JavaScript
 
