@@ -17,6 +17,8 @@ Bienvenido a **5411 Estate**, la inmobiliaria diseñada para facilitar el proces
 ## Tecnologías Utilizadas
 - CSS
 - JavaScript
+- Next.js
+- React
 
 ## Contacto
 
