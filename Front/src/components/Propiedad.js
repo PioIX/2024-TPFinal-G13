@@ -18,7 +18,6 @@ export default function Propiedad (props){
               <p>Ambientes: {props.ambientes}</p>
               <p>Para alquilar: {alquiler}</p>
               <p>Precio: {props.precio}</p>
-              <p>Nombre de usuario publicante</p>
             </div>
         </article>
     )

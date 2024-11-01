@@ -121,11 +121,11 @@ export default function layoutHome({children}) {
                 <li><a href={"http://localhost:3000/home/contacto"}>Contacto</a></li>
                 <li><a href={"http://localhost:3000/home/chat"}>Chats</a></li>
                 <div class="user">
-                <a href={""}>
+                <a href={"http://localhost:3000/home/user?id=" + localStorage.getItem("idUsuario")}>
                 <img src='/imagenUsuario.png' alt="User"></img>
                 </a>
                 </div>
-                <li><a href={""}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
+                <li><a href={"http://localhost:3000/home/user?id=" + localStorage.getItem("idUsuario")}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
             </ul>
             </nav>
           </header> {children}

@@ -149,16 +149,39 @@ app.post('/addImagen', async function(req,res) {
     VALUES (${req.body.idPropiedad}, '${req.body.imagen}')`);
 })
 
-app.get('/getImagen', async function(req,res){
+app.get('/user', async function(req,res){
+    try {
+        // Asegúrate de que se está recibiendo el parámetro `id`
+        if (!req.query.id) {
+            return res.status(400).send({ error: 'ID de usuario es requerido' });
+        }
+
+        // Realiza la consulta a la base de datos
+        let usuarios = await MySql.realizarQuery(`SELECT * FROM Usuarios WHERE idUsuario = ${req.query.id}`);
+
+        // Verifica si se encontraron usuarioes
+        if (usuarios.length === 0) {
+            return res.status(404).send({ error: 'Usuario no encontrado' });
+        }
+
+        // Enviar las usuarioes como respuesta
+        res.send(usuarios);
+    } catch (error) {
+        console.error('Error al obtener usuarios:', error); // Log del error para depuración
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+})
+
+app.get('/nombreUsuario', async function(req,res){
     //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
-    let imagenes = await MySql.realizarQuery(`select * from Imagenes where idPropiedad = ${req.query.idPropiedad}`);
-    res.send(imagenes)
+    let nombreUsuario = await MySql.realizarQuery(`select * from Usuarios where idUsuario = ${req.body.idUsuario}`);
+    res.send(nombreUsuario)
 })
 
 
 
 //whatsapp 
-io.on("connection", (socket) => {
+/*io.on("connection", (socket) => {
 	const req = socket.request;
 
 	socket.on('joinRoom', data => {
@@ -194,4 +217,5 @@ io.on("connection", (socket) => {
 	socket.on('disconnect', () => {
 		console.log("Disconnect");
 	})
-});
+});*/
+

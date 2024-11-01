@@ -20,7 +20,7 @@ export default function VerPropiedad (props){
               <p>Zona: {props.zona}</p>
               <p>Descripción: {props.descripcion}</p>
               <p>Precio: {props.precio}</p>
-              <p>Nombre de usuario publicante</p>
+              <p>Nombre de usuario publicante: {props.nombreUsuario}</p>
             </div>
         </article>
     )
