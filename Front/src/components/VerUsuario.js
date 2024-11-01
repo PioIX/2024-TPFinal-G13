@@ -9,7 +9,7 @@ export default function VerUsuario (props){
         <article>
             <div key={props.idUsuario}>
               <p>Nombre de Usuario: {props.nombre}</p>
-              <p>contraseña: {props.contraseña}</p>
+              <p>Contraseña: {props.contraseña}</p>
               <p>Nombre y Apellido: {props.nombreApellido}</p>
             </div>
         </article>

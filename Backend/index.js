@@ -40,7 +40,8 @@ app.post('/addUsuario', async function(req,res) {
     console.log(req.body);
     let respuesta = {
         success: false,
-        id: 0
+        id: 0,
+        nombre: ""
     }
     let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}'`);
     if (usuario.length != 0) {
@@ -52,6 +53,7 @@ app.post('/addUsuario', async function(req,res) {
         console.log(usuario)
         respuesta.id = usuario[0].idUsuario;
         respuesta.success = true;
+        respuesta.nombre = usuario[0].nombre;
         res.send(respuesta);     
     }
 })
@@ -67,7 +69,7 @@ app.post('/login', async function(req,res) {
     if (usuario.length != 0) {
         respuesta.id = usuario[0].idUsuario;
         respuesta.success = true;
-        respuesta.nombre = usuario[0].nombre
+        respuesta.nombre = usuario[0].nombre;
         res.send(respuesta);
     } else {
         res.send(respuesta);  
@@ -178,7 +180,38 @@ app.get('/nombreUsuario', async function(req,res){
     res.send(nombreUsuario)
 })
 
+app.put('/changeUsuario', async function(req, res){
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}'`);
+    if (usuario.length != 0) {
+        res.send(respuesta.success);
+    } else {
+        
+        await MySql.realizarQuery(`UPDATE Usuarios SET nombre = '${req.body.nombre}' WHERE id = '${req.body.idUsuario}'`);
+        respuesta.success = true;
+        res.send(respuesta);     
+    }
+})
 
+app.put('/changeNombreApellido', async function(req, res){
+    await MySql.realizarQuery(`UPDATE Usuarios SET nombreApellido = '${req.body.nombreApellido}' WHERE id = '${req.body.idUsuario}'`);
+    res.send("ok");     
+})
+
+app.put('/changeContraseña', async function(req, res){
+    await MySql.realizarQuery(`UPDATE Usuarios SET contraseña = '${req.body.contraseña}' WHERE id = '${req.body.idUsuario}'`);
+    res.send("ok");     
+})
+
+app.delete('/deleteJugador', async function(req, res){
+    await MySql.realizarQuery(`DELETE FROM Jugadores WHERE Id = '${req.body.Id}'`);
+    res.send("ok");
+})
 
 //whatsapp 
 /*io.on("connection", (socket) => {

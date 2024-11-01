@@ -25,9 +25,12 @@ export default function Usuario() {
         "Content-Type": "application/json",
       },
     });
-
+    console.log(response)
     const result = await response.json();
+    console.log(result)
+    
     setVector(result[0]);
+    console.log(vector)
   };
 
   useEffect(() => {
@@ -43,7 +46,14 @@ export default function Usuario() {
   return (
     <div className={styles.container}>
       {console.log(vector)}
-      <VerUsuario nombre={vector.nombre} contraseña={vector.contraseña} nombreApellido={vector.nombreApellido}></VerUsuario>
+      { vector != null &&
+        <VerUsuario 
+        idUsuario={vector.idUsuario}
+        nombre={vector.nombre}
+        contraseña={vector.contraseña}
+        nombreApellido={vector.nombreApellido}
+      />
+      }
     </div>
   );
 }
