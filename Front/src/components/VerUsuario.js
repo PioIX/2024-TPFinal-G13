@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 export default function VerUsuario (props){
     //const archivo = "/images/" + props.src
     //<img src={archivo}/>
-
+    
 
     return(
         <article>

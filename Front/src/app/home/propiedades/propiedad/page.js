@@ -27,6 +27,8 @@ export default function Propiedades() {
     });
 
     const result = await response.json();
+    console.log("Result:")
+    console.log(result)
     setVector(result[0]);
   };
 
@@ -60,6 +62,7 @@ export default function Propiedades() {
         precio={vector.precio}
         zona={vector.zona}
         descripcion={vector.descripcion}
+        idUsuario={vector.idUsuario}
       />
       { vector.idUsuario == localStorage.getItem("idUsuario") &&
         <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>

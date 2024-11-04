@@ -85,7 +85,7 @@ const ChangeUser = () => {
             idUsuario: idUsuarioActual
         };
 
-        const response = await fetch('http://localhost:4000/changeContraseña',{
+        const response = await fetch('http://localhost:4000/changeContrasena',{
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const ChangeUser = () => {
     
 
     return(
-        <div className={styles.container}>
+        <>
         <h1 className={styles.h1}>MODIFICAR USUARIO</h1>
         
             <div className={styles.formGroup}>
@@ -156,8 +156,8 @@ const ChangeUser = () => {
                 <Button className={styles.boton} onClick={changeContraseña} text="Cambiar Contraseña"/>
                 
                 <Button className={styles.boton} onClick={changeNombreApellido} text="Cambiar Nombre completo"/>
-            </div>
         </div>
+        </>
     )
 }
 

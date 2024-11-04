@@ -92,7 +92,7 @@ function login(){
       />
       }     
       <ButtonChat onClick={redirigir} text={"Modificar Usuario"}/>
-      <ButtonChat onClick={deleteUser} text={"Eliminar Usuario"}/>
+      {/*<ButtonChat onClick={deleteUser} text={"Eliminar Usuario"}/>*/}
       
       <ButtonChat onClick={login} text={"Cerrar Sesión"}/>
     </div>

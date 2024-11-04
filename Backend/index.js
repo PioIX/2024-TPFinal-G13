@@ -111,7 +111,7 @@ app.get('/propiedad', async function(req, res) {
 
         // Realiza la consulta a la base de datos
         let propiedades = await MySql.realizarQuery(`SELECT * FROM Propiedades WHERE idPropiedad = ${req.query.id}`);
-
+        console.log(propiedades)
         // Verifica si se encontraron propiedades
         if (propiedades.length === 0) {
             return res.status(404).send({ error: 'Propiedad no encontrada' });
@@ -176,8 +176,9 @@ app.get('/user', async function(req,res){
 
 app.get('/nombreUsuario', async function(req,res){
     //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
-    let nombreUsuario = await MySql.realizarQuery(`select * from Usuarios where idUsuario = ${req.body.idUsuario}`);
-    res.send(nombreUsuario)
+    console.log(req.query.idUsuario)
+    let nombreUsuario = await MySql.realizarQuery(`select nombre from Usuarios where idUsuario = ${req.query.idUsuario}`);
+    res.send({nombreUsuario: nombreUsuario[0].nombre})
 })
 
 app.put('/changeUsuario', async function(req, res){
@@ -210,7 +211,7 @@ app.put('/changeNombreApellido', async function(req, res){
     res.send(respuesta);     
 })
 
-app.put('/changeContraseña', async function(req, res){
+app.put('/changeContrasena', async function(req, res){
     console.log(req.body);
     let respuesta = {
         success: false,
@@ -229,7 +230,7 @@ app.delete('/deleteUsuario', async function(req, res){
         id: 0,
         nombre: ""
     }
-    await MySql.realizarQuery(`DELETE FROM Usuarios WHERE idUsuario = ${req.body.idUsuario}`);
+    await MySql.realizarQuery(`DELETE FROM Usuarios WHERE idUsuario == ${req.body.idUsuario}`);
     respuesta.success = true;
     res.send(respuesta);    
 })
