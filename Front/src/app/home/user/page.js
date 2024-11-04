@@ -12,6 +12,7 @@ import ButtonMensaje from "../../../components/ButtonMensaje";
 import Chat from "../../../components/Chat";
 import VerPropiedad from "../../../components/VerPropiedad";
 import VerUsuario from "../../../components/VerUsuario";
+import ButtonChat from "../../../components/ButtonChat";
 
 export default function Usuario() {
   const [vector, setVector] = useState(null);
@@ -43,6 +44,42 @@ export default function Usuario() {
     }
   }, []);
 
+  function redirigir(){
+    router.push("user/modificar")
+  }
+
+  const deleteUser = async () => { //Links con lógica
+    //Metodo push para registrar en el historial el cambio de pantalla
+    const data = {
+        idUsuario: localStorage.getItem("idUsuario")
+    };
+    console.log(data)
+
+    const response = await fetch('http://localhost:4000/deleteUsuario',{
+        method:"DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            },
+        body:JSON.stringify(data),
+    })
+    console.log(response)
+        
+    let respuesta = await response.json();
+    console.log(respuesta)     
+    if (respuesta.success == true){
+        alert("Usuario eliminado correctamente")
+        login()
+    } else {
+        alert("Usuario no eliminado")
+    }  
+}
+
+
+function login(){
+  router.replace("/")
+  localStorage.setItem("idUsuario", 0)
+}
+
   return (
     <div className={styles.container}>
       {console.log(vector)}
@@ -53,7 +90,11 @@ export default function Usuario() {
         contraseña={vector.contraseña}
         nombreApellido={vector.nombreApellido}
       />
-      }
+      }     
+      <ButtonChat onClick={redirigir} text={"Modificar Usuario"}/>
+      <ButtonChat onClick={deleteUser} text={"Eliminar Usuario"}/>
+      
+      <ButtonChat onClick={login} text={"Cerrar Sesión"}/>
     </div>
   );
 }

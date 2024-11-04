@@ -192,25 +192,46 @@ app.put('/changeUsuario', async function(req, res){
         res.send(respuesta.success);
     } else {
         
-        await MySql.realizarQuery(`UPDATE Usuarios SET nombre = '${req.body.nombre}' WHERE id = '${req.body.idUsuario}'`);
+        await MySql.realizarQuery(`UPDATE Usuarios SET nombre = '${req.body.nombre}' WHERE idUsuario = ${req.body.idUsuario}`);
         respuesta.success = true;
         res.send(respuesta);     
     }
 })
 
 app.put('/changeNombreApellido', async function(req, res){
-    await MySql.realizarQuery(`UPDATE Usuarios SET nombreApellido = '${req.body.nombreApellido}' WHERE id = '${req.body.idUsuario}'`);
-    res.send("ok");     
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    await MySql.realizarQuery(`UPDATE Usuarios SET nombreApellido = '${req.body.nombreApellido}' WHERE idUsuario = ${req.body.idUsuario}`);
+    respuesta.success = true;
+    res.send(respuesta);     
 })
 
 app.put('/changeContraseña', async function(req, res){
-    await MySql.realizarQuery(`UPDATE Usuarios SET contraseña = '${req.body.contraseña}' WHERE id = '${req.body.idUsuario}'`);
-    res.send("ok");     
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    await MySql.realizarQuery(`UPDATE Usuarios SET contraseña = '${req.body.contraseña}' WHERE idUsuario = ${req.body.idUsuario}`);
+    respuesta.success = true;
+    res.send(respuesta);         
 })
 
-app.delete('/deleteJugador', async function(req, res){
-    await MySql.realizarQuery(`DELETE FROM Jugadores WHERE Id = '${req.body.Id}'`);
-    res.send("ok");
+app.delete('/deleteUsuario', async function(req, res){
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    await MySql.realizarQuery(`DELETE FROM Usuarios WHERE idUsuario = ${req.body.idUsuario}`);
+    respuesta.success = true;
+    res.send(respuesta);    
 })
 
 //whatsapp 
