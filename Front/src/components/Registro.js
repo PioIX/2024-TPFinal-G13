@@ -82,7 +82,7 @@ const Registro = () => {
     } //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
 
     function redirigir(){
-        location.href = "/home"
+        router.replace("home")
     }
 
     return(

@@ -40,7 +40,8 @@ app.post('/addUsuario', async function(req,res) {
     console.log(req.body);
     let respuesta = {
         success: false,
-        id: 0
+        id: 0,
+        nombre: ""
     }
     let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}'`);
     if (usuario.length != 0) {
@@ -52,6 +53,7 @@ app.post('/addUsuario', async function(req,res) {
         console.log(usuario)
         respuesta.id = usuario[0].idUsuario;
         respuesta.success = true;
+        respuesta.nombre = usuario[0].nombre;
         res.send(respuesta);     
     }
 })
@@ -67,7 +69,7 @@ app.post('/login', async function(req,res) {
     if (usuario.length != 0) {
         respuesta.id = usuario[0].idUsuario;
         respuesta.success = true;
-        respuesta.nombre = usuario[0].nombre
+        respuesta.nombre = usuario[0].nombre;
         res.send(respuesta);
     } else {
         res.send(respuesta);  
@@ -109,7 +111,7 @@ app.get('/propiedad', async function(req, res) {
 
         // Realiza la consulta a la base de datos
         let propiedades = await MySql.realizarQuery(`SELECT * FROM Propiedades WHERE idPropiedad = ${req.query.id}`);
-
+        console.log(propiedades)
         // Verifica si se encontraron propiedades
         if (propiedades.length === 0) {
             return res.status(404).send({ error: 'Propiedad no encontrada' });
@@ -138,3 +140,137 @@ app.post('/addComentario', async function(req,res) {
     respuesta.success = true;
     res.send(respuesta);     
 })
+
+app.post('/addImagen', async function(req,res) {
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0
+    }
+    await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
+    VALUES (${req.body.idPropiedad}, '${req.body.imagen}')`);
+})
+
+app.get('/user', async function(req,res){
+    try {
+        // Asegúrate de que se está recibiendo el parámetro `id`
+        if (!req.query.id) {
+            return res.status(400).send({ error: 'ID de usuario es requerido' });
+        }
+
+        // Realiza la consulta a la base de datos
+        let usuarios = await MySql.realizarQuery(`SELECT * FROM Usuarios WHERE idUsuario = ${req.query.id}`);
+
+        // Verifica si se encontraron usuarioes
+        if (usuarios.length === 0) {
+            return res.status(404).send({ error: 'Usuario no encontrado' });
+        }
+
+        // Enviar las usuarioes como respuesta
+        res.send(usuarios);
+    } catch (error) {
+        console.error('Error al obtener usuarios:', error); // Log del error para depuración
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+})
+
+app.get('/nombreUsuario', async function(req,res){
+    //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
+    console.log(req.query.idUsuario)
+    let nombreUsuario = await MySql.realizarQuery(`select nombre from Usuarios where idUsuario = ${req.query.idUsuario}`);
+    res.send({nombreUsuario: nombreUsuario[0].nombre})
+})
+
+app.put('/changeUsuario', async function(req, res){
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}'`);
+    if (usuario.length != 0) {
+        res.send(respuesta.success);
+    } else {
+        
+        await MySql.realizarQuery(`UPDATE Usuarios SET nombre = '${req.body.nombre}' WHERE idUsuario = ${req.body.idUsuario}`);
+        respuesta.success = true;
+        res.send(respuesta);     
+    }
+})
+
+app.put('/changeNombreApellido', async function(req, res){
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    await MySql.realizarQuery(`UPDATE Usuarios SET nombreApellido = '${req.body.nombreApellido}' WHERE idUsuario = ${req.body.idUsuario}`);
+    respuesta.success = true;
+    res.send(respuesta);     
+})
+
+app.put('/changeContrasena', async function(req, res){
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    await MySql.realizarQuery(`UPDATE Usuarios SET contraseña = '${req.body.contraseña}' WHERE idUsuario = ${req.body.idUsuario}`);
+    respuesta.success = true;
+    res.send(respuesta);         
+})
+
+app.delete('/deleteUsuario', async function(req, res){
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0,
+        nombre: ""
+    }
+    await MySql.realizarQuery(`DELETE FROM Usuarios WHERE idUsuario == ${req.body.idUsuario}`);
+    respuesta.success = true;
+    res.send(respuesta);    
+})
+
+//whatsapp 
+/*io.on("connection", (socket) => {
+	const req = socket.request;
+
+	socket.on('joinRoom', data => {
+		console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
+		if (req.session.room != undefined && req.session.room.length > 0)
+			socket.leave(req.session.room);
+		req.session.room = data.room;
+		socket.join(req.session.room);
+
+		io.to(req.session.room).emit('chat-messages', { user: req.session.user, room: req.session.room });
+	});
+
+	socket.on('leaveRoom', data => {
+		req.session.room = data.room;
+		socket.leave(req.session.room)
+	})
+
+	socket.on('pingAll', data => {
+		console.log("PING ALL: ", data);
+		io.emit('pingAll', { event: "Ping to all", message: data });
+	});
+
+	socket.on('newRoom', data => {
+		req.session.username = data.username
+		console.log("New Room: ", data);
+		io.emit('newRoom', { event: "New Room Created", user: req.session.username });
+	});
+
+	socket.on('sendMessage', data => {
+		io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+	});
+
+	socket.on('disconnect', () => {
+		console.log("Disconnect");
+	})
+});*/
+

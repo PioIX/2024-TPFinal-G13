@@ -1,5 +1,5 @@
 .button {
-    background-color: #52b8d1; /* Color de fondo */
+    background-color: #814444; /* Color de fondo */
     color: white; /* Color del texto */
     padding: 15px 30px; /* Espaciado interno */
     border: 1px solid #69645f; /* Borde gris claro */
@@ -10,7 +10,7 @@
 }
 
 .button:hover {
-    background-color: #406b8f; /* Color al pasar el ratón */
+    background-color: #814444; /* Color al pasar el ratón */
     transform: scale(1.05); /* Aumentar tamaño al pasar */
     border-color: white;
 }

@@ -11,6 +11,7 @@ import Text from "../../../../components/Text";
 import ButtonMensaje from "../../../../components/ButtonMensaje";
 import Chat from "../../../../components/Chat";
 import VerPropiedad from "../../../../components/VerPropiedad";
+import ButtonChat from "../../../../components/ButtonChat";
 
 export default function Propiedades() {
   const [idPropiedad, setIdPropiedad] = useState(-1);
@@ -26,6 +27,8 @@ export default function Propiedades() {
     });
 
     const result = await response.json();
+    console.log("Result:")
+    console.log(result)
     setVector(result[0]);
   };
 
@@ -43,6 +46,10 @@ export default function Propiedades() {
     return <div>Cargando...</div>;
   }
 
+  function redirigir(){
+    router.push("home/propiedades/propiedad/modificar")
+  }
+
   return (
     <div className={styles.container}>
       {console.log(vector)}
@@ -55,7 +62,11 @@ export default function Propiedades() {
         precio={vector.precio}
         zona={vector.zona}
         descripcion={vector.descripcion}
+        idUsuario={vector.idUsuario}
       />
+      { vector.idUsuario == localStorage.getItem("idUsuario") &&
+        <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
+      }
     </div>
   );
 }
