@@ -5,7 +5,7 @@ import Button from './Button';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../components/AddPropiedad.module.css";
-import Input from './Inputs';
+import Input from './Input';
 import Checkbox from './Checkbox';
 import InputImagen from './InputsImagenes';
 
