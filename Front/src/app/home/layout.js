@@ -105,27 +105,28 @@ export default function layoutHome({children}) {
     const [vector, setVector] = useState([])
     let isLoaded = false
 
+
     return (
       <> 
         <div>
           <header className={styles.header}>
             <div class="logo">
-            <a href={"http://localhost:3000/home"}>
+            <a href={"/home"}>
                 <img src='/5411estate.jfif' alt="Logo"></img>
             </a>
             </div>
             <nav>
             <ul>
-                <li><a href={"http://localhost:3000/home/equipo"}>Equipo</a></li>
-                <li><a href={"http://localhost:3000/home/propiedades"}>Propiedades</a></li>
-                <li><a href={"http://localhost:3000/home/contacto"}>Contacto</a></li>
-                <li><a href={"http://localhost:3000/home/chat"}>Chats</a></li>
+                <li><a href={"/home/equipo"}>Equipo</a></li>
+                <li><a href={"/home/propiedades"}>Propiedades</a></li>
+                <li><a href={"/home/contacto"}>Contacto</a></li>
+                <li><a href={"/home/chat"}>Chats</a></li>
                 <div class="user">
-                <a href={"http://localhost:3000/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>
+                <a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>
                 <img src='/imagenUsuario.png' alt="User"></img>
                 </a>
                 </div>
-                <li><a href={"http://localhost:3000/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
+                <li><a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
             </ul>
             </nav>
           </header> {children}

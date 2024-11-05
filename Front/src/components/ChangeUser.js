@@ -72,6 +72,7 @@ const ChangeUser = () => {
                   
         if (respuesta.success == true){
             alert("Nombre de usuario modificado")
+            localStorage.setItem("nombreUsuario", usuario)
             redirigir()
         } else {
             alert("Nombre de usuario ya existente")
