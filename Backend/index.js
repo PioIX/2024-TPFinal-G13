@@ -176,9 +176,10 @@ app.get('/user', async function(req,res){
 
 app.get('/nombreUsuario', async function(req,res){
     //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
-    console.log(req.query.idUsuario)
+    console.log("query :" + req.query.idUsuario)
     let nombreUsuario = await MySql.realizarQuery(`select nombre from Usuarios where idUsuario = ${req.query.idUsuario}`);
-    res.send({nombreUsuario: nombreUsuario[0].nombre})
+    console.log(nombreUsuario)
+    res.send(nombreUsuario)
 })
 
 app.put('/changeUsuario', async function(req, res){

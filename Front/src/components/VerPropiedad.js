@@ -15,7 +15,8 @@ export default function VerPropiedad (props){
     const [nombre, setNombre] = useState("")
 
     const getVector = async () => {
-       
+        let url = 'http://localhost:4000/nombreUsuario?idUsuario='+ idUsuario
+        console.log(url)    
         const response = await fetch('http://localhost:4000/nombreUsuario?idUsuario='+ idUsuario,{
             method:"GET",
             headers: {
@@ -25,9 +26,9 @@ export default function VerPropiedad (props){
   
         //Tengo que usar el await porque la respuesta del servidor es lenta
         const result = await response.json()
-        console.log("Result:" + result.nombreUsuario)
-        setNombre(result.nombreUsuario)
-        console.log(vector)
+        
+        setNombre(result[0].nombre)
+        // console.log(vector)
     }
 
     useEffect(() => {
