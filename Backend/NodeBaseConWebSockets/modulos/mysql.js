@@ -1,17 +1,13 @@
 ﻿//Sección MySQL del código
 const mySql = require("mysql2/promise");
 
-const cors = require('cors');
-app.use(cors());
-
-
 /**
  * Objeto con la configuración de la base de datos MySQL a utilizar.
  */
 const SQL_CONFIGURATION_DATA =
 {
 	host: "10.1.5.205", //IP privada del servidor del colegio
-	//host: "186.18.137.196", //IP pública del servidor del colegio
+	//host: "181.47.29.35", //IP pública del servidor del colegio
 	user: "2024-5BINF-G04",
 	password: "paula",
 	database: "2024-5BINF-G04",

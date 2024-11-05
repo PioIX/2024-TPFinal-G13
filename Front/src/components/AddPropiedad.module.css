@@ -24,9 +24,16 @@
   display: flex;
   font-weight: 700;
   color: #ebebeb; /* Color verde característico de WhatsApp */
-  margin-top: 30px;
-  margin-bottom: 100px;
+  margin-top: 200px;
+  margin-bottom: 60px;
   text-align: center;
+  
+  text-shadow: 
+  1px 1px 0 black,   /* Sombra a la derecha */
+  -1px -1px 0 black, /* Sombra a la izquierda */
+  1px -1px 0 black,  /* Sombra arriba derecha */
+  -1px 1px 0 black;  /* Sombra abajo izquierda */
+  margin-left: 0px;
 }
 
 /* Estilo del contenedor de los campos de texto y botón */
@@ -49,6 +56,11 @@
   text-align: center;
   margin-bottom: 1rem;
   color: #ebebeb;
+  text-shadow: 
+  1px 1px 0 black,   /* Sombra a la derecha */
+  -1px -1px 0 black, /* Sombra a la izquierda */
+  1px -1px 0 black,  /* Sombra arriba derecha */
+  -1px 1px 0 black;  /* Sombra abajo izquierda */
 }
 
 .usuario input{
@@ -63,7 +75,9 @@
   outline: none; /* Sin contorno al enfocar */
   color: #ebebeb;
   background-color: #994848;
+  margin-bottom: 20px;
 }
+
 
 .usuario input:focus{
   border-color: #c0afaf; /* Color del borde al enfocar */
@@ -81,3 +95,7 @@
   color: #ebebeb; /* Color gris oscuro para el texto */
 }
 
+.usuario h2{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}

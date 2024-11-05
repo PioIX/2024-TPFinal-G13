@@ -31,7 +31,6 @@ export default function Input ({type, placeholder, onChange}){
         <>
         <div>
             <input className={styles.description} type={type} placeholder={placeholder} onChange={ponerTexto}></input>
-            <ButtonMensaje className={styles.buttonMensaje} onClick={handleClick} text="Enviar" />
         </div>
         </>
     )

@@ -1,5 +1,43 @@
-.checkbox{
-    width: 100px;
-    height: 100px;
-    border-radius: 7px;
-}
+/* Ocultar el checkbox original */
+.checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* Estilo del nuevo checkbox (cuadrado grande) */
+  .checkbox span {
+    margin-top: 10px;
+    width: 30px;   /* Tamaño del cuadrado */
+    height: 30px;  /* Tamaño del cuadrado */
+    border: 3px solid #ccc;  /* Grosor del borde */
+    border-radius: 5px;      /* Bordes redondeados */
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    margin-left: 375px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  /* Cuando el checkbox está marcado */
+  .checkbox input[type="checkbox"]:checked + span {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  /* Marca dentro del checkbox cuando está seleccionado */
+  .checkbox input[type="checkbox"]:checked + span::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  /* Efecto hover */
+  .checkbox span:hover {
+    border-color: #888;
+  }
+  

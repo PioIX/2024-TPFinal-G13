@@ -4,8 +4,11 @@ import clsx from 'clsx';
 
 export default function Checkbox ({onChange}){
     return(
-        <div className={styles.checkbox}>
+        <>
+            <label class={styles.checkbox}>
             <input type="checkbox" onChange={onChange}></input>
-        </div>
+            <span></span> 
+            </label>
+        </>
     )
 }

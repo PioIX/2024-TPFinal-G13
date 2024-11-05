@@ -2,7 +2,6 @@
 .input {
     width: 100%; /* Se ajusta al ancho del contenedor padre */
     padding: 12px 20px; /* Espaciado interno cómodo */
-    margin: 8px 0; /* Espaciado externo entre otros elementos */
     box-sizing: border-box; /* Incluye el padding y el border dentro del width */
     border: 2px solid #ddd; /* Borde gris claro */
     border-radius: 8px; /* Bordes redondeados */
