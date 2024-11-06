@@ -300,16 +300,14 @@ app.delete('/deleteUsuario', async function(req, res){
 })
 
 app.post('/addChat', async function(req,res) {
-    console.log(req.body);
+    console.log("user 1:" + req.body.usuario1);
+    console.log("user 2:" + req.body.usuario2)
     let respuesta = {
         success: false,
         id: 0
     }
     await MySql.realizarQuery(`INSERT INTO Chats (usuario1, usuario2)
     SELECT ${req.body.usuario1}, Usuarios.idUsuario FROM Usuarios WHERE Usuarios.nombre ='${req.body.usuario2 }'`);
-    let comentario = await MySql.realizarQuery(`select * from Comentarios  WHERE idUsuario=${req.body.idUsuario} and  nombreApellido='${req.body.nombreApellido}'`);
-    console.log(comentario)
-    respuesta.id = comentario[0].idComentario;
     respuesta.success = true;
     res.send(respuesta);     
 })

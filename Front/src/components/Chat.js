@@ -3,6 +3,7 @@ import styles from "./Chat.module.css";
 import Button from "./Button";
 import { useSocket } from "../hooks/useSocket"
 import { useEffect, useState } from "react"
+import ButtonChat from "./ButtonChat";
 
 
 // Componente Input
@@ -46,6 +47,7 @@ export default function Home() {
     const [selectedChat, setSelectedChat] = useState(null);
     const [inputValue, setInputValue] = useState('');
     const [messagesList, setMessagesList] = useState({});
+    const [usuario2, setUsuario2] = useState('');
     const [chats] = useState([
         { chatID: '1', name: 'Tomas jefe' },
         { chatID: '2', name: 'Santiago asesor' },
@@ -54,6 +56,33 @@ export default function Home() {
         { chatID: '5', name: 'Agus actuario' },
         { chatID: '6', name: 'Nacho CM' }
     ]);
+
+    const addChat = async () => { //Links con lógica
+        //Metodo push para registrar en el historial el cambio de pantalla
+        console.log("inicio")
+        const data = {
+            usuario1: parseInt(localStorage.getItem("idUsuario")),
+            usuario2: usuario2
+        };
+        console.log("addChat es: ",data)
+
+        const response = await fetch('http://localhost:4000/addChat',{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+                },
+            body: JSON.stringify(data)
+        })
+        
+        console.log(response)
+        let respuesta = await response.json();
+        console.log(respuesta)
+        if (respuesta.success == true){
+            alert("Chat agregado")
+        } else {
+            alert("Chat ya existente")
+        }  
+    } 
 
     const userID = 'user1';
 
@@ -119,6 +148,11 @@ export default function Home() {
                             <Chat chatId={chat.chatID} titulo={chat.name} />
                         </a>
                     ))}
+                    <Input type="text" 
+                        placeholder="Nombre del usuario a agregar" 
+                        onChange={(event) => setUsuario2(event.target.value)}>
+                    </Input>
+                    <ButtonChat className={styles.buttonChat} onClick={addChat} text="Agregar Chat"></ButtonChat>
                 </div>
                 <div className={styles.messages}>
                     {selectedChat && messagesList[selectedChat]?.map((msg, index) => {
