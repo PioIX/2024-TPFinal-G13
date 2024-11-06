@@ -24,11 +24,8 @@ app.use(cors());
 const session = require('express-session');				// Para el manejo de las variables de sesión
 									// Inicializo express para el manejo de las peticiones
 
-
-const LISTEN_PORT = 3306;								// Puerto por el que estoy ejecutando la página Web
-
-const server = app.listen(LISTEN_PORT, () => {
-	console.log(`Servidor NodeJS corriendo en http://localhost:${LISTEN_PORT}/`);
+const server = app.listen(port, () => {
+	console.log(`Servidor NodeJS corriendo en http://localhost:${port}/`);
 });;
 
 const io = require('socket.io')(server, {
@@ -100,11 +97,6 @@ app.post('/nombreDelPedido', function(req,res) {
     console.log(req.body) //Los pedidos post reciben los datos del req.body
     res.send("ok")
 })
-
-//Pongo el servidor a escuchar
-app.listen(port, function(){
-    console.log(`Server running in http://localhost:${port}`);
-});
 
 app.post('/addUsuario', async function(req,res) {
     console.log(req.body);
