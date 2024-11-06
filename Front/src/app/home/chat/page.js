@@ -16,34 +16,6 @@ export default function mensajes() {
   
   const router = useRouter();
 
-  const {socket, isConnected} = useSocket();
-    const [message, setMessage] = useState("Hola soy lucas")
-    useEffect(()=>{
-        if (!socket) return;
-
-        socket.on('pingAll', (data) => {
-            console.log("Me llego el evento pingAll", data); 
-        });
-
-        socket.on('newMessage', (data) => {
-            console.log("Mensaje de la sala", data); 
-        });
-
-    }, [socket, isConnected]);
-
-
-    function handleClick(){
-        socket.emit('pingAll' ,{message: "Aguante el bicho"});
-    }
-    function handleJoinChat(){
-        socket.emit('joinRoom' ,{room: "paula"});
-    }
-    function handleSendMessage(){
-        socket.emit('sendMessage' ,{mensaje: message});
-    }
-  
-  const [variant, serVariant] = useState("login")
-
   return (
     //<>
     //<div className={styles.chatContainer}>
@@ -59,11 +31,7 @@ export default function mensajes() {
       </div>
       <div className={styles.chatContainer}>
         <Chat/>
-        <h1>Soy la ruta de /pruebas</h1>
-        <Button onClick ={handleClick} text = "Enviar pingAll"/>
-        <Button onClick ={handleJoinChat} text = "conectar"/>
-        <Button onClick ={handleSendMessage} text = "Enviar "/>
-        <input onChange={(event) => setMessage(event.target.value)}/>
+      
       </div>
       </div>
     </>

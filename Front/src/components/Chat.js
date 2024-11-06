@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+"use client"
 import styles from "./Chat.module.css";
+import Button from "./Button";
+import { useSocket } from "../hooks/useSocket"
+import { useEffect, useState } from "react"
+
 
 // Componente Input
 const Input = ({ value, onChange, onSubmit }) => {
@@ -84,6 +88,27 @@ export default function Home() {
         }
     };
 
+    const {socket, isConnected} = useSocket();
+    const [message, setMessage] = useState("Hola soy lucas")
+    useEffect(()=>{
+        if (!socket) return;
+
+        
+
+        socket.on('newMessage', (data) => {
+            console.log("Conetado", data); 
+        });
+
+    }, [socket, isConnected]);
+
+
+    function handleJoinChat(){
+        socket.emit('joinRoom' ,{room: "paula"});
+    }
+    function handleSendMessage(){
+        socket.emit('sendMessage' ,{mensaje: message});
+    }
+
     return (
         <>
             <div className={styles.main}>
@@ -107,7 +132,12 @@ export default function Home() {
                     })}
                     {selectedChat && <Input value={inputValue} onChange={handleInputChange} onSubmit={handleSubmit} />}
                 </div>
+
             </div>
+            <h1>Soy la ruta de /pruebas</h1>
+            <Button onClick ={handleJoinChat} text = "conectar"/>
+            <Button onClick ={handleSendMessage} text = "Enviar "/>
+            <input onChange={(event) => setMessage(event.target.value)}/>
         </>
     );
 }
