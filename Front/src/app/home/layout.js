@@ -120,7 +120,7 @@ export default function layoutHome({children}) {
                 <li><a href={"/home/equipo"}>Equipo</a></li>
                 <li><a href={"/home/propiedades"}>Propiedades</a></li>
                 <li><a href={"/home/contacto"}>Contacto</a></li>
-                <li><a href={"/home/chat"}>Chats</a></li>
+                <li><a href={"/home/chat?idUsuario=" + localStorage.getItem("idUsuario")}>Chats</a></li>
                 <div class="user">
                 <a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>
                 <img src='/imagenUsuario.png' alt="User"></img>

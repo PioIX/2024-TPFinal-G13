@@ -306,8 +306,21 @@ app.post('/addChat', async function(req,res) {
         success: false,
         id: 0
     }
-    await MySql.realizarQuery(`INSERT INTO Chats (usuario1, usuario2)
-    SELECT ${req.body.usuario1}, Usuarios.idUsuario FROM Usuarios WHERE Usuarios.nombre ='${req.body.usuario2 }'`);
-    respuesta.success = true;
-    res.send(respuesta);     
+    /*let chat = await MySql.realizarQuery(`select * from Chats where usuario1 = ${req.body.usuario1} AND Usuarios.nombre ='${req.body.usuario2}'`);
+    if (chat.length != 0) {
+        res.send(respuesta.success);
+    } else {
+        */await MySql.realizarQuery(`INSERT INTO Chats (usuario1, usuario2)
+        SELECT ${req.body.usuario1}, Usuarios.idUsuario FROM Usuarios WHERE Usuarios.nombre ='${req.body.usuario2}'`);
+        respuesta.success = true;
+        res.send(respuesta);     
+    //}
+})
+
+
+app.get('/chats', async function(req,res){
+    console.log("query :" + req.query.idUsuario)
+    let chats = await MySql.realizarQuery(`SELECT * FROM Chats WHERE usuario1 = ${req.query.idUsuario} OR usuario2 = ${req.query.idUsuario};`);
+    console.log(chats)
+    res.send(chats)
 })

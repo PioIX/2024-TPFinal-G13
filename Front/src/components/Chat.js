@@ -48,14 +48,34 @@ export default function Home() {
     const [inputValue, setInputValue] = useState('');
     const [messagesList, setMessagesList] = useState({});
     const [usuario2, setUsuario2] = useState('');
-    const [chats] = useState([
-        { chatID: '1', name: 'Tomas jefe' },
-        { chatID: '2', name: 'Santiago asesor' },
-        { chatID: '3', name: 'Juan asesor' },
-        { chatID: '4', name: 'Lucas inversionista' },
-        { chatID: '5', name: 'Agus actuario' },
-        { chatID: '6', name: 'Nacho CM' }
-    ]);
+    const [chats, setChats] = useState([]);
+    const [idUsuario, setIdUsuario] = useState(-1);
+
+    const getVector = async (id) => {
+        console.log("id es: "+ id)
+        const response = await fetch(`http://localhost:4000/chats?id=${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(response)
+        const result = await response.json();
+        console.log(result)
+        
+        setChats(result[0]);
+        console.log(chats)
+      };
+    
+      useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("idUsuario");
+    
+        if (id) {
+          setIdUsuario(parseInt(id, 10)); // Convertir a número
+          getVector(id);
+        }
+      }, []);
 
     const addChat = async () => { //Links con lógica
         //Metodo push para registrar en el historial el cambio de pantalla
