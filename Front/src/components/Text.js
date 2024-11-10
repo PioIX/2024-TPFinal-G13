@@ -24,6 +24,8 @@ export default function Text ({textoH2, placeholder, onChange}){
         onChange(valor);  // Notifica al componente padre del cambio.
     }
 
+
+    
     return(
         <>
         <div>

@@ -23,6 +23,17 @@ export default function mensajes() {
     //</div>
     //</>
     <>
+      <header className={styles.header}>
+      </header>
+      <div className={styles.container}>
+      
+      <div className={styles.contactos}>
+      </div>
+      <div className={styles.chatContainer}>
+        <Chat/>
+      
+      </div>
+      </div>
     </>
   );
 }

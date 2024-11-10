@@ -19,7 +19,8 @@ export default function Input ({type, placeholder, onChange}){
     
     function ponerTexto (evento){
         const valor = evento.target.value;
-        setValorInput(valor);  // Notifica al componente padre del cambio.
+        setValorInput(valor);  
+        onChange(valor)// Notifica al componente padre del cambio.
     }
 
     function handleClick (evento){
@@ -30,7 +31,7 @@ export default function Input ({type, placeholder, onChange}){
     return(
         <>
         <div>
-            <input className={styles.description} type={type} placeholder={placeholder} onChange={ponerTexto}></input>
+            <input value={valorInput} className={styles.description} type={type} placeholder={placeholder} onChange={ponerTexto}></input>
         </div>
         </>
     )

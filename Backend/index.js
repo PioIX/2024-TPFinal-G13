@@ -299,23 +299,41 @@ app.delete('/deleteUsuario', async function(req, res){
     res.send(respuesta);    
 })
 
-app.post('/addChat', async function(req,res) {
-    console.log("user 1:" + req.body.usuario1);
-    console.log("user 2:" + req.body.usuario2)
-    let respuesta = {
-        success: false,
-        id: 0
-    }
-    /*let chat = await MySql.realizarQuery(`select * from Chats where usuario1 = ${req.body.usuario1} AND Usuarios.nombre ='${req.body.usuario2}'`);
-    if (chat.length != 0) {
-        res.send(respuesta.success);
+
+app.post('/addChat', async function(req, res) {
+    console.log("user 1:", req.body.usuario1);
+    console.log("nombre1:", req.body.nombre1);
+    console.log("nombre2:", req.body.nombre2);
+    
+    let respuesta = { success: false, id: 0 };
+
+    // Comprobar si ya existe un chat entre nombre1 y nombre2
+    let chat = await MySql.realizarQuery(`SELECT * FROM Chats WHERE nombre1 = '${req.body.nombre1}' AND nombre2 ='${req.body.nombre2}'`);
+    
+    if (chat.length !== 0) {
+        res.send(respuesta); // Chat ya existe, enviar respuesta con success: false
     } else {
-        */await MySql.realizarQuery(`INSERT INTO Chats (usuario1, usuario2)
-        SELECT ${req.body.usuario1}, Usuarios.idUsuario FROM Usuarios WHERE Usuarios.nombre ='${req.body.usuario2}'`);
+        // Obtener idUsuario de nombre2 en la tabla Usuarios
+        let usuario2Data = await MySql.realizarQuery(`SELECT idUsuario FROM Usuarios WHERE nombre = '${req.body.nombre2}'`);
+
+        if (usuario2Data.length === 0) {
+            res.send({ success: false, message: "Usuario no encontrado" });
+            return;
+        }
+
+        const usuario2 = usuario2Data[0].idUsuario;
+
+        // Insertar el nuevo chat en la tabla Chats
+        await MySql.realizarQuery(`
+            INSERT INTO Chats (usuario1, usuario2, nombre1, nombre2) 
+            VALUES (${req.body.usuario1}, ${usuario2}, '${req.body.nombre1}', '${req.body.nombre2}')
+        `);
+        
         respuesta.success = true;
         res.send(respuesta);     
-    //}
-})
+    }
+});
+
 
 
 app.get('/chats', async function(req,res){
@@ -323,4 +341,11 @@ app.get('/chats', async function(req,res){
     let chats = await MySql.realizarQuery(`SELECT * FROM Chats WHERE usuario1 = ${req.query.idUsuario} OR usuario2 = ${req.query.idUsuario};`);
     console.log(chats)
     res.send(chats)
+})
+
+app.get('/mensajes', async function(req,res){
+    console.log("query :" + req.query.idChat)
+    let mensajes = await MySql.realizarQuery(`SELECT * FROM Mensajes WHERE idChat = ${req.query.idChat};`);
+    console.log(mensajes)
+    res.send(mensajes)
 })
