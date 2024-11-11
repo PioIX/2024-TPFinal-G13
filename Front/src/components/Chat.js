@@ -7,6 +7,10 @@ import ButtonChat from "./ButtonChat";
 import Input from "./Input";
 import BubbleChat from "./BurbujaChats"
 import { useRouter } from "next/navigation";
+import ButtonMensaje from "./ButtonMensaje";
+import BubbleRight from "./BurbujaDer";
+import BubbleLeft from "./BurbujaIzq";
+import React from "react";
 
 
 
@@ -81,7 +85,7 @@ export default function Home() {
         let respuesta = await response.json();
         console.log(respuesta);
         if (respuesta.success == true) {
-            //redirigir();
+            redirigir();
             alert("Chat agregado");
         } else {
             alert("Chat ya existente");
@@ -118,6 +122,14 @@ const getMensajes = async (selectedChat) => {
     }
   };
 
+  useEffect(()=>{
+    console.log("Mensajes: ")
+    if (mensajes.length != 0) {
+        console.log(mensajes[0].mensaje)
+        
+    }
+  },[mensajes])
+
   useEffect(() => {
     console.log("IdCHAT: " + selectedChat)
     let id = selectedChat
@@ -127,7 +139,35 @@ const getMensajes = async (selectedChat) => {
   }, [selectedChat]);
 
 
+  // ----------------------- ADD MENSAJES
 
+  const addMensajes = async () => { 
+    const data = {
+        idChat: selectedChat,
+        mensaje: inputValue,
+        usuarioEnvia: parseInt(localStorage.getItem("idUsuario")),
+         // Asegúrate de que aquí tienes el valor correcto
+    };
+
+    console.log("addMensaje es: ", data);  // Verifica los datos que se envían
+
+    const response = await fetch('http://localhost:4000/addMensaje', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    let respuesta = await response.json();
+    console.log(respuesta);
+    if (respuesta.success == true) {
+        //redirigir();
+        alert("Mensaje agregado");
+    } else {
+        redirigir()
+    }
+}
 
     /*const handleSubmit = () => {
         if (inputValue.trim() && selectedChat) {
@@ -169,7 +209,6 @@ const getMensajes = async (selectedChat) => {
 
                     {chats.map((chat) => {
                         const otroUsuarioNombre = (chat.nombre1 === localStorage.getItem("nombreUsuario")) ? chat.nombre2 : chat.nombre1;
-                        
                         return (
                             <a key={chat.idChat} href="#" onClick={() => handleChatClick(chat.idChat)}>
                                 
@@ -194,21 +233,34 @@ const getMensajes = async (selectedChat) => {
                         placeholder="Envía un mensaje..." // Vincula el valor del input al estado nombre2
                         onChange={setInputValue}  // Actualiza nombre2 cuando el usuario escribe
                     />
+                    <ButtonMensaje className={styles.ButtonMensaje} onClick={addMensajes} text="Enviar"/>
                     <div>
-                        <h1>Mensajes</h1>
-                        <p>ID del chat: {selectedChat}</p>
-                        <div>
-                            {mensajes.length > 0 ? (
+                    <h1>Mensajes</h1>
+                    <p>ID del chat: {selectedChat}</p>
+                    <div>
+                        {mensajes.length > 0 ? (
                             <ul>
-                                {mensajes.map((msg, index) => (
-                                <li key={index}>{msg.text}</li>
-                                ))}
+                                {mensajes.map((mensaje) => {
+                                    const isOwnMessage = mensaje.usuarioEnvia === localStorage.getItem("idUsuario");
+                                    
+                                    return (
+                                        <React.Fragment key={mensaje.tiempo}>
+                                            <li>{mensaje.mensaje}</li>
+                                            {isOwnMessage ? (
+                                                <BubbleRight mensaje={mensaje.mensaje} />
+                                            ) : (
+                                                <BubbleLeft mensaje={mensaje.mensaje} />
+                                            )}
+                                        </React.Fragment>
+                                    );
+                                })}
                             </ul>
-                            ) : (
+                        ) : (
                             <p>No hay mensajes</p>
-                            )}
-                        </div>
+                        )}
                     </div>
+                    </div>
+
                     </>
                     }
                 </div>

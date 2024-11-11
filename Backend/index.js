@@ -346,7 +346,7 @@ app.get('/chats', async function(req,res){
 app.get('/mensajes', async function(req,res){
     console.log("query id chat:" + req.query.idChat)
     let mensajes = await MySql.realizarQuery(`SELECT * FROM Mensajes WHERE idChat = ${req.query.idChat};`);
-    console.log("mensajes: " + mensajes)
+    console.log("mensajes: " + {mensajes})
     res.send(mensajes)
 })
 
