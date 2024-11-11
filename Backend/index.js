@@ -344,8 +344,20 @@ app.get('/chats', async function(req,res){
 })
 
 app.get('/mensajes', async function(req,res){
-    console.log("query :" + req.query.idChat)
+    console.log("query id chat:" + req.query.idChat)
     let mensajes = await MySql.realizarQuery(`SELECT * FROM Mensajes WHERE idChat = ${req.query.idChat};`);
-    console.log(mensajes)
+    console.log("mensajes: " + mensajes)
     res.send(mensajes)
+})
+
+app.post('/addMensaje', async function(req,res) {
+    console.log(req.body);
+    let respuesta = {
+        success: false,
+        id: 0
+    }
+    await MySql.realizarQuery(`INSERT INTO Mensajes (idChat, mensaje, usuarioEnvia, tiempo)
+    VALUES (${req.body.idChat}, '${req.body.mensaje}', ${req.body.usuarioEnvia}, NOW())`);
+    respuesta.success = true;
+    res.send(respuesta);     
 })

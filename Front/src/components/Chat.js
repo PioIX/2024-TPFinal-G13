@@ -12,15 +12,17 @@ import { useRouter } from "next/navigation";
 
 
 export default function Home() {
-    const [selectedChat, setSelectedChat] = useState(-1);
-    const [messagesList, setMessagesList] = useState({})
+    const [selectedChat, setSelectedChat] = useState();
+    const [mensajes, setMensajes] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [nombre2, setNombre2] = useState('');
     const [chats, setChats] = useState([]);
-    const [idUsuario, setIdUsuario] = useState(-1);
+    const [idUsuario, setIdUsuario] = useState();
     
   const router = useRouter();
 
+
+  //---------------------------- TRAE TODOS LOS CHATS
     const getVector = async (idUsuario) => {
         console.log("id es: "+ idUsuario)
         const response = await fetch(`http://localhost:4000/chats?idUsuario=` + idUsuario, {
@@ -41,6 +43,7 @@ export default function Home() {
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const id = params.get("idUsuario");
+        console.log("anda")
     
         if (id) {
           setIdUsuario(parseInt(id, 10)); // Convertir a número
@@ -49,6 +52,8 @@ export default function Home() {
     }, []);
 
 
+
+//---------------------------------------- AGREGA CHATS
     const addChat = async () => { 
         console.log("Valor de nombre2 antes de enviar:", nombre2);  // Verifica el valor antes de enviar
     
@@ -76,25 +81,53 @@ export default function Home() {
         let respuesta = await response.json();
         console.log(respuesta);
         if (respuesta.success == true) {
-            redirigir();
+            //redirigir();
             alert("Chat agregado");
         } else {
             alert("Chat ya existente");
         }
     }
 
+
+//---------------------------------- ELEGIR CHAT
     function handleChatClick(idChat){
-        
         localStorage.setItem("idChat", idChat)
         console.log("chat numero: ", idChat)
         setSelectedChat(idChat)
-        socket.emit('joinRoom' ,{room: {idChat}});
-        entrarChat()
+        socket.emit('joinRoom' ,{room: {selectedChat}});
     };
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
+
+
+//----------------------------------- TRAER LOS MENSAJES DEL CHAT
+const getMensajes = async (selectedChat) => {
+    try {
+      console.log("id es: " + selectedChat);
+      const response = await fetch(`http://localhost:4000/mensajes?idChat=${selectedChat}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      const result = await response.json();
+      console.log(result);
+      setMensajes(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("IdCHAT: " + selectedChat)
+    let id = selectedChat
+    if (id){
+        getMensajes(selectedChat);
+    }
+  }, [selectedChat]);
+
+
+
 
     /*const handleSubmit = () => {
         if (inputValue.trim() && selectedChat) {
@@ -127,10 +160,6 @@ export default function Home() {
         router.push("/home/chat?idUsuario=" + localStorage.getItem('idUsuario'))
     }
 
-    function entrarChat(){
-        router.push("/home/chat/conversacion?idChat=" + localStorage.getItem('idChat'))
-        
-    }
 
     return (
         <>
@@ -140,8 +169,10 @@ export default function Home() {
 
                     {chats.map((chat) => {
                         const otroUsuarioNombre = (chat.nombre1 === localStorage.getItem("nombreUsuario")) ? chat.nombre2 : chat.nombre1;
+                        
                         return (
                             <a key={chat.idChat} href="#" onClick={() => handleChatClick(chat.idChat)}>
+                                
                                 <BubbleChat idChat={chat.idChat} nombre={otroUsuarioNombre}/>
                             </a>
                         );
@@ -156,19 +187,30 @@ export default function Home() {
                 </div>
 
                 <div className={styles.messages}>
-
-                    
-
-                    {/*selectedChat && messagesList[selectedChat]?.map((msg, index) => {
-                        const isUserMessage = msg.userID === userID;
-                        return isUserMessage ? (
-                            <BubbleRight key={index} mensaje="hola que tal" />
-                        ) : (
-                            <BubbleLeft key={index} mensaje="hola linda" />
-                        );
-                        
-                    })}
-                    {selectedChat && <Input value={inputValue} onChange={handleInputChange} /*onSubmit={handleSubmit} />*/}
+                    {selectedChat > 0 && 
+                    <>
+                    <h1>hola {selectedChat}</h1> 
+                    <Input type="text"
+                        placeholder="Envía un mensaje..." // Vincula el valor del input al estado nombre2
+                        onChange={setInputValue}  // Actualiza nombre2 cuando el usuario escribe
+                    />
+                    <div>
+                        <h1>Mensajes</h1>
+                        <p>ID del chat: {selectedChat}</p>
+                        <div>
+                            {mensajes.length > 0 ? (
+                            <ul>
+                                {mensajes.map((msg, index) => (
+                                <li key={index}>{msg.text}</li>
+                                ))}
+                            </ul>
+                            ) : (
+                            <p>No hay mensajes</p>
+                            )}
+                        </div>
+                    </div>
+                    </>
+                    }
                 </div>
 
             </div>
