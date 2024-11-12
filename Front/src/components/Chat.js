@@ -181,10 +181,14 @@ const getMensajes = async (selectedChat) => {
         
 
         socket.on('newMessage', (data) => {
-            console.log("Me llegó: ", data); 
+            console.log("chat seleccionado: ", parseInt(localStorage.getItem("idChat")))
+            if (data.usuarioEnvia !== parseInt(localStorage.getItem("idUsuario"))){
+                getMensajes(parseInt(localStorage.getItem("idChat"))) 
+            }
+            
         });
 
-    }, [socket, isConnected]);
+    }, [socket, isConnected, selectedChat]);
 
     function redirigir(){
         router.push("/home/chat?idUsuario=" + localStorage.getItem('idUsuario'))
