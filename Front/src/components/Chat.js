@@ -174,7 +174,7 @@ const getMensajes = async (selectedChat) => {
 
 
     const {socket, isConnected} = useSocket();
-    const [message, setMessage] = useState("Hola soy lucas")
+    
     useEffect(()=>{
         if (!socket) return;
 
