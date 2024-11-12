@@ -5,7 +5,7 @@ import clsx from 'clsx';
 export default function Checkbox ({onChange}){
     return(
         <>
-            <label class={styles.checkbox}>
+            <label className={styles.checkbox}>
             <input type="checkbox" onChange={onChange}></input>
             <span></span> 
             </label>

@@ -65,13 +65,14 @@ io.on("connection", (socket) => {
 	const req = socket.request;
 
 	socket.on('joinRoom', data => {
-		console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
 		if (req.session.room != undefined && req.session.room.length > 0)
 			socket.leave(req.session.room);
 		req.session.room = data.room;
 		socket.join(req.session.room);
-
+        console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
+		
 		io.to(req.session.room).emit('chat-messages', { user: req.session.user, room: req.session.room });
+        
 	});
 
 	socket.on('pingAll', data => {
@@ -79,8 +80,12 @@ io.on("connection", (socket) => {
 		io.emit('pingAll', { event: "Ping to all", message: data });
 	});
 
-	socket.on('sendMessage', data => {
-		io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+	socket.on('sendMessage', async (data) => {
+		await MySql.realizarQuery(`INSERT INTO Mensajes (idChat, mensaje, usuarioEnvia, tiempo)
+    VALUES (${data.idChat}, '${data.mensaje}', ${data.usuarioEnvia}, NOW())`);
+        io.to(req.session.room).emit('newMessage', { room: req.session.room, mensaje: data.mensaje, idChat: data.idChat, usuarioEnvia: data.usuarioEnvia
+
+        });
 	});
 
 	socket.on('disconnect', () => {

@@ -204,7 +204,7 @@ const AddPropiedad = () => {
 
                 <div className={styles.usuario}>
                     <h2>¿Es alquiler?</h2>
-                    <div class="checkbox">
+                    <div className="checkbox">
                     <Checkbox 
                         onChange={checkValue} 
                     />
