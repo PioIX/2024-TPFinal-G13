@@ -153,15 +153,6 @@ const getMensajes = async (selectedChat) => {
     console.log("addMensaje es: ", data);  // Verifica los datos que se envían
 
     socket.emit('sendMessage' ,data)
-
-    let respuesta = await response.json();
-    console.log(respuesta);
-    if (respuesta.success == true) {
-        //redirigir();
-        alert("Mensaje agregado");
-    } else {
-        window.location.reload()
-    }
 }
 
     /*const handleSubmit = () => {
@@ -182,9 +173,9 @@ const getMensajes = async (selectedChat) => {
 
         socket.on('newMessage', (data) => {
             console.log("chat seleccionado: ", parseInt(localStorage.getItem("idChat")))
-            if (data.usuarioEnvia !== parseInt(localStorage.getItem("idUsuario"))){
-                getMensajes(parseInt(localStorage.getItem("idChat"))) 
-            }
+            //if (data.usuarioEnvia !== parseInt(localStorage.getItem("idUsuario"))){
+            getMensajes(parseInt(localStorage.getItem("idChat"))) 
+            //}
             
         });
 
@@ -251,14 +242,14 @@ const getMensajes = async (selectedChat) => {
                                     if (usuarioEnvia === usuarioActual) {
                                         // Si el usuario actual envió el mensaje, muestra BubbleRight
                                         return (
-                                            <React.Fragment key={mensaje.tiempo}>
+                                            <React.Fragment key={mensaje.idMensaje}>
                                                 <BubbleRight mensaje={mensaje.mensaje} />
                                             </React.Fragment>
                                         );
                                     } if (usuarioEnvia !== usuarioActual)
                                         // Si otro usuario envió el mensaje, muestra BubbleLeft
                                         return (
-                                            <React.Fragment key={mensaje.tiempo}>
+                                            <React.Fragment key={mensaje.idMensaje}>
                                                 <BubbleLeft mensaje={mensaje.mensaje} />
                                             </React.Fragment>
                                         );

@@ -12,9 +12,6 @@ export default function layoutHome({children}) {
   
     const router = useRouter();
     const [vector, setVector] = useState([])
-    let isLoaded = false
-
-
     return (
       <> 
         <div>

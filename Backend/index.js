@@ -11,14 +11,16 @@ var express = require('express'); //Tipo de servidor: Express
 var bodyParser = require('body-parser'); //Convierte los JSON
 const cors = require('cors');
 const MySql = require('./modulos/mysql')
+const fileUpload = require('express-fileupload');
 
 var app = express(); //Inicializo express
 var port = process.env.PORT || 4000; //Ejecuto el servidor en el puerto 4000
 
 // Convierte una petición recibida (POST-GET...) a objeto JSON
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(fileUpload());
 
 // Cargo librerías instaladas y necesarias				// Añado el archivo mysql.js presente en la carpeta módulos
 const session = require('express-session');				// Para el manejo de las variables de sesión
@@ -210,13 +212,32 @@ app.post('/addComentario', async function(req,res) {
 })
 
 app.post('/addImagen', async function(req,res) {
-    console.log(req.body);
+    
+    console.log("ARCHIVOS:                    ", req.files);
+
+    let files = [];
+
+    if(req.files.file.length) {
+        for(let i = 0; i < req.files.file.length; i++) {
+            const base64String = Buffer.from(req.files.file[i].data).toString('base64');
+            files.push( { base64String } );
+        }
+    }
+    else {
+        const base64String = Buffer.from(req.files.file.data).toString('base64');
+        files.push( { base64String } );
+    }
+
+    console.log(req.body);    
     let respuesta = {
         success: false,
         id: 0
     }
-    await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
-    VALUES (${req.body.idPropiedad}, '${req.body.imagen}')`);
+
+    for(let i = 0; i < files.length; i++) {        
+        await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
+            VALUES (${req.body.idPropiedad}, '${files[i].base64String}')`);
+    }
 })
 
 app.get('/user', async function(req,res){
