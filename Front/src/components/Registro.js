@@ -71,9 +71,9 @@ const Registro = () => {
             
         let respuesta = await response.json();
         
-        localStorage.setItem("idUsuario", respuesta.id)
-                  
         if (respuesta.success == true){
+            localStorage.setItem("idUsuario", respuesta.id)
+            localStorage.setItem("nombreUsuario", respuesta.nombre)
             alert("Usuario registrado")
             redirigir()
         } else {

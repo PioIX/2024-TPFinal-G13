@@ -212,7 +212,11 @@ app.post('/addComentario', async function(req,res) {
 })
 
 app.post('/addImagen', async function(req,res) {
-    
+    console.log(req.body);    
+    let respuesta = {
+        success: false,
+        id: 0
+    }
     console.log("ARCHIVOS:                    ", req.files);
 
     let files = [];
@@ -228,16 +232,12 @@ app.post('/addImagen', async function(req,res) {
         files.push( { base64String } );
     }
 
-    console.log(req.body);    
-    let respuesta = {
-        success: false,
-        id: 0
-    }
-
     for(let i = 0; i < files.length; i++) {        
         await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
             VALUES (${req.body.idPropiedad}, '${files[i].base64String}')`);
     }
+
+    
 })
 
 app.get('/user', async function(req,res){
@@ -269,24 +269,6 @@ app.get('/nombreUsuario', async function(req,res){
     let nombreUsuario = await MySql.realizarQuery(`select nombre from Usuarios where idUsuario = ${req.query.idUsuario}`);
     console.log(nombreUsuario)
     res.send(nombreUsuario)
-})
-
-app.put('/changeUsuario', async function(req, res){
-    console.log(req.body);
-    let respuesta = {
-        success: false,
-        id: 0,
-        nombre: ""
-    }
-    let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}'`);
-    if (usuario.length != 0) {
-        res.send(respuesta.success);
-    } else {
-        
-        await MySql.realizarQuery(`UPDATE Usuarios SET nombre = '${req.body.nombre}' WHERE idUsuario = ${req.body.idUsuario}`);
-        respuesta.success = true;
-        res.send(respuesta);     
-    }
 })
 
 app.put('/changeNombreApellido', async function(req, res){
@@ -386,4 +368,10 @@ app.post('/addMensaje', async function(req,res) {
     VALUES (${req.body.idChat}, '${req.body.mensaje}', ${req.body.usuarioEnvia}, NOW())`);
     respuesta.success = true;
     res.send(respuesta);     
+})
+
+app.get('/usuarios', async function(req,res){
+    //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
+    let usuarios = await MySql.realizarQuery(`select * from Usuarios`);
+    res.send(usuarios)
 })

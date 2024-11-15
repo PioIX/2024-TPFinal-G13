@@ -23,17 +23,32 @@ export default function layoutHome({children}) {
             </div>
             <nav>
             <ul>
-                <li><a href={"/home/equipo"}>Equipo</a></li>
+                {localStorage.getItem("nombreUsuario") !== "admin" &&
+                  <li><a href={"/home/equipo"}>Equipo</a></li>
+                }
+                
                 <li><a href={"/home/propiedades"}>Propiedades</a></li>
-                <li><a href={"/home/contacto"}>Contacto</a></li>
-                <li><a href={"/home/chat?idUsuario=" + localStorage.getItem("idUsuario")}>Chats</a></li>
+                {localStorage.getItem("nombreUsuario") !== "admin" &&
+                  <li><a href={"/home/contacto"}>Contacto</a></li>
+                }
+                
+                {localStorage.getItem("nombreUsuario") !== "admin" &&
+                  <li><a href={"/home/chat?idUsuario=" + localStorage.getItem("idUsuario")}>Chats</a></li>
+                }
+                
                 <div className="user">
                 <a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>
                 <img src='/imagenUsuario.png' alt="User"></img>
                 </a>
                 </div>
-                <li><a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
-            </ul>
+                {localStorage.getItem("nombreUsuario") !== "admin" &&
+                  <li><a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
+                }
+
+                {localStorage.getItem("nombreUsuario") === "admin" &&
+                  <li><a href={"/home/editarUsuarios"}>Usuarios</a></li>
+                }
+              </ul>
             </nav>
           </header> {children}
         </div>
