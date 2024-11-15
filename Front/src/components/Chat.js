@@ -29,6 +29,7 @@ export default function Home() {
   //---------------------------- TRAE TODOS LOS CHATS
     const getVector = async (idUsuario) => {
         console.log("id es: "+ idUsuario)
+        //socket.emit('getChats', {});
         const response = await fetch(`http://localhost:4000/chats?idUsuario=` + idUsuario, {
           method: "GET",
           headers: {
@@ -98,7 +99,7 @@ export default function Home() {
         localStorage.setItem("idChat", idChat)
         console.log("chat numero: ", idChat)
         setSelectedChat(idChat)
-        socket.emit('joinRoom' ,{room: {selectedChat}});
+        socket.emit('joinRoom' ,{room: selectedChat, idUsuario: localStorage.getItem("idUsuario")});
     };
 
 
@@ -151,22 +152,7 @@ const getMensajes = async (selectedChat) => {
 
     console.log("addMensaje es: ", data);  // Verifica los datos que se envían
 
-    const response = await fetch('http://localhost:4000/addMensaje', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-
-    let respuesta = await response.json();
-    console.log(respuesta);
-    if (respuesta.success == true) {
-        //redirigir();
-        alert("Mensaje agregado");
-    } else {
-        window.location.reload()
-    }
+    socket.emit('sendMessage' ,data)
 }
 
     /*const handleSubmit = () => {
@@ -179,22 +165,21 @@ const getMensajes = async (selectedChat) => {
 
 
     const {socket, isConnected} = useSocket();
-    const [message, setMessage] = useState("Hola soy lucas")
+    
     useEffect(()=>{
         if (!socket) return;
 
         
 
         socket.on('newMessage', (data) => {
-            console.log("Conetado", data); 
+            console.log("chat seleccionado: ", parseInt(localStorage.getItem("idChat")))
+            //if (data.usuarioEnvia !== parseInt(localStorage.getItem("idUsuario"))){
+            getMensajes(parseInt(localStorage.getItem("idChat"))) 
+            //}
+            
         });
 
-    }, [socket, isConnected]);
-
-
-    function handleSendMessage(){
-        socket.emit('sendMessage' ,{mensaje: message});
-    }
+    }, [socket, isConnected, selectedChat]);
 
     function redirigir(){
         router.push("/home/chat?idUsuario=" + localStorage.getItem('idUsuario'))
@@ -249,22 +234,22 @@ const getMensajes = async (selectedChat) => {
 
                                 {mensajes.map((mensaje) => {
                                     // Obtenemos el usuario actual desde localStorage y normalizamos el valor
-                                    const usuarioActual = localStorage.getItem("idUsuario");
-                                    const usuarioEnvia = mensaje.usuarioEnvia; // Normalizamos también el remitente
+                                    const usuarioActual = parseInt(localStorage.getItem("idUsuario"));
+                                    const usuarioEnvia = parseInt(mensaje.usuarioEnvia); // Normalizamos también el remitente
 
-                                    console.log("usuarioActual:", usuarioActual, "usuarioEnvia:", usuarioEnvia); // Verifica los valores
+                                    console.log("usuarioActual:", usuarioActual, "usuarioEnvia:", usuarioEnvia, mensaje); // Verifica los valores
 
                                     if (usuarioEnvia === usuarioActual) {
                                         // Si el usuario actual envió el mensaje, muestra BubbleRight
                                         return (
-                                            <React.Fragment key={mensaje.tiempo}>
+                                            <React.Fragment key={mensaje.idMensaje}>
                                                 <BubbleRight mensaje={mensaje.mensaje} />
                                             </React.Fragment>
                                         );
                                     } if (usuarioEnvia !== usuarioActual)
                                         // Si otro usuario envió el mensaje, muestra BubbleLeft
                                         return (
-                                            <React.Fragment key={mensaje.tiempo}>
+                                            <React.Fragment key={mensaje.idMensaje}>
                                                 <BubbleLeft mensaje={mensaje.mensaje} />
                                             </React.Fragment>
                                         );
@@ -290,9 +275,6 @@ const getMensajes = async (selectedChat) => {
 
 
             <h1>Soy la ruta de /pruebas</h1>
-            <Button onClick ={handleChatClick} text = "conectar"/>
-            <Button onClick ={handleSendMessage} text = "Enviar "/>
-            <input onChange={(event) => setMessage(event.target.value)}/>
         </>
     );
 }
