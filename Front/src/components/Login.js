@@ -65,7 +65,7 @@ export default function Login() {
                 alert("Usuario logueado")
                 redirigir()
             } else {
-                alert("Datos incorrectos")
+                alert("Los datos son incorrectos")
             }
         }
     }
