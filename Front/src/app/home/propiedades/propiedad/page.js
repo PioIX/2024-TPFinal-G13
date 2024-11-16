@@ -14,7 +14,6 @@ import VerPropiedad from "../../../../components/VerPropiedad";
 import ButtonChat from "../../../../components/ButtonChat";
 
 export default function Propiedades() {
-  const [idPropiedad, setIdPropiedad] = useState(-1);
   const [vector, setVector] = useState(null);
   const router = useRouter();
 
@@ -35,12 +34,12 @@ export default function Propiedades() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("idPropiedad");
-
+    console.log("Extracted idPropiedad:", id);
     if (id) {
-      setIdPropiedad(parseInt(id, 10)); // Convertir a número
       getVector(id);
     }
   }, []);
+  
 
   if (!vector) {
     return <div>Cargando...</div>;
@@ -50,6 +49,8 @@ export default function Propiedades() {
     router.push("home/propiedades/propiedad/modificar")
   }
 
+  let idPropiedad = parseInt(vector.idPropiedad)
+  console.log("idPropiedad es: "+ idPropiedad)
   return (
     <div className={styles.container}>
       {console.log(vector)}
@@ -65,6 +66,10 @@ export default function Propiedades() {
         idUsuario={vector.idUsuario}
       />
       { vector.idUsuario == localStorage.getItem("idUsuario") &&
+        <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
+      }
+
+      { localStorage.getItem("nombreUsuario") === "admin" &&
         <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
       }
     </div>

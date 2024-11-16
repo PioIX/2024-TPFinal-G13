@@ -12,6 +12,10 @@ export default function layoutHome({children}) {
   
     const router = useRouter();
     const [vector, setVector] = useState([])
+    function login(){
+      router.replace("/")
+      localStorage.setItem("idUsuario", 0)
+    }
     return (
       <> 
         <div>
@@ -26,8 +30,13 @@ export default function layoutHome({children}) {
                 {localStorage.getItem("nombreUsuario") !== "admin" &&
                   <li><a href={"/home/equipo"}>Equipo</a></li>
                 }
+
+                {localStorage.getItem("nombreUsuario") === "admin" &&
+                  <li><a onClick={login}>Cerrar Sesión</a></li>
+                }
                 
                 <li><a href={"/home/propiedades"}>Propiedades</a></li>
+                
                 {localStorage.getItem("nombreUsuario") !== "admin" &&
                   <li><a href={"/home/contacto"}>Contacto</a></li>
                 }
@@ -36,17 +45,30 @@ export default function layoutHome({children}) {
                   <li><a href={"/home/chat?idUsuario=" + localStorage.getItem("idUsuario")}>Chats</a></li>
                 }
                 
+                
+                {localStorage.getItem("nombreUsuario") === "admin" &&
+                  <li><a href={"/home/verUsers"}>Usuarios</a></li>
+                }
                 <div className="user">
-                <a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>
-                <img src='/imagenUsuario.png' alt="User"></img>
-                </a>
+                
+                {localStorage.getItem("nombreUsuario") !== "admin" &&
+                  <a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>
+                  <img src='/imagenUsuario.png' alt="User"></img>
+                  </a> 
+                }
+
+                {localStorage.getItem("nombreUsuario") === "admin" &&
+                  <img src='/imagenUsuario.png' alt="User"></img>
+                   
+                }
+                
                 </div>
                 {localStorage.getItem("nombreUsuario") !== "admin" &&
                   <li><a href={"/home/user?idUsuario=" + localStorage.getItem("idUsuario")}>Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
                 }
 
                 {localStorage.getItem("nombreUsuario") === "admin" &&
-                  <li><a href={"/home/editarUsuarios"}>Usuarios</a></li>
+                  <li><a >Hola, {localStorage.getItem("nombreUsuario")}!</a></li>
                 }
               </ul>
             </nav>

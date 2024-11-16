@@ -295,14 +295,15 @@ app.put('/changeContrasena', async function(req, res){
     res.send(respuesta);         
 })
 
-app.delete('/deleteUsuario', async function(req, res){
-    console.log(req.body);
+app.delete('/deletePropiedad', async function(req, res){
     let respuesta = {
         success: false,
         id: 0,
         nombre: ""
     }
-    await MySql.realizarQuery(`DELETE FROM Usuarios WHERE idUsuario == ${req.body.idUsuario}`);
+    let id = req.query.idPropiedad
+    console.log("query :" + id)
+    await MySql.realizarQuery(`DELETE FROM Propiedades WHERE idPropiedad = ${id}`);
     respuesta.success = true;
     res.send(respuesta);    
 })
