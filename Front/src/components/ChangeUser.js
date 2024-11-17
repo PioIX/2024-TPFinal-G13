@@ -16,7 +16,6 @@ import Text from './Text';
 let idUsuarioActual = parseInt(localStorage.getItem("idUsuario"))
 
 const ChangeUser = () => {
-    const [usuario, setUsuario] = useState('');
     const [contraseña, setContraseña] = useState('');
     const [nombreApellido, setNombreApellido] = useState('');
 
@@ -53,32 +52,7 @@ const ChangeUser = () => {
 
     const router = useRouter();
 
-    const changeUsuario = async () => { //Links con lógica
-        //Metodo push para registrar en el historial el cambio de pantalla
-        const data = {
-            nombre: usuario,
-            idUsuario: idUsuarioActual
-        };
-
-        const response = await fetch('http://localhost:4000/changeUsuario',{
-            method:"PUT",
-            headers: {
-                "Content-Type": "application/json",
-                },
-            body:JSON.stringify(data),
-        })
-            
-        let respuesta = await response.json();
-                  
-        if (respuesta.success == true){
-            alert("Nombre de usuario modificado")
-            localStorage.setItem("nombreUsuario", usuario)
-            redirigir()
-        } else {
-            alert("Nombre de usuario ya existente")
-        }  
-    } //REPLACE para que no se registre en el historial, solo vuelve a pag de inicio 
-
+    
     const changeContraseña = async () => { //Links con lógica
         //Metodo push para registrar en el historial el cambio de pantalla
         const data = {
@@ -143,17 +117,12 @@ const ChangeUser = () => {
         <h1 className={styles.h1}>MODIFICAR USUARIO</h1>
         
             <div className={styles.formGroup}>
-                <div className={styles.usuario}>
-                    <Text textoH2="Usuario" placeholder="Nombre de Usuario" onChange={setUsuario}></Text>
-                </div>
                 <div className={styles.password}>
                     <Text textoH2="Contraseña" placeholder="Contraseña" onChange={setContraseña}></Text>
                 </div>
                 <div className={styles.usuario}>
                     <Text textoH2="Nombre y Apellido" placeholder="Nombre completo" onChange={setNombreApellido}></Text>
                 </div>
-                <Button className={styles.boton} onClick={changeUsuario} text="Cambiar Nombre de usuario"/>
-                
                 <Button className={styles.boton} onClick={changeContraseña} text="Cambiar Contraseña"/>
                 
                 <Button className={styles.boton} onClick={changeNombreApellido} text="Cambiar Nombre completo"/>

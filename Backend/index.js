@@ -11,14 +11,16 @@ var express = require('express'); //Tipo de servidor: Express
 var bodyParser = require('body-parser'); //Convierte los JSON
 const cors = require('cors');
 const MySql = require('./modulos/mysql')
+const fileUpload = require('express-fileupload');
 
 var app = express(); //Inicializo express
 var port = process.env.PORT || 4000; //Ejecuto el servidor en el puerto 4000
 
 // Convierte una petición recibida (POST-GET...) a objeto JSON
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(fileUpload());
 
 // Cargo librerías instaladas y necesarias				// Añado el archivo mysql.js presente en la carpeta módulos
 const session = require('express-session');				// Para el manejo de las variables de sesión
@@ -65,13 +67,14 @@ io.on("connection", (socket) => {
 	const req = socket.request;
 
 	socket.on('joinRoom', data => {
-		console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
 		if (req.session.room != undefined && req.session.room.length > 0)
 			socket.leave(req.session.room);
 		req.session.room = data.room;
 		socket.join(req.session.room);
-
+        console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
+		
 		io.to(req.session.room).emit('chat-messages', { user: req.session.user, room: req.session.room });
+        
 	});
 
 	socket.on('pingAll', data => {
@@ -79,8 +82,12 @@ io.on("connection", (socket) => {
 		io.emit('pingAll', { event: "Ping to all", message: data });
 	});
 
-	socket.on('sendMessage', data => {
-		io.to(req.session.room).emit('newMessage', { room: req.session.room, message: data });
+	socket.on('sendMessage', async (data) => {
+		await MySql.realizarQuery(`INSERT INTO Mensajes (idChat, mensaje, usuarioEnvia, tiempo)
+    VALUES (${data.idChat}, '${data.mensaje}', ${data.usuarioEnvia}, NOW())`);
+        io.to(req.session.room).emit('newMessage', { room: req.session.room, mensaje: data.mensaje, idChat: data.idChat, usuarioEnvia: data.usuarioEnvia
+
+        });
 	});
 
 	socket.on('disconnect', () => {
@@ -205,13 +212,32 @@ app.post('/addComentario', async function(req,res) {
 })
 
 app.post('/addImagen', async function(req,res) {
-    console.log(req.body);
+    console.log(req.body);    
     let respuesta = {
         success: false,
         id: 0
     }
-    await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
-    VALUES (${req.body.idPropiedad}, '${req.body.imagen}')`);
+    console.log("ARCHIVOS:                    ", req.files);
+
+    let files = [];
+
+    if(req.files.file.length) {
+        for(let i = 0; i < req.files.file.length; i++) {
+            const base64String = Buffer.from(req.files.file[i].data).toString('base64');
+            files.push( { base64String } );
+        }
+    }
+    else {
+        const base64String = Buffer.from(req.files.file.data).toString('base64');
+        files.push( { base64String } );
+    }
+
+    for(let i = 0; i < files.length; i++) {        
+        await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
+            VALUES (${req.body.idPropiedad}, '${files[i].base64String}')`);
+    }
+
+    
 })
 
 app.get('/user', async function(req,res){
@@ -245,24 +271,6 @@ app.get('/nombreUsuario', async function(req,res){
     res.send(nombreUsuario)
 })
 
-app.put('/changeUsuario', async function(req, res){
-    console.log(req.body);
-    let respuesta = {
-        success: false,
-        id: 0,
-        nombre: ""
-    }
-    let usuario = await MySql.realizarQuery(`select * from Usuarios where nombre = '${req.body.nombre}'`);
-    if (usuario.length != 0) {
-        res.send(respuesta.success);
-    } else {
-        
-        await MySql.realizarQuery(`UPDATE Usuarios SET nombre = '${req.body.nombre}' WHERE idUsuario = ${req.body.idUsuario}`);
-        respuesta.success = true;
-        res.send(respuesta);     
-    }
-})
-
 app.put('/changeNombreApellido', async function(req, res){
     console.log(req.body);
     let respuesta = {
@@ -287,14 +295,15 @@ app.put('/changeContrasena', async function(req, res){
     res.send(respuesta);         
 })
 
-app.delete('/deleteUsuario', async function(req, res){
-    console.log(req.body);
+app.delete('/deletePropiedad', async function(req, res){
     let respuesta = {
         success: false,
         id: 0,
         nombre: ""
     }
-    await MySql.realizarQuery(`DELETE FROM Usuarios WHERE idUsuario == ${req.body.idUsuario}`);
+    let id = req.query.idPropiedad
+    console.log("query :" + id)
+    await MySql.realizarQuery(`DELETE FROM Propiedades WHERE idPropiedad = ${id}`);
     respuesta.success = true;
     res.send(respuesta);    
 })
@@ -360,4 +369,10 @@ app.post('/addMensaje', async function(req,res) {
     VALUES (${req.body.idChat}, '${req.body.mensaje}', ${req.body.usuarioEnvia}, NOW())`);
     respuesta.success = true;
     res.send(respuesta);     
+})
+
+app.get('/usuarios', async function(req,res){
+    //let usuario = await MySql.realizarQuery(`select nombre from Propiedades where idUsuario = '${req.body.id}'`);
+    let usuarios = await MySql.realizarQuery(`select * from Usuarios`);
+    res.send(usuarios)
 })

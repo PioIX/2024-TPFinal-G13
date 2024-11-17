@@ -16,12 +16,28 @@ export default function layoutHome({children}) {
   return (
       <div className={styles.div}>
         <div className={styles.container}>
+        {localStorage.getItem("nombreUsuario") !== "admin" &&
+        <>
         <h1>Conectando personas</h1>
         <h1>con sus lugares</h1>
         <h1>perfectos.</h1>
         <div className={styles.button}>
           <Button className={styles.button} onClick={redirigir} text="VER MÁS" />
         </div>
+        </>
+        }
+        {localStorage.getItem("nombreUsuario") === "admin" &&
+        <>
+        
+        <br></br>
+        <h1>Bienvenido</h1>
+        <h1>administrador</h1>
+        <br></br>
+        <br></br>
+        <br></br>
+        </>
+        }
+        
         </div>
       </div>
     );

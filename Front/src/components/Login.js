@@ -6,7 +6,7 @@ import Button from './Button';
 import Text from './Text';
 import { Red_Rose } from "next/font/google";
 import ButtonChat from "./ButtonChat";
-import ButtonMensaje from "./ButtonMensaje";
+import ButtonRegistrar from "./ButtonRegistrar";
 
 export default function Login() {
     const [usuario, setUsuario] = useState('');
@@ -59,13 +59,13 @@ export default function Login() {
             }
             else*/ 
             console.log(respuesta)
-            localStorage.setItem("idUsuario", respuesta.id)
-            localStorage.setItem("nombreUsuario", respuesta.nombre)
             if (respuesta.success == true){
+                localStorage.setItem("idUsuario", respuesta.id)
+                localStorage.setItem("nombreUsuario", respuesta.nombre)
                 alert("Usuario logueado")
                 redirigir()
             } else {
-                alert("Datos incorrectos")
+                alert("Los datos son incorrectos")
             }
         }
     }
@@ -96,7 +96,7 @@ export default function Login() {
                     </div>
                     <div className={styles.usuario}>
                         <h3>¿No tienes una cuenta?</h3>
-                        <ButtonMensaje className={styles.buttonMensaje} onClick={registro} text="Regístrate" />
+                        <ButtonRegistrar className={styles.buttonMensaje} onClick={registro} text="Regístrate" />
                     </div>
                 </div>
             </div>
