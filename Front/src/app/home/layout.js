@@ -21,8 +21,8 @@ export default function layoutHome({children}) {
         <div>
           <header className={styles.header}>
             <div className="logo">
-            <a href={"/home"}>
-                <img src='/5411estate.jfif' alt="Logo"></img>
+            <a href="https://www.argenprop.com/5411-estate/inmuebles/venta?anunciante-283014">
+                <img src='/logo5411estate.png' alt="Logo"></img>
             </a>
             </div>
             <nav>
@@ -89,7 +89,7 @@ export default function layoutHome({children}) {
               <a href="https://www.facebook.com/5411Estate/" target="_blank">
                   <img className="redes" src="/facebook-icon.png" alt="Facebook" />
               </a>
-              <a href="https://www.google.com/search?q=culo&rlz=1C1GCEU_esAR1106AR1106&oq=culo&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIJCAEQABgKGIAE0gEINTk0MmowajeoAgCwAgA&sourceid=chrome&ie=U" target="_blank">
+              <a href="https://web.whatsapp.com/" target="_blank">
                   <img className="redes" src="/whatsapp-icon.png" alt="WhatsApp"/>
               </a>
           </div>
