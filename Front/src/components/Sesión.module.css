@@ -7,13 +7,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*background-color: #69645f;/* Color de fondo similar a WhatsApp */
-     /* Tipografía moderna */
-    background-image: url('/EdificiosNy.jpg');
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    margin-top: auto;
+    margin-bottom: auto;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
