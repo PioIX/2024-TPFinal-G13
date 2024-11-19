@@ -222,13 +222,13 @@ app.get('/propiedad', async function(req, res) {
 
 app.get('/getImagenes', async function(req, res) {
     try {
+        let imagenes
         // Asegúrate de que se está recibiendo el parámetro `id`
         if (!req.query.idPropiedad) {
-            return res.status(400).send({ error: 'ID de propiedad es requerido' });
+            imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes`); 
+        } else {
+            imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes WHERE idPropiedad = ${req.query.idPropiedad}`);
         }
-
-        // Realiza la consulta a la base de datos
-        let imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes WHERE idPropiedad = ${req.query.idPropiedad}`);
         
         // Verifica si se encontraron propiedades
         if (imagenes.length === 0) {
@@ -265,7 +265,7 @@ app.get('/user', async function(req,res){
         if (!req.query.id) {
             return res.status(400).send({ error: 'ID de usuario es requerido' });
         }
-
+            //con un 5 nos conformamos brenchu ❤❤💖😢💖💖💖😜💖😘🙌🙌😘💕💕
         // Realiza la consulta a la base de datos
         let usuarios = await MySql.realizarQuery(`SELECT * FROM Usuarios WHERE idUsuario = ${req.query.id}`);
 
