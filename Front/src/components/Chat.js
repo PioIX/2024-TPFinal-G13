@@ -272,6 +272,9 @@ const getMensajes = async (selectedChat) => {
 
             </div>
 
+
+
+            <h1>Soy la ruta de /pruebas</h1>
         </>
     );
 }
