@@ -84,7 +84,9 @@ export default function propiedades() {
           vector.map((propiedad,index) => (
               <div key={index}>
                 <Propiedad key={index} onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}} idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} ambientes={propiedad.ambientes} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
-                <Image src={"data:image/jfif;base64," + handleImage(propiedad.idPropiedad)} width={100} height={100} alt="imagen-de-propiedad"></Image>
+                <a onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}}>
+                  <Image src={"data:image/jfif;base64," + handleImage(propiedad.idPropiedad)} width={100} height={100} alt="imagen-de-propiedad"></Image>
+                </a>
                 <br></br>
               </div>
             ))

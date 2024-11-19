@@ -224,10 +224,10 @@ app.get('/getImagenes', async function(req, res) {
     try {
         let imagenes
         // Asegúrate de que se está recibiendo el parámetro `id`
-        if (!req.query.idPropiedad) {
+        if (!req.query.id) {
             imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes`); 
         } else {
-            imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes WHERE idPropiedad = ${req.query.idPropiedad}`);
+            imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes WHERE idPropiedad = ${req.query.id}`);
         }
         
         // Verifica si se encontraron propiedades
