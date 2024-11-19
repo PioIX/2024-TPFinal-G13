@@ -89,7 +89,7 @@ export default function layoutHome({children}) {
               <a href="https://www.facebook.com/5411Estate/" target="_blank">
                   <img className="redes" src="/facebook-icon.png" alt="Facebook" />
               </a>
-              <a href="https://www.google.com/search?q=culo&rlz=1C1GCEU_esAR1106AR1106&oq=culo&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIJCAEQABgKGIAE0gEINTk0MmowajeoAgCwAgA&sourceid=chrome&ie=U" target="_blank">
+              <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmz_HCvkFoRh5u5CbfvGj31Cp26uvzhYSTuQ&s" target="_blank">
                   <img className="redes" src="/whatsapp-icon.png" alt="WhatsApp"/>
               </a>
           </div>

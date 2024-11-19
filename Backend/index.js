@@ -153,17 +153,39 @@ app.post('/addPropiedad', async function(req,res) {
         id: 0
     }
     let propiedad = await MySql.realizarQuery(`select * from Propiedades where direccion = '${req.body.direccion}'`);
-    if (propiedad.length != 0) {
-        res.send(respuesta.success);
-    } else {
-        await MySql.realizarQuery(`INSERT INTO Propiedades (tipoVivienda, precio, direccion, ambientes, zona, alquiler, descripcion, idUsuario)
+    if (propiedad.length == 0) {
+        let propiedadInsert = await MySql.realizarQuery(`INSERT INTO Propiedades (tipoVivienda, precio, direccion, ambientes, zona, alquiler, descripcion, idUsuario)
         VALUES ('${req.body.tipoVivienda}', ${req.body.precio}, '${req.body.direccion}', ${req.body.ambientes}, '${req.body.zona}', ${req.body.alquiler}, '${req.body.descripcion}', ${req.body.idUsuario})`);
-        let propiedad = await MySql.realizarQuery(`select * from Propiedades  WHERE direccion='${req.body.direccion}' and  precio=${req.body.precio}`);
+        console.log("RTA INSERT", propiedadInsert);
+        //let propiedad = await MySql.realizarQuery(`select * from Propiedades  WHERE direccion='${req.body.direccion}' and  precio=${req.body.precio}`);
         console.log(propiedad)
-        respuesta.id = propiedad[0].idpropiedades;
+        let propiedadId = propiedadInsert.insertId;
+
+        console.log("ARCHIVOS:                    ", req.files);
+
+        let files = [];
+
+        if(req.files.file.length) {
+            for(let i = 0; i < req.files.file.length; i++) {
+                const base64String = Buffer.from(req.files.file[i].data).toString('base64');
+                files.push( { base64String } );
+            }
+        }
+        else {
+            const base64String = Buffer.from(req.files.file.data).toString('base64');
+            files.push( { base64String } );
+        }
+
+        for(let i = 0; i < files.length; i++) {        
+            await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
+                VALUES (${propiedadId}, '${files[i].base64String}')`);
+        }
+
+        respuesta.id = propiedadId;
         respuesta.success = true;
-        res.send(respuesta);     
+
     }
+    res.send(respuesta);
 })
 
 app.get('/propiedades', async function(req,res){
@@ -171,6 +193,9 @@ app.get('/propiedades', async function(req,res){
     let propiedades = await MySql.realizarQuery(`select * from Propiedades`);
     res.send(propiedades)
 })
+
+
+
 
 app.get('/propiedad', async function(req, res) {
     try {
@@ -195,6 +220,28 @@ app.get('/propiedad', async function(req, res) {
     }
 });
 
+app.get('/getImagenes', async function(req, res) {
+    try {
+        // Asegúrate de que se está recibiendo el parámetro `id`
+        if (!req.query.idPropiedad) {
+            return res.status(400).send({ error: 'ID de propiedad es requerido' });
+        }
+
+        // Realiza la consulta a la base de datos
+        let imagenes = await MySql.realizarQuery(`SELECT * FROM Imagenes WHERE idPropiedad = ${req.query.idPropiedad}`);
+        
+        // Verifica si se encontraron propiedades
+        if (imagenes.length === 0) {
+            return res.status(404).send({ error: 'Imagenes no encontradas' });
+        }
+
+        // Enviar las propiedades como respuesta
+        res.send(imagenes);
+    } catch (error) {
+        console.error('Error al obtener imagenes:', error); // Log del error para depuración
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
 
 app.post('/addComentario', async function(req,res) {
     console.log(req.body);
@@ -211,34 +258,6 @@ app.post('/addComentario', async function(req,res) {
     res.send(respuesta);     
 })
 
-app.post('/addImagen', async function(req,res) {
-    console.log(req.body);    
-    let respuesta = {
-        success: false,
-        id: 0
-    }
-    console.log("ARCHIVOS:                    ", req.files);
-
-    let files = [];
-
-    if(req.files.file.length) {
-        for(let i = 0; i < req.files.file.length; i++) {
-            const base64String = Buffer.from(req.files.file[i].data).toString('base64');
-            files.push( { base64String } );
-        }
-    }
-    else {
-        const base64String = Buffer.from(req.files.file.data).toString('base64');
-        files.push( { base64String } );
-    }
-
-    for(let i = 0; i < files.length; i++) {        
-        await MySql.realizarQuery(`INSERT INTO Imagenes (idPropiedad, imagen)
-            VALUES (${req.body.idPropiedad}, '${files[i].base64String}')`);
-    }
-
-    
-})
 
 app.get('/user', async function(req,res){
     try {
@@ -303,6 +322,7 @@ app.delete('/deletePropiedad', async function(req, res){
     }
     let id = req.query.idPropiedad
     console.log("query :" + id)
+    await MySql.realizarQuery(`DELETE FROM Imagenes WHERE idPropiedad = ${id}`);
     await MySql.realizarQuery(`DELETE FROM Propiedades WHERE idPropiedad = ${id}`);
     respuesta.success = true;
     res.send(respuesta);    

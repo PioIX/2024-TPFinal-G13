@@ -16,6 +16,8 @@ export default function propiedades() {
   
   const router = useRouter();
   const [vector, setVector] = useState([]) 
+  
+  const [imagenes, setImagenes] = useState([]) 
   let isLoaded = false
 
   function redirigir(){
@@ -38,6 +40,23 @@ export default function propiedades() {
       console.log(result)
       setVector(result)
   }
+
+  const getImagenes = async (idPropiedad) => {
+    /*const data = {
+        id : localStorage.getItem("idUsuario")
+    }*/  
+    const response = await fetch('http://localhost:4000/getImagenes?idPropiedad=' + idPropiedad,{
+        method:"GET",
+        headers: {
+            "Content-Type": "application/json",
+          },
+    })
+
+    //Tengo que usar el await porque la respuesta del servidor es lenta
+    const result = await response.json()
+    console.log(result)
+    setImagenes(result)
+}
 
   useEffect(() => {
       if(!isLoaded){
@@ -62,6 +81,9 @@ export default function propiedades() {
           vector.map(propiedad => (
               <>
                 <Propiedad onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}} idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} ambientes={propiedad.ambientes} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
+                {
+
+                }
                 <br></br>
               </>
             ))
