@@ -27,36 +27,6 @@ const AddPropiedad = () => {
     const [descripcion, setDescripcion] = useState('');
     const [imagenes, setImagenes] = useState("");
 
-    const subirImagenes1 = (event) => {
-        if (event.target && event.target.files) {
-            const archivos = Array.from(event.target.files);
-            setImagenes(archivos);
-            
-            // Convertir cada imagen a base64
-        const promises = archivos.map((archivo) => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(archivo);
-            });
-        });
-
-        // Almacenar las imágenes en base64 cuando se resuelvan todas las promesas
-        Promise.all(promises)
-            .then((base64Array) => {
-                setImagenesBase64(base64Array);
-            })
-            .catch((error) => {
-                console.error("Error al convertir las imágenes a base64:", error);
-            });
-
-        } else {
-            console.error("No se pudo acceder a los archivos");
-        }
-        console.log(imagenes)
-    };
-
     // function ponerUsuario (evento){
     //     const valor = evento.target.value;
     //     setUsuario(valor); // Actualiza el valor localmente.
@@ -103,24 +73,24 @@ const AddPropiedad = () => {
 
         
         console.log("alquiler es: " + alquiler)
-        const data = {
-            tipoVivienda: tipoVivienda,
-            precio: precio,
-            direccion: direccion,
-            alquiler: alquiler,
-            ambientes: ambientes,
-            zona: zona,
-            descripcion: descripcion,
-            idUsuario: localStorage.getItem("idUsuario"),
-        };
-        console.log(data)
+        let formData = imagenes;
+        
+        formData.set('tipoVivienda', tipoVivienda);
+        formData.set('precio', precio);
+        formData.set('direccion', direccion);
+        formData.set('alquiler', alquiler);
+        formData.set('ambientes', ambientes);
+        formData.set('zona', zona);
+        formData.set('descripcion', descripcion);
+        formData.set('idUsuario', localStorage.getItem("idUsuario"));
+        console.log("FORMDATA", formData);
 
         const response = await fetch('http://localhost:4000/addPropiedad',{
             method:"POST",
             headers: {
-                "Content-Type": "application/json",
+                //"Content-Type": "application/json",
                 },
-            body:JSON.stringify(data),
+            body: formData,
         })
         
         console.log(response)
@@ -142,23 +112,7 @@ const AddPropiedad = () => {
 
     const subirImagenes = async (files) => { //Links con lógica
         //Metodo push para registrar en el historial el cambio de pantalla
-        console.log("inicio funcion")
-        const data = {
-            idPropiedad: 1,
-            
-        };
-        console.log(data)
-
-        for (const value of files.values()) {
-            console.log(value);
-          }
-
-        files.append('parametro', 'hola');
-
-        const response = await fetch('http://localhost:4000/addImagen',{
-            method:"POST",
-            body: files,
-        })
+        setImagenes(files);
     }
 
 
@@ -177,7 +131,6 @@ const AddPropiedad = () => {
         console.log(result[0].imagen)
         setImagenes(result[0].imagen)
     }
-
 
     return(
 
@@ -252,20 +205,10 @@ const AddPropiedad = () => {
                     <h2>Subir imagenes:</h2>
                         <InputImagen onChange={subirImagenes}/>
                 </div>
-                {/* {imagenes.length > 0 ? (
-                    imagenes.map((img, index) => (
-                        <p key={index}>{img.name}</p>
-                    ))
-                ) : (
-                    <p>No hay imágenes seleccionadas.</p>
-                )} */}
+                
 
                 <Button className={styles.boton} onClick={handleClick} text="Publicar"/>
                 
-                <Button className={styles.boton} onClick={subirImagenes} text="Subir imagen"/>
-                
-                <Button className={styles.boton} onClick={getImagen} text="Get imagen"/>
-                <img src={imagenes}></img>
             </div>
         </div>
     )

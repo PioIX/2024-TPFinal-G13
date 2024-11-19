@@ -23,6 +23,8 @@ export default function mensajes() {
     //</div>
     //</>
     <>
+      <header className={styles.header}>
+      </header>
       <div className={styles.container}>
       
       <div className={styles.contactos}>
