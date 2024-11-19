@@ -61,9 +61,6 @@ export default function Propiedades() {
     return <div>Cargando...</div>;
   }
 
-  function redirigir(){
-    router.push("home/propiedades/propiedad/modificar")
-  }
 
   let idPropiedad = parseInt(vector.idPropiedad)
   console.log("idPropiedad es: "+ idPropiedad)
@@ -83,14 +80,6 @@ export default function Propiedades() {
       />
       
       <ImageCarousel images={imagenes}></ImageCarousel>
-
-      { vector.idUsuario == localStorage.getItem("idUsuario") &&
-        <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
-      }
-
-      { localStorage.getItem("nombreUsuario") === "admin" &&
-        <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
-      }
     </div>
   );
 }
