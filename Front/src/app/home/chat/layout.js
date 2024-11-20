@@ -22,15 +22,10 @@ export default function mensajes() {
     //  <Chat></Chat>
     //</div>
     //</>
-    <>
-      <div className={styles.container}>
-      
-      <div className={styles.contactos}>
-      </div>
+    <>      
       <div className={styles.chatContainer}>
         <Chat/>
       
-      </div>
       </div>
     </>
   );

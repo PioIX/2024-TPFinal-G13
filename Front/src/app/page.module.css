@@ -43,4 +43,6 @@
   background-color: #855959; /* Fondo blanco para la sección de chat */
   overflow-y: auto; /* Desplazamiento vertical si es necesario */
   padding: 1rem;
+  margin-left: 50px;
+  margin-right: 50px;
 }
