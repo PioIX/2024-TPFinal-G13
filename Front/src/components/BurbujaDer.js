@@ -1,7 +1,7 @@
 "use client"
 import styles from "./Chat.module.css";
 
-export default function BubbleRight ({ mensaje, horaEnvio, tics }) {
+export default function BubbleRight ({ mensaje, horaEnvio}) {
     return (
         <div style={{ textAlign: 'right', margin: '10px 0' }}>
             <div
@@ -25,7 +25,7 @@ export default function BubbleRight ({ mensaje, horaEnvio, tics }) {
                         textAlign: 'right',
                     }}
                 >
-                    {horaEnvio} {tics} {/* Hora + Tics */}
+                    {horaEnvio}
                 </span>
             </div>
         </div>
