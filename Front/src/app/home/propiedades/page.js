@@ -8,6 +8,7 @@ import Registro from "../../../components/Registro";
 import Login from "../../../components/Login";
 import Button from "../../../components/Button";
 import Propiedad from "../../../components/Propiedad";
+import ImageCarousel from "../../../components/ImageCarousel"
 
 export default function propiedades() {
   
@@ -80,21 +81,31 @@ export default function propiedades() {
     //</div>
     //</>
     <div className={styles.container}>
-      {
-          vector.map((propiedad,index) => (
-              <div key={index}>
-                <Propiedad key={index} onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}} idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} ambientes={propiedad.ambientes} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
-                <a onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}}>
-                  <Image src={"data:image/jfif;base64," + handleImage(propiedad.idPropiedad)} width={100} height={100} alt="imagen-de-propiedad"></Image>
-                </a>
-                <br></br>
-              </div>
-            ))
-      }
-      <div className={styles.button}>
-        <Button className={styles.button} onClick={redirigir} text="Agregar Propiedad" />
-      </div>
+      {vector.map((propiedad, index) => (
+        <div key={index} className={styles.propiedadCard}>
+          <div className={styles.carouselContainer}>
+            <ImageCarousel
+              images={imagenes.filter((imagen) => imagen.idPropiedad === propiedad.idPropiedad)}
+            />
+          </div>
+
+          <div className={styles.propertyDetails}>
+            <h2>{propiedad.direccion}</h2>
+            <p>{propiedad.tipoVivienda} - {propiedad.ambientes} ambientes</p>
+            <p>Precio: ${propiedad.precio}</p>
+            <button
+              onClick={() => handleClickPropiedad(propiedad.idPropiedad)}
+              className={styles.propertyButton}
+            >
+              Ver más detalles
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
+
+
+
 
   );
 }

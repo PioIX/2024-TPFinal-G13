@@ -20,7 +20,7 @@
 .sidebar h2 {
     font-size: 18px;
     padding: 15px;
-    background-color: #25d366; /* Verde WhatsApp */
+    background-color: #994848; /* Verde WhatsApp */
     color: white;
     margin: 0;
     text-align: center;
@@ -34,10 +34,13 @@
     display: flex;
     flex-direction: column;
     gap: 10px; /* Espacio entre los chats */
+    border-top: 1px solid #ddd;
 }
 
 .nombreChat p{
     margin-left: 0px;
+    border-top: 1px solid #ddd;
+
 }
 /* Item de la lista de chats */
 .chatItem {
@@ -47,10 +50,11 @@
     justify-content: center; /* Alinea horizontalmente el contenido */
     align-items: center; /* Alinea verticalmente el contenido */
     text-align: center; /* Centra el texto dentro del contenedor */
+    border-bottom: 1px solid #ddd;
 }
 
 .chatItem:hover {
-    background-color: #e0ffe6; /* Fondo claro al pasar el cursor */
+    background-color: rgba(255, 107, 107, 0.5); /* Fondo claro al pasar el cursor */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -65,13 +69,15 @@
 
 /* Nuevo Chat */
 .addChat {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
     display: flex;
-    gap: 10px; /* Espacio entre el input y el botón */
     align-items: center;
+    padding: 15px; /* Igual que .messageInputContainer */
+    background-color: white;
+    border-top: 1px solid #ddd;
+    gap: 10px; /* Espacio uniforme entre elementos */
+    justify-content: center;
 }
+
 
 /* Input de nuevo chat */
 .addChat input {
@@ -86,8 +92,8 @@
     
 
 .addChat input:focus {
-    border-color: #25d366;
-    box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+    border-color: rgba(255, 107, 107, 0.5);;
+    box-shadow: 0 0 5px #994848;
 }
 
 /* Botón de agregar nuevo chat */
@@ -96,7 +102,7 @@
     font-size: 14px;
     border: none;
     border-radius: 20px;
-    background-color: #25d366;
+    background-color: rgba(255, 107, 107, 0.5);;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -106,11 +112,11 @@
 }
 
 .addChat button:hover {
-    background-color: #1da851;
+    background-color: rgba(255, 107, 107, 0.5);;
 }
 
 .addChat button:active {
-    background-color: #14843a;
+    background-color: #994848;
 }
 
 
@@ -159,8 +165,8 @@
 }
 
 .messageInput:focus {
-    border-color: #25d366;
-    box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+    border-color: rgba(255, 107, 107, 0.5);;
+    box-shadow: 0 0 5px #994848;
 }
 
 .sendButton {
@@ -168,7 +174,7 @@
     font-size: 14px;
     border: none;
     border-radius: 20px;
-    background-color: #25d366;
+    background-color: rgba(255, 107, 107, 0.5);;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -178,16 +184,16 @@
 }
 
 .sendButton:hover {
-    background-color: #1da851;
+    background-color: rgba(255, 107, 107, 0.5);;
 }
 
 .sendButton:active {
-    background-color: #14843a;
+    background-color: #994848;
 }
 
 /* Burbuja del mensaje del usuario actual (derecha) */
 .bubbleRight {
-    background-color: #25d366; /* Verde similar a WhatsApp */
+    background-color: #994848 !important;
     color: white;
     border-radius: 15px;
     padding: 10px 15px;
@@ -219,3 +225,6 @@
     flex-direction: column;
 }
 
+.messages p {
+    font-size: 18px;
+}

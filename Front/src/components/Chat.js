@@ -32,7 +32,7 @@ export default function Home() {
                 <div
                     style={{
                         display: 'inline-block',
-                        background: '#25d366',
+                        background: '#994848',
                         color: '#fff',
                         padding: '10px',
                         borderRadius: '10px',
@@ -172,64 +172,44 @@ const addChat = async () => {
 
 
 //----------------------------------- TRAER LOS MENSAJES DEL CHAT
-const getMensajes = async (selectedChat) => {
-    try {
-      console.log("id es: " + selectedChat);
-      const response = await fetch(`http://localhost:4000/mensajes?idChat=${selectedChat}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      
-      const result = await response.json();
-      console.log(result);
-      setMensajes(result);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+const getMensajes = (idChat) => {
+    const mensajesGuardados = localStorage.getItem(`mensajes_${idChat}`);
+    if (mensajesGuardados) {
+        setMensajes(JSON.parse(mensajesGuardados));
+    } else {
+        setMensajes([]); // Si no hay mensajes, establece un array vacío
     }
-  };
+};
 
-  useEffect(()=>{
-    console.log("Mensajes: ")
-    if (mensajes.length != 0) {
-        console.log(mensajes)
-    } else{
-    }
-  },[mensajes])
-
-  useEffect(() => {
-    console.log("IdCHAT: " + selectedChat)
-    let id = selectedChat
-    if (id){
+useEffect(() => {
+    if (selectedChat) {
         getMensajes(selectedChat);
     }
-  }, [selectedChat]);
+}, [selectedChat]);
 
 
 
   // ----------------------- ADD MENSAJES
-  const addMensajes = async () => {
-    if (!inputValue.trim()) {
-        return;
-    }
+  const addMensajes = () => { 
+    if (inputValue.trim() === '') return; // Evita enviar mensajes vacíos
 
-    const horaActual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Hora actual en formato HH:mm
-
+    const horaEnvio = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const nuevoMensaje = {
         idChat: selectedChat,
         mensaje: inputValue,
-        usuarioEnvia: parseInt(localStorage.getItem("idUsuario")),
-        horaEnvio: horaActual, // Hora del mensaje
-        tics: "✓", // Estado inicial de los tics
+        horaEnvio: horaEnvio,
+        tics: '✓' // Estado inicial de los tics
     };
 
-    console.log("Mensaje enviado:", nuevoMensaje);
+    // Actualizar mensajes en el estado
+    setMensajes((prevMensajes) => {
+        const nuevosMensajes = [...prevMensajes, nuevoMensaje];
+        // Guardar mensajes actualizados en localStorage
+        localStorage.setItem(`mensajes_${selectedChat}`, JSON.stringify(nuevosMensajes));
+        return nuevosMensajes;
+    });
 
-    // Agregar mensaje al estado local
-    setMensajes((prevMensajes) => [...prevMensajes, nuevoMensaje]);
-
-    // Limpiar el input después de enviar el mensaje
+    // Limpiar el input
     setInputValue('');
 };
 
@@ -294,6 +274,9 @@ const getMensajes = async (selectedChat) => {
                         placeholder="Nuevo chat"
                         value={nombre2}
                         onChange={(e) => setNombre2(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') addChat(); // Llama a la función addChat al presionar Enter
+                        }}
                     />
                     <ButtonChat text="Agregar" onClick={addChat} />
                 </div>
@@ -306,9 +289,10 @@ const getMensajes = async (selectedChat) => {
                         <div className={styles.messages}>
                             {mensajes.map((mensaje, index) => {
                                 const isCurrentUser =
-                                    parseInt(mensaje.usuarioEnvia) ===
+                                    parseInt(mensaje.usuarioEnvia) !==
                                     parseInt(localStorage.getItem("idUsuario"));
-    
+                            
+
                                 return isCurrentUser ? (
                                     <BubbleRight
                                         key={index}
@@ -323,7 +307,8 @@ const getMensajes = async (selectedChat) => {
                                         horaEnvio={mensaje.horaEnvio}
                                     />
                                 );
-                            })}
+                        })}
+
                         </div>
     
                         {/* Input y Botón */}
@@ -334,6 +319,9 @@ const getMensajes = async (selectedChat) => {
                                 placeholder="Escribe un mensaje..."
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') addMensajes(); // Llama a la función addMensajes al presionar Enter
+                                }}
                             />
                             <button
                                 className={styles.sendButton}
