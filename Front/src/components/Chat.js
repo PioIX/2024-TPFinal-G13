@@ -86,8 +86,8 @@ export default function Home() {
         let respuesta = await response.json();
         console.log(respuesta);
         if (respuesta.success == true) {
-            redirigir();
             alert("Chat agregado");
+            redirigir();
         } else {
             alert("Chat ya existente");
         }
