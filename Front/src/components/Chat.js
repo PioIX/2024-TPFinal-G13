@@ -70,11 +70,11 @@ export default function Home() {
         const data = {
             usuario1: parseInt(localStorage.getItem("idUsuario")),
             nombre1: localStorage.getItem("nombreUsuario"),
-            nombre2: nombre2  // Asegúrate de que aquí tienes el valor correcto
+            nombre2: nombre2
         };
-    
-        console.log("addChat es: ", data);  // Verifica los datos que se envían
-    
+
+        console.log("addChat es: ", data);
+
         const response = await fetch('http://localhost:4000/addChat', {
             method: "POST",
             headers: {
@@ -82,16 +82,20 @@ export default function Home() {
             },
             body: JSON.stringify(data),
         });
-    
+
         let respuesta = await response.json();
+
         console.log(respuesta);
+        
         if (respuesta.success == true) {
-            alert("Chat agregado");
             redirigir();
+            alert("Chat agregado");
+            // Limpiar el input después de agregar el chat
+            setNombre2('');
         } else {
             alert("Chat ya existente");
         }
-    }
+    };
 
 
 //---------------------------------- ELEGIR CHAT
@@ -187,7 +191,7 @@ const getMensajes = async (selectedChat) => {
 
 
     return (
-        <>
+        <div className={styles.container}>
             <div className={styles.main}>
                 <div className={styles.chats}>
                     <h2>Chats</h2>
@@ -220,7 +224,9 @@ const getMensajes = async (selectedChat) => {
                         onChange={setNombre2}  // Actualiza nombre2 cuando el usuario escribe
                     />
                     <ButtonChat className={styles.buttonChat} onClick={addChat} text="Agregar Chat"></ButtonChat>
+                    
 
+                    
                 </div>
 
                 <div className={styles.messages}>
@@ -243,14 +249,14 @@ const getMensajes = async (selectedChat) => {
                                         // Si el usuario actual envió el mensaje, muestra BubbleRight
                                         return (
                                             <React.Fragment key={mensaje.idMensaje}>
-                                                <BubbleRight mensaje={mensaje.mensaje} />
+                                                <BubbleRight mensaje={mensaje.mensaje} horaEnvio={mensaje.horaEnvio} tics={mensaje.tics}/>
                                             </React.Fragment>
                                         );
                                     } if (usuarioEnvia !== usuarioActual)
                                         // Si otro usuario envió el mensaje, muestra BubbleLeft
                                         return (
                                             <React.Fragment key={mensaje.idMensaje}>
-                                                <BubbleLeft mensaje={mensaje.mensaje} />
+                                                <BubbleLeft mensaje={mensaje.mensaje} horaEnvio={mensaje.horaEnvio} tics={mensaje.tics}/>
                                             </React.Fragment>
                                         );
                                     
@@ -260,7 +266,8 @@ const getMensajes = async (selectedChat) => {
                             <p>No hay mensajes</p>
                         )}
                     </div>
-                    <Input type="text"
+                    <Input 
+                        type="text"
                         placeholder="Envía un mensaje..." // Vincula el valor del input al estado nombre2
                         onChange={setInputValue}  // Actualiza nombre2 cuando el usuario escribe
                     />
@@ -271,7 +278,6 @@ const getMensajes = async (selectedChat) => {
                 </div>
 
             </div>
-
-        </>
+        </div>
     );
 }
