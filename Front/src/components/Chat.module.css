@@ -1,221 +1,110 @@
-/* Contenedor Principal */
-.container {
+.main {
     display: flex;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: #f7f7f7;
     font-family: Arial, sans-serif;
 }
 
-/* Sidebar de Chats */
-.sidebar {
-    width: 30%;
+.chats {
+    width: 250px;
     background-color: #ffffff;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
 }
 
-/* Título de la sección */
-.sidebar h2 {
+.chats h2 {
     font-size: 18px;
-    padding: 15px;
-    background-color: #25d366; /* Verde WhatsApp */
-    color: white;
+    color: #333;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
     margin: 0;
-    text-align: center;
 }
 
-/* Lista de Chats */
-.chatList {
-    flex: 1; /* Ocupa el espacio disponible */
-    padding: 10px;
-    overflow-y: auto; /* Habilita scroll si hay muchos chats */
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espacio entre los chats */
-}
-
-.nombreChat p{
-    margin-left: 0px;
-}
-/* Item de la lista de chats */
 .chatItem {
-    padding: 15px 15px;
+    padding: 15px;
     cursor: pointer;
     display: flex;
-    justify-content: center; /* Alinea horizontalmente el contenido */
-    align-items: center; /* Alinea verticalmente el contenido */
-    text-align: center; /* Centra el texto dentro del contenedor */
+    align-items: center;
+    transition: background-color 0.3s ease;
 }
 
 .chatItem:hover {
-    background-color: #e0ffe6; /* Fondo claro al pasar el cursor */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #f0f0f0;
 }
 
-/* Nombre del chat */
-.chatName {
+.chatItem span {
     font-size: 16px;
     color: #333;
-    font-weight: bold;
-    text-align: center; /* Centra el texto si el contenedor cambia de tamaño */
 }
 
-
-/* Nuevo Chat */
-.addChat {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-    display: flex;
-    gap: 10px; /* Espacio entre el input y el botón */
-    align-items: center;
-}
-
-/* Input de nuevo chat */
-.addChat input {
-    flex: 1; /* Ocupa todo el ancho disponible */
-    padding: 10px 15px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-    transition: all 0.3s ease;
-}
-    
-
-.addChat input:focus {
-    border-color: #25d366;
-    box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
-}
-
-/* Botón de agregar nuevo chat */
-.addChat button {
-    padding: 10px 15px;
-    font-size: 14px;
-    border: none;
-    border-radius: 20px;
-    background-color: #25d366;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 13px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-}
-
-.addChat button:hover {
-    background-color: #1da851;
-}
-
-.addChat button:active {
-    background-color: #14843a;
-}
-
-
-
-/* Área de Mensajes */
-.chatArea {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #e9ecef;
-}
-
-.chatContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.noChatSelected {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    color: #666;
-}
-
-/* Input y Botón */
-.messageInputContainer {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background-color: white;
-    border-top: 1px solid #ddd;
-}
-
-.messageInput {
-    flex: 1;
-    padding: 10px 15px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-    transition: all 0.3s ease;
-    margin-right: 10px;
-}
-
-.messageInput:focus {
-    border-color: #25d366;
-    box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
-}
-
-.sendButton {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 20px;
-    background-color: #25d366;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 13px;
-    margin-bottom: 15px;
-    margin-left: 10px;
-}
-
-.sendButton:hover {
-    background-color: #1da851;
-}
-
-.sendButton:active {
-    background-color: #14843a;
-}
-
-/* Burbuja del mensaje del usuario actual (derecha) */
-.bubbleRight {
-    background-color: #25d366; /* Verde similar a WhatsApp */
-    color: white;
-    border-radius: 15px;
-    padding: 10px 15px;
-    margin: 5px 0;
-    max-width: 60%;
-    align-self: flex-end; /* Alinea a la derecha */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Burbuja del mensaje del otro usuario (izquierda) */
-.bubbleLeft {
-    background-color: #ffffff;
-    color: #333;
-    border-radius: 15px;
-    padding: 10px 15px;
-    margin: 5px 0;
-    max-width: 60%;
-    align-self: flex-start; /* Alinea a la izquierda */
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Contenedor de mensajes con separación */
 .messages {
     flex: 1;
-    padding: 15px;
-    overflow-y: auto;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    background-color: #e9ecef;
+    overflow-y: auto;
 }
 
+.bubbleLeft, .bubbleRight {
+    max-width: 70%;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.bubbleLeft {
+    background-color: #f1f1f1;
+    color: #333;
+    align-self: flex-start;
+    border-radius: 20px 20px 20px 5px;
+    margin-right: 1100px;
+}
+
+.bubbleRight {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    border-radius: 20px 20px 5px 20px;
+    margin-left: 1100px;
+}
+
+.textInput {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.textInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.button {
+    background-color: #994848; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 7px 15px; /* Espaciado interno */
+    border: 1px solid #69645f; /* Borde gris claro */
+    border-radius: 25px; /* Bordes redondeados */
+    font-size: 12px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cursor de mano al pasar */
+    transition: background-color 0.3s, transform 0.3s; /* Efecto de transición */
+}
+
+.button:hover {
+    background-color: #814444; /* Color al pasar el ratón */
+    transform: scale(1.05); /* Aumentar tamaño al pasar */
+    border-color: white;
+}
+
+.button:active {
+    transform: scale(0.95); /* Reducir tamaño al hacer clic */
+}

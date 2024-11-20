@@ -26,69 +26,6 @@ export default function Home() {
   const router = useRouter();
 
 
-    const BubbleRight = ({ mensaje, horaEnvio, tics }) => {
-        return (
-            <div style={{ textAlign: 'right', margin: '10px 0' }}>
-                <div
-                    style={{
-                        display: 'inline-block',
-                        background: '#25d366',
-                        color: '#fff',
-                        padding: '10px',
-                        borderRadius: '10px',
-                        maxWidth: '70%',
-                        position: 'relative',
-                    }}
-                >
-                    <p style={{ margin: 0 }}>{mensaje}</p>
-                    <span
-                        style={{
-                            fontSize: '12px',
-                            color: '#d0f5dc',
-                            marginTop: '5px',
-                            display: 'block',
-                            textAlign: 'right',
-                        }}
-                    >
-                        {horaEnvio} {tics} {/* Hora + Tics */}
-                    </span>
-                </div>
-            </div>
-        );
-    };
-
-    const BubbleLeft = ({ mensaje, horaEnvio }) => {
-        return (
-            <div style={{ textAlign: 'left', margin: '10px 0' }}>
-                <div
-                    style={{
-                        display: 'inline-block',
-                        background: '#e0e0e0',
-                        color: '#333',
-                        padding: '10px',
-                        borderRadius: '10px',
-                        maxWidth: '70%',
-                        position: 'relative',
-                    }}
-                >
-                    <p style={{ margin: 0 }}>{mensaje}</p>
-                    <span
-                        style={{
-                            fontSize: '12px',
-                            color: '#999',
-                            marginTop: '5px',
-                            display: 'block',
-                            textAlign: 'left',
-                        }}
-                    >
-                        {horaEnvio} {/* Solo la hora */}
-                    </span>
-                </div>
-            </div>
-        );
-    };    
-
-
   //---------------------------- TRAE TODOS LOS CHATS
     const getVector = async (idUsuario) => {
         console.log("id es: "+ idUsuario)
@@ -122,7 +59,6 @@ export default function Home() {
 
 
 //---------------------------------------- AGREGA CHATS
-<<<<<<< HEAD
     const addChat = async () => { 
         console.log("Valor de nombre2 antes de enviar:", nombre2);  // Verifica el valor antes de enviar
     
@@ -155,45 +91,7 @@ export default function Home() {
         } else {
             alert("Chat ya existente");
         }
-=======
-const addChat = async () => { 
-    console.log("Valor de nombre2 antes de enviar:", nombre2);
-
-    if (nombre2 === '') {
-        alert("Por favor ingresa un nombre para el usuario");
-        return;
->>>>>>> 9a24a467cd4c55bb407dc8715b0e073023c7bc5b
     }
-
-    const data = {
-        usuario1: parseInt(localStorage.getItem("idUsuario")),
-        nombre1: localStorage.getItem("nombreUsuario"),
-        nombre2: nombre2
-    };
-
-    console.log("addChat es: ", data);
-
-    const response = await fetch('http://localhost:4000/addChat', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-
-    let respuesta = await response.json();
-    console.log(respuesta);
-    if (respuesta.success == true) {
-        redirigir();
-        alert("Chat agregado");
-
-        // Limpiar el input después de agregar el chat
-        setNombre2('');
-    } else {
-        alert("Chat ya existente");
-    }
-};
-
 
 
 //---------------------------------- ELEGIR CHAT
@@ -244,31 +142,18 @@ const getMensajes = async (selectedChat) => {
 
 
   // ----------------------- ADD MENSAJES
-  const addMensajes = async () => {
-    if (!inputValue.trim()) {
-        return;
-    }
-
-    const horaActual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Hora actual en formato HH:mm
-
-    const nuevoMensaje = {
+  const addMensajes = async () => { 
+    const data = {
         idChat: selectedChat,
         mensaje: inputValue,
         usuarioEnvia: parseInt(localStorage.getItem("idUsuario")),
-        horaEnvio: horaActual, // Hora del mensaje
-        tics: "✓", // Estado inicial de los tics
+         // Asegúrate de que aquí tienes el valor correcto
     };
 
-    console.log("Mensaje enviado:", nuevoMensaje);
+    console.log("addMensaje es: ", data);  // Verifica los datos que se envían
 
-    // Agregar mensaje al estado local
-    setMensajes((prevMensajes) => [...prevMensajes, nuevoMensaje]);
-
-    // Limpiar el input después de enviar el mensaje
-    setInputValue('');
-};
-
-
+    socket.emit('sendMessage' ,data)
+}
 
     /*const handleSubmit = () => {
         if (inputValue.trim() && selectedChat) {
@@ -302,89 +187,91 @@ const getMensajes = async (selectedChat) => {
 
 
     return (
-        <div className={styles.container}>
-            {/* Sidebar de Chats */}
-            <div className={styles.sidebar}>
-                <h2>Chats</h2>
-                <div className={styles.chatList}>
+        <>
+            <div className={styles.main}>
+                <div className={styles.chats}>
+                    <h2>Chats</h2>
+
                     {chats.map((chat) => {
-                        const currentUser = localStorage.getItem("nombreUsuario");
-                        const nombreChat =
-                            chat.nombre1 === currentUser ? chat.nombre2 : chat.nombre1;
-    
-                        return (
-                            <div
-                                key={chat.idChat}
-                                className={styles.nombreChat}
-                                onClick={() => handleChatClick(chat.idChat)}
-                            >
-                                <BubbleChat nombre={nombreChat} />
-                            </div>
-                        );
+                        // Obtenemos el id del usuario actual desde localStorage
+                        const nombreUsuarioActual = localStorage.getItem("nombreUsuario");
+                        
+                        if (chat.nombre1 === nombreUsuarioActual){
+                            return (
+                                <a key={chat.idChat} onClick={() => handleChatClick(chat.idChat)}>
+                                    <BubbleChat nombre={chat.nombre2} />
+                                </a>
+                            );
+                        } if (chat.nombre2 === nombreUsuarioActual)
+                            return (
+                                <a key={chat.idChat} onClick={() => handleChatClick(chat.idChat)}>
+                                    <BubbleChat nombre={chat.nombre1} />
+                                </a>
+                            )
+                        
+                        ;
                     })}
-                </div>
-                <div className={styles.addChat}>
-                    <Input
+
+
+
+                    <Input 
                         type="text"
-                        placeholder="Nuevo chat"
-                        value={nombre2}
-                        onChange={(e) => setNombre2(e.target.value)}
+                        placeholder="Nombre del usuario a agregar" // Vincula el valor del input al estado nombre2
+                        onChange={setNombre2}  // Actualiza nombre2 cuando el usuario escribe
                     />
-                    <ButtonChat text="Agregar" onClick={addChat} />
+                    <ButtonChat className={styles.buttonChat} onClick={addChat} text="Agregar Chat"></ButtonChat>
+
                 </div>
-            </div>
-    
-            {/* Área del Chat */}
-            <div className={styles.chatArea}>
-                {selectedChat ? (
-                    <div className={styles.chatContainer}>
-                        <div className={styles.messages}>
-                            {mensajes.map((mensaje, index) => {
-                                const isCurrentUser =
-                                    parseInt(mensaje.usuarioEnvia) ===
-                                    parseInt(localStorage.getItem("idUsuario"));
-    
-                                return isCurrentUser ? (
-                                    <BubbleRight
-                                        key={index}
-                                        mensaje={mensaje.mensaje}
-                                        horaEnvio={mensaje.horaEnvio}
-                                        tics={mensaje.tics}
-                                    />
-                                ) : (
-                                    <BubbleLeft
-                                        key={index}
-                                        mensaje={mensaje.mensaje}
-                                        horaEnvio={mensaje.horaEnvio}
-                                    />
-                                );
-                            })}
-                        </div>
-    
-                        {/* Input y Botón */}
-                        <div className={styles.messageInputContainer}>
-                            <input
-                                className={styles.messageInput}
-                                type="text"
-                                placeholder="Escribe un mensaje..."
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                            />
-                            <button
-                                className={styles.sendButton}
-                                onClick={addMensajes}
-                            >
-                                Enviar
-                            </button>
-                        </div>
+
+                <div className={styles.messages}>
+                    {selectedChat > 0 && 
+                    <>
+                    
+                    
+                    <div>
+                        {mensajes.length > 0 ? (
+                            <ul>
+
+                                {mensajes.map((mensaje) => {
+                                    // Obtenemos el usuario actual desde localStorage y normalizamos el valor
+                                    const usuarioActual = parseInt(localStorage.getItem("idUsuario"));
+                                    const usuarioEnvia = parseInt(mensaje.usuarioEnvia); // Normalizamos también el remitente
+
+                                    console.log("usuarioActual:", usuarioActual, "usuarioEnvia:", usuarioEnvia, mensaje); // Verifica los valores
+
+                                    if (usuarioEnvia === usuarioActual) {
+                                        // Si el usuario actual envió el mensaje, muestra BubbleRight
+                                        return (
+                                            <React.Fragment key={mensaje.idMensaje}>
+                                                <BubbleRight mensaje={mensaje.mensaje} />
+                                            </React.Fragment>
+                                        );
+                                    } if (usuarioEnvia !== usuarioActual)
+                                        // Si otro usuario envió el mensaje, muestra BubbleLeft
+                                        return (
+                                            <React.Fragment key={mensaje.idMensaje}>
+                                                <BubbleLeft mensaje={mensaje.mensaje} />
+                                            </React.Fragment>
+                                        );
+                                    
+                                })}
+                            </ul>
+                        ) : (
+                            <p>No hay mensajes</p>
+                        )}
                     </div>
-                ) : (
-                    <div className={styles.noChatSelected}>
-                        <p>Selecciona un chat para empezar</p>
-                    </div>
-                )}
+                    <Input type="text"
+                        placeholder="Envía un mensaje..." // Vincula el valor del input al estado nombre2
+                        onChange={setInputValue}  // Actualiza nombre2 cuando el usuario escribe
+                    />
+                    <ButtonMensaje className={styles.ButtonMensaje} onClick={addMensajes} text="Enviar"/>
+
+                    </>
+                    }
+                </div>
+
             </div>
-        </div>
-    );    
-        
+
+        </>
+    );
 }
