@@ -196,6 +196,7 @@ app.get('/propiedades', async function(req,res){
 
 
 
+
 app.get('/propiedad', async function(req, res) {
     try {
         // Asegúrate de que se está recibiendo el parámetro `id`
