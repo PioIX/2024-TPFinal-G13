@@ -12,9 +12,11 @@ import ButtonMensaje from "../../../../components/ButtonMensaje";
 import Chat from "../../../../components/Chat";
 import VerPropiedad from "../../../../components/VerPropiedad";
 import ButtonChat from "../../../../components/ButtonChat";
+import ImageCarousel from "../../../../components/ImagenCarrusel";
 
 export default function Propiedades() {
   const [vector, setVector] = useState(null);
+  const [imagenes, setImagenes] = useState([])
   const router = useRouter();
 
   const getVector = async (id) => {
@@ -31,12 +33,26 @@ export default function Propiedades() {
     setVector(result[0]);
   };
 
+  const getImagenes = async (id) => {
+    const response = await fetch(`http://localhost:4000/getImagenes?id=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json()
+    console.log(result)
+    setImagenes(result)
+  };
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("idPropiedad");
     console.log("Extracted idPropiedad:", id);
     if (id) {
       getVector(id);
+      getImagenes(id)
     }
   }, []);
   
@@ -45,9 +61,6 @@ export default function Propiedades() {
     return <div>Cargando...</div>;
   }
 
-  function redirigir(){
-    router.push("home/propiedades/propiedad/modificar")
-  }
 
   let idPropiedad = parseInt(vector.idPropiedad)
   console.log("idPropiedad es: "+ idPropiedad)
@@ -65,13 +78,8 @@ export default function Propiedades() {
         descripcion={vector.descripcion}
         idUsuario={vector.idUsuario}
       />
-      { vector.idUsuario == localStorage.getItem("idUsuario") &&
-        <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
-      }
-
-      { localStorage.getItem("nombreUsuario") === "admin" &&
-        <ButtonChat onClick={redirigir} text={"Modificar Publicación"}/>
-      }
+      
+      <ImageCarousel images={imagenes}></ImageCarousel>
     </div>
   );
 }
