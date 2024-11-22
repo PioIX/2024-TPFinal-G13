@@ -19,11 +19,12 @@
     padding: 10px;
     color: #fff;
     transition: transform 0.3s, box-shadow 0.3s;
-    width: 100%; /* El perfil ocupa todo el ancho disponible */
+    width: 98%; /* El perfil ocupa todo el ancho disponible */
     height: 150px; /* Reducir la altura total del perfil */
     align-items: center; /* Centrar verticalmente el contenido */
-    margin: 5px;
+    margin: 20px;
 }
+
 
 .perfil:hover {
     transform: scale(1.02); /* Efecto de aumento suave al pasar el mouse */
