@@ -21,7 +21,7 @@ export default function layoutHome({children}) {
         <div>
           <header className={styles.header}>
             <div className="logo">
-            <a href="https://www.argenprop.com/5411-estate/inmuebles/venta?anunciante-283014">
+            <a href={"/home"}>
                 <img src='/logo5411estate.png' alt="Logo"></img>
             </a>
             </div>
