@@ -1,0 +1,10 @@
+.VerPropiedad {
+    margin-bottom: 15px;
+    margin-right: 20px;
+    border-radius: 8px;
+    font-size: 40%;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    outline: none; /* Sin contorno al enfocar */
+    color: #000000;
+}
