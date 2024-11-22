@@ -2,7 +2,7 @@
 import React from "react";
 import styles from './Contacto.module.css';
 import Input from "... @/components/Input";
-import Button from "./Button";
+import ButtonContacto from "./ButtonContacto";
 import Textarea from "./Textarea";
 import { useEffect, useState } from "react";
 
@@ -84,7 +84,7 @@ export default function ContactForm(){
             
             <Textarea placeholder="Dejanos tu comentario" onChange={setTexto}/>
             <div className={styles.button}>
-                <Button className={styles.button} onClick={handleClick} text="Enviar comentario" />
+                <ButtonContacto className={styles.button} onClick={handleClick} text="Enviar comentario" />
             </div>
         </form>
         </div>
