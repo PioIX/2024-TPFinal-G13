@@ -134,46 +134,49 @@ const AddPropiedad = () => {
 
     return(
 
-        <div className={styles.container}>
-        <h1 className={styles.h1}>AGREGAR PROPIEDAD</h1>
-        
+        <div className={styles.contenedor}>
+            <h1 className={styles.h1}>AGREGAR PROPIEDAD</h1>
+
             <div className={styles.formGroup}>
-                <div className={styles.usuario}>
-                    <h2>Tipo de vivienda:</h2>
-                    <Input 
-                        type="text" 
-                        placeholder="Tipo de vivienda" 
-                        onChange={setTipoVivienda} 
-                    />
-                </div>
+                <div className={styles.formGroup1}>  
+                    <div className={styles.usuario}>
+                        <h2>Tipo de vivienda:</h2>
+                        <Input 
+                            type="text" 
+                            placeholder="Tipo de vivienda" 
+                            onChange={setTipoVivienda} 
+                        />
+                    </div>
 
-                <div className={styles.usuario}>
-                    <h2>Precio en Dólares:</h2>
-                    <Input 
-                        type="number" 
-                        placeholder="Precio" 
-                        onChange={setPrecio} 
-                    />
-                </div>
+                    <div className={styles.usuario}>
+                        <h2>Precio en Dólares:</h2>
+                        <Input 
+                            type="number" 
+                            placeholder="Precio" 
+                            onChange={setPrecio} 
+                        />
+                    </div>
 
-                <div className={styles.usuario}>
-                    <h2>Dirección:</h2>
-                    <Input 
-                        type="text" 
-                        placeholder="Dirección" 
-                        onChange={setDireccion} 
-                    />
-                </div>
+                    <div className={styles.usuario}>
+                        <h2>Dirección:</h2>
+                        <Input 
+                            type="text" 
+                            placeholder="Dirección" 
+                            onChange={setDireccion} 
+                        />
+                    </div>
 
-                <div className={styles.usuario}>
-                    <h2>¿Es alquiler?</h2>
-                    <div className="checkbox">
-                    <Checkbox 
-                        onChange={checkValue} 
-                    />
+                    <div className={styles.usuario}>
+                        <h2>¿Es alquiler?</h2>
+                        <div className="checkbox">
+                        <Checkbox 
+                            onChange={checkValue} 
+                        />
+                        </div>
                     </div>
                 </div>
 
+            <div className={styles.formGroup2}>   
                 <div className={styles.usuario}>
                     <h2>Cantidad de ambientes:</h2>
                     <Input 
@@ -205,11 +208,11 @@ const AddPropiedad = () => {
                     <h2>Subir imagenes:</h2>
                         <InputImagen onChange={subirImagenes}/>
                 </div>
+            </div>
                 
-
-                <Button className={styles.boton} onClick={handleClick} text="Publicar"/>
                 
             </div>
+            <Button className={styles.boton} onClick={handleClick} text="Publicar"/>
         </div>
     )
 }

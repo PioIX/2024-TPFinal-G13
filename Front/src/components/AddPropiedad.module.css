@@ -2,21 +2,21 @@
 /* Estilo del contenedor principal */
 
 
-.container {
+.contenedor {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display:inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   /*background-color: #69645f;/* Color de fondo similar a WhatsApp */
    /* Tipografía moderna */
   height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: rgba(51, 51, 51, 0.8);
+  width: 98%;
+  margin-left: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Estilo del título */
@@ -24,7 +24,7 @@
   display: flex;
   font-weight: 700;
   color: #ebebeb; /* Color verde característico de WhatsApp */
-  margin-top: 200px;
+  margin-top: 20px;
   margin-bottom: 60px;
   text-align: center;
   
@@ -45,6 +45,8 @@
   background-color: #69645f;
   align-items: center; /* Centra los elementos hijos horizontalmente */
 }
+
+
 
 .button {
   margin-top: 1rem; /* Espaciado superior */
