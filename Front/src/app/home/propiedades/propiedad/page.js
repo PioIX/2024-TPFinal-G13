@@ -96,13 +96,14 @@ export default function Propiedades() {
         />
       </div>
 
-      {/* Botones de administrador y propietario */}
+      <div className={styles.ButtonChat}>{/* Botones de administrador y propietario */}
       {isAdmin && (
         <ButtonChat onClick={deletePropiedad} text={"Eliminar Publicación"} />
       )}
       {isOwner && (
         <ButtonChat onClick={deletePropiedad} text={"Eliminar Publicación"} />
       )}
+      </div>
     </>
   );
 }

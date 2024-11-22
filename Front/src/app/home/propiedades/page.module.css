@@ -36,14 +36,31 @@
 
 .nuevaProp{
     background-color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    width: 49%;
-    margin-bottom: 10px;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    margin-left: 50px;
+    margin-bottom: 0.5%; /* 5px */
+    padding: 2%; /* 20px */
+    border-radius: 10px; /* 10px */
+    width: 90%; /* No cambia, ya es un porcentaje */
+    margin-bottom: -2%; /* 10px */
+    margin-left: 5%; /* 50px */
+    margin-right: 5%; /* 50px */
+}
+
+.nuevaProp.VerPropiedad{
+    margin-bottom: 15px;
+    margin-right: 20px;
+    border-radius: 8px;
+    font-size: 40%;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    outline: none; /* Sin contorno al enfocar */
+    color: #000000;
+}
+
+.ButtonChat {
+    margin-top: 2% ;
+    margin-left: 35%;
 }

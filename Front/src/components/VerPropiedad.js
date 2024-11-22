@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import styles from "./VerPropiedad.module.css"
 
 export default function VerPropiedad(props) {
   const [nombre, setNombre] = useState("");
@@ -27,31 +28,31 @@ export default function VerPropiedad(props) {
   return (
     <>
       <article>
-        <div key={props.idPropiedad}>
-          <p>
-            <strong>Dirección:</strong> {props.direccion}
-          </p>
-          <p>
-            <strong>Tipo de vivienda:</strong> {props.tipoVivienda}
-          </p>
-          <p>
-            <strong>Para alquilar:</strong> {alquiler}
-          </p>
-          <p>
-            <strong>Ambientes:</strong> {props.ambientes}
-          </p>
-          <p>
-            <strong>Zona:</strong> {props.zona}
-          </p>
-          <p>
-            <strong>Descripción:</strong> {props.descripcion}
-          </p>
-          <p>
-            <strong>Precio:</strong> {props.precio}
-          </p>
-          <p>
-            <strong>Nombre de usuario publicante:</strong> {nombre}
-          </p>
+        <div key={props.idPropiedad} className={styles.VerPropiedad}>
+          <h4>
+            <u>Dirección:</u> {props.direccion}
+          </h4>
+          <h4>
+            <u>Tipo de vivienda:</u> {props.tipoVivienda}
+          </h4>
+          <h4>
+            <u>Para alquilar:</u> {alquiler}
+          </h4>
+          <h4>
+            <u>Ambientes:</u> {props.ambientes}
+          </h4>
+          <h4>
+            <u>Zona:</u> {props.zona}
+          </h4>
+          <h4>
+            <u>Descripción:</u> {props.descripcion}
+          </h4>
+          <h4>
+            <u>Precio:</u> {props.precio}
+          </h4>
+          <h4>
+            <u>Nombre de usuario publicante:</u> {nombre}
+          </h4>
         </div>
       </article>
     </>
