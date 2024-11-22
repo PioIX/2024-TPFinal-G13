@@ -188,84 +188,92 @@ const getMensajes = async (selectedChat) => {
 
     return (
         <>
-            <div className={styles.main}>
-                <div className={styles.chats}>
+            <div className={styles.container}>
+                <div className={styles.sidebar}>
                     <h2>Chats</h2>
 
-                    {chats.map((chat) => {
-                        // Obtenemos el id del usuario actual desde localStorage
-                        const nombreUsuarioActual = localStorage.getItem("nombreUsuario");
-                        
-                        if (chat.nombre1 === nombreUsuarioActual){
-                            return (
-                                <a key={chat.idChat} onClick={() => handleChatClick(chat.idChat)}>
-                                    <BubbleChat nombre={chat.nombre2} />
-                                </a>
-                            );
-                        } if (chat.nombre2 === nombreUsuarioActual)
-                            return (
-                                <a key={chat.idChat} onClick={() => handleChatClick(chat.idChat)}>
-                                    <BubbleChat nombre={chat.nombre1} />
-                                </a>
-                            )
-                        
-                        ;
-                    })}
+                    <div className={styles.chatList}>
+                        {chats.map((chat) => {
+                            // Obtenemos el id del usuario actual desde localStorage
+                            const nombreUsuarioActual = localStorage.getItem("nombreUsuario");
+                            
+                            if (chat.nombre1 === nombreUsuarioActual){
+                                return (
+                                    <a key={chat.idChat} onClick={() => handleChatClick(chat.idChat)}>
+                                        <BubbleChat nombre={chat.nombre2} />
+                                    </a>
+                                );
+                            } if (chat.nombre2 === nombreUsuarioActual)
+                                return (
+                                    <a key={chat.idChat} onClick={() => handleChatClick(chat.idChat)}>
+                                        <BubbleChat nombre={chat.nombre1} />
+                                    </a>
+                                )
+                            
+                            ;
+                        })}
+                    </div>
 
-
-
-                    <Input 
-                        type="text"
-                        placeholder="Nombre del usuario a agregar" // Vincula el valor del input al estado nombre2
-                        onChange={setNombre2}  // Actualiza nombre2 cuando el usuario escribe
-                    />
-                    <ButtonChat className={styles.buttonChat} onClick={addChat} text="Agregar Chat"></ButtonChat>
+                    <div className={styles.addChat}>
+                        <Input 
+                            type="text"
+                            placeholder="Nombre del usuario a agregar" // Vincula el valor del input al estado nombre2
+                            onChange={setNombre2}  // Actualiza nombre2 cuando el usuario escribe
+                        />
+                        <ButtonChat className={styles.buttonChat} onClick={addChat} text="Agregar Chat"></ButtonChat>
+                    </div>
 
                 </div>
 
-                <div className={styles.messages}>
+                <div className={styles.chatArea}>
                     {selectedChat > 0 && 
                     <>
                     
+                    <div className={styles.chatContainer}>
+                    <div className={styles.messages}>
+                            {mensajes.length > 0 ? (
+                                <ul>
+
+                                    {mensajes.map((mensaje) => {
+                                        // Obtenemos el usuario actual desde localStorage y normalizamos el valor
+                                        const usuarioActual = parseInt(localStorage.getItem("idUsuario"));
+                                        const usuarioEnvia = parseInt(mensaje.usuarioEnvia); // Normalizamos también el remitente
+
+                                        console.log("usuarioActual:", usuarioActual, "usuarioEnvia:", usuarioEnvia, mensaje); // Verifica los valores
+
+                                        if (usuarioEnvia === usuarioActual) {
+                                            // Si el usuario actual envió el mensaje, muestra BubbleRight
+                                            return (
+                                                <React.Fragment key={mensaje.idMensaje}>
+                                                    <BubbleRight mensaje={mensaje.mensaje} />
+                                                </React.Fragment>
+                                            );
+                                        } if (usuarioEnvia !== usuarioActual)
+                                            // Si otro usuario envió el mensaje, muestra BubbleLeft
+                                            return (
+                                                <React.Fragment key={mensaje.idMensaje}>
+                                                    <BubbleLeft mensaje={mensaje.mensaje} />
+                                                </React.Fragment>
+                                            );
+                                        
+                                    })}
+                                </ul>
+                            ) : (
+                                <p>No hay mensajes</p>
+                            )}
+                        </div>
                     
-                    <div>
-                        {mensajes.length > 0 ? (
-                            <ul>
+                        
 
-                                {mensajes.map((mensaje) => {
-                                    // Obtenemos el usuario actual desde localStorage y normalizamos el valor
-                                    const usuarioActual = parseInt(localStorage.getItem("idUsuario"));
-                                    const usuarioEnvia = parseInt(mensaje.usuarioEnvia); // Normalizamos también el remitente
+                        <div className={styles.messageInputContainer}>
+                            <Input type="text"
+                                placeholder="Envía un mensaje..." // Vincula el valor del input al estado nombre2
+                                onChange={setInputValue}  // Actualiza nombre2 cuando el usuario escribe
+                            />
+                            <ButtonMensaje className={styles.ButtonMensaje} onClick={addMensajes} text="Enviar"/>
+                        </div>
 
-                                    console.log("usuarioActual:", usuarioActual, "usuarioEnvia:", usuarioEnvia, mensaje); // Verifica los valores
-
-                                    if (usuarioEnvia === usuarioActual) {
-                                        // Si el usuario actual envió el mensaje, muestra BubbleRight
-                                        return (
-                                            <React.Fragment key={mensaje.idMensaje}>
-                                                <BubbleRight mensaje={mensaje.mensaje} />
-                                            </React.Fragment>
-                                        );
-                                    } if (usuarioEnvia !== usuarioActual)
-                                        // Si otro usuario envió el mensaje, muestra BubbleLeft
-                                        return (
-                                            <React.Fragment key={mensaje.idMensaje}>
-                                                <BubbleLeft mensaje={mensaje.mensaje} />
-                                            </React.Fragment>
-                                        );
-                                    
-                                })}
-                            </ul>
-                        ) : (
-                            <p>No hay mensajes</p>
-                        )}
                     </div>
-                    <Input type="text"
-                        placeholder="Envía un mensaje..." // Vincula el valor del input al estado nombre2
-                        onChange={setInputValue}  // Actualiza nombre2 cuando el usuario escribe
-                    />
-                    <ButtonMensaje className={styles.ButtonMensaje} onClick={addMensajes} text="Enviar"/>
-
                     </>
                     }
                 </div>
