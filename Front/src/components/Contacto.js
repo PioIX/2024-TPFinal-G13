@@ -32,7 +32,7 @@ export default function ContactForm(){
         };
         console.log(data)
 
-        const response = await fetch('http://localhost:4000/addComentario',{
+        const response = await fetch('http://10.1.5.140:4000/addComentario',{
             method:"POST",
             headers: {
                 "Content-Type": "application/json",

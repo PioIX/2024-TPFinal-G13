@@ -25,7 +25,7 @@ export default function Login() {
     // }
     
     // useEffect(() => {
-    //     fetch('http://localhost:3000/saludo')
+    //     fetch('http://10.1.5.140:3000/saludo')
     //         .then((res) => res.json())
     //         .then((data) => {
     //             console.log(data);
@@ -44,7 +44,7 @@ export default function Login() {
             alert("Administrador logueado")
             router.replace("/home");
         } else {
-            const response = await fetch('http://localhost:4000/login',{
+            const response = await fetch('http://10.1.5.140:4000/login',{
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json",

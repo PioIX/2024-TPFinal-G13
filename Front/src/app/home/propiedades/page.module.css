@@ -40,7 +40,10 @@
     flex-direction: row;
     align-items: center;
     transition: transform 0.3s ease, background-color 0.3s ease;
-  margin-left: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 8px;
+
 }
 
 .main {
@@ -53,16 +56,6 @@
     margin-right: 5%; /* 50px */
 }
 
-.nuevaProp.VerPropiedad{
-    margin-bottom: 15px;
-    margin-right: 20px;
-    border-radius: 8px;
-    font-size: 40%;
-    font-family: 'Roboto', sans-serif;
-    width: 100%;
-    outline: none; /* Sin contorno al enfocar */
-    color: #000000;
-}
 
 .ButtonChat {
     margin-top: 2% ;

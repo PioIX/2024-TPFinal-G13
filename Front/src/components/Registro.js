@@ -40,7 +40,7 @@ const Registro = () => {
 
     // useEffect(
     //     function(){
-    //     fetch('http://localhost:3008/saludo')
+    //     fetch('http://10.1.5.140:3008/saludo')
     //     .then((res) => res.json())
     //     .then((data) => {
     //         console.log(data)
@@ -61,7 +61,7 @@ const Registro = () => {
             nombreApellido: nombreApellido,
         };
 
-        const response = await fetch('http://localhost:4000/addUsuario',{
+        const response = await fetch('http://10.1.5.140:4000/addUsuario',{
             method:"POST",
             headers: {
                 "Content-Type": "application/json",

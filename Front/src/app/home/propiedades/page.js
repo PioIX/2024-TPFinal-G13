@@ -24,7 +24,7 @@ export default function propiedades() {
       /*const data = {
           id : localStorage.getItem("idUsuario")
       }*/  
-      const response = await fetch('http://localhost:4000/propiedades',{
+      const response = await fetch('http://10.1.5.140:4000/propiedades',{
           method:"GET",
           headers: {
               "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export default function propiedades() {
     /*const data = {
         id : localStorage.getItem("idUsuario")
     }*/  
-    const response = await fetch('http://localhost:4000/getImagenes',{
+    const response = await fetch('http://10.1.5.140:4000/getImagenes',{
         method:"GET",
         headers: {
             "Content-Type": "application/json",

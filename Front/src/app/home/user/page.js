@@ -21,7 +21,7 @@ export default function Usuario() {
   const router = useRouter();
 
   const getVector = async (id) => {
-    const response = await fetch(`http://localhost:4000/user?id=${id}`, {
+    const response = await fetch(`http://10.1.5.140:4000/user?id=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

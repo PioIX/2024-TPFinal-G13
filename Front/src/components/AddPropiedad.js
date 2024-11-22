@@ -47,7 +47,7 @@ const AddPropiedad = () => {
 
     // useEffect(
     //     function(){
-    //     fetch('http://localhost:3008/saludo')
+    //     fetch('http://10.1.5.140:3008/saludo')
     //     .then((res) => res.json())
     //     .then((data) => {
     //         console.log(data)
@@ -85,7 +85,7 @@ const AddPropiedad = () => {
         formData.set('idUsuario', localStorage.getItem("idUsuario"));
         console.log("FORMDATA", formData);
 
-        const response = await fetch('http://localhost:4000/addPropiedad',{
+        const response = await fetch('http://10.1.5.140:4000/addPropiedad',{
             method:"POST",
             headers: {
                 //"Content-Type": "application/json",
@@ -120,7 +120,7 @@ const AddPropiedad = () => {
         //Metodo push para registrar en el historial el cambio de pantalla
         console.log("inicio funcion")
 
-        const response = await fetch('http://localhost:4000/getImagen?idPropiedad='+1,{
+        const response = await fetch('http://10.1.5.140:4000/getImagen?idPropiedad='+1,{
             method:"GET",
             headers: {
                 "Content-Type": "application/json",

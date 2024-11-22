@@ -27,7 +27,7 @@
 
 
 .perfil:hover {
-    transform: scale(1.02); /* Efecto de aumento suave al pasar el mouse */
+    transform: scale(1.01); /* Efecto de aumento suave al pasar el mouse */
     box-shadow: 0 0 50px rgba(255, 255, 255, 0.8); /* Efecto de brillo */
 }
 
