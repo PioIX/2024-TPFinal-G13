@@ -27,13 +27,13 @@ const session = require('express-session');				// Para el manejo de las variable
 									// Inicializo express para el manejo de las peticiones
 
 const server = app.listen(port, () => {
-	console.log(`Servidor NodeJS corriendo en http://10.1.5.140:${port}/`);
+	console.log(`Servidor NodeJS corriendo en http://localhost:${port}/`);
 });;
 
 const io = require('socket.io')(server, {
 	cors: {
 		// IMPORTANTE: REVISAR PUERTO DEL FRONTEND
-		origin: ["http://10.1.5.140:3000", "http://10.1.5.140:3001", "http://10.1.5.140:3002", "http://10.1.5.140:3003", "http://10.1.5.140:3004", "http://10.1.5.140:3005"],            	// Permitir el origen 10.1.5.140:3000
+		origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "http://localhost:3004", "http://localhost:3005"],            	// Permitir el origen localhost:3000
 		methods: ["GET", "POST", "PUT", "DELETE"],  	// Métodos permitidos
 		credentials: true                           	// Habilitar el envío de cookies
 	}

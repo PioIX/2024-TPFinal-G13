@@ -39,7 +39,7 @@ const ChangeUser = () => {
 
     // useEffect(
     //     function(){
-    //     fetch('http://10.1.5.140:3008/saludo')
+    //     fetch('http://localhost:3008/saludo')
     //     .then((res) => res.json())
     //     .then((data) => {
     //         console.log(data)
@@ -60,7 +60,7 @@ const ChangeUser = () => {
             idUsuario: idUsuarioActual
         };
 
-        const response = await fetch('http://10.1.5.140:4000/changeContrasena',{
+        const response = await fetch('http://localhost:4000/changeContrasena',{
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const ChangeUser = () => {
         };
         console.log(data)
 
-        const response = await fetch('http://10.1.5.140:4000/changeNombreApellido',{
+        const response = await fetch('http://localhost:4000/changeNombreApellido',{
             method:"PUT",
             headers: {
                 "Content-Type": "application/json",

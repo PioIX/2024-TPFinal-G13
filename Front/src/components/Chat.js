@@ -30,7 +30,7 @@ export default function Home() {
     const getVector = async (idUsuario) => {
         console.log("id es: "+ idUsuario)
         //socket.emit('getChats', {});
-        const response = await fetch(`http://10.1.5.140:4000/chats?idUsuario=` + idUsuario, {
+        const response = await fetch(`http://localhost:4000/chats?idUsuario=` + idUsuario, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export default function Home() {
     
         console.log("addChat es: ", data);  // Verifica los datos que se envían
     
-        const response = await fetch('http://10.1.5.140:4000/addChat', {
+        const response = await fetch('http://localhost:4000/addChat', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -108,7 +108,7 @@ export default function Home() {
 const getMensajes = async (selectedChat) => {
     try {
       console.log("id es: " + selectedChat);
-      const response = await fetch(`http://10.1.5.140:4000/mensajes?idChat=${selectedChat}`, {
+      const response = await fetch(`http://localhost:4000/mensajes?idChat=${selectedChat}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

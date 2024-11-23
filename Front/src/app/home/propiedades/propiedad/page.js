@@ -15,7 +15,7 @@ export default function Propiedades() {
   const router = useRouter();
 
   const getVector = async (id) => {
-    const response = await fetch(`http://10.1.5.140:4000/propiedad?id=${id}`, {
+    const response = await fetch(`http://localhost:4000/propiedad?id=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export default function Propiedades() {
   };
 
   const getImagenes = async (id) => {
-    const response = await fetch(`http://10.1.5.140:4000/getImagenes?id=${id}`, {
+    const response = await fetch(`http://localhost:4000/getImagenes?id=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export default function Propiedades() {
 
   const deletePropiedad = async () => {
     try {
-      const response = await fetch(`http://10.1.5.140:4000/deletePropiedad?idPropiedad=${vector.idPropiedad}`, {
+      const response = await fetch(`http://localhost:4000/deletePropiedad?idPropiedad=${vector.idPropiedad}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -24,7 +24,7 @@ export default function propiedades() {
       /*const data = {
           id : localStorage.getItem("idUsuario")
       }*/  
-      const response = await fetch('http://10.1.5.140:4000/usuarios',{
+      const response = await fetch('http://localhost:4000/usuarios',{
           method:"GET",
           headers: {
               "Content-Type": "application/json",

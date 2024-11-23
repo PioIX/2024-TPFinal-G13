@@ -9,7 +9,7 @@ export default function VerPropiedad(props) {
   const alquiler = props.alquiler == 1 ? "SI" : "NO";
 
   const getVector = async () => {
-    const url = `http://10.1.5.140:4000/nombreUsuario?idUsuario=${props.idUsuario}`;
+    const url = `http://localhost:4000/nombreUsuario?idUsuario=${props.idUsuario}`;
     const response = await fetch(url, {
       method: "GET",
       headers: {
