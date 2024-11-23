@@ -1,0 +1,63 @@
+.contenedor{
+    margin: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contenedorPropiedad {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5%; /* 5px */
+    padding: 2%; /* 20px */
+    border-radius: 10px; /* 10px */
+    width: 49%; /* No cambia, ya es un porcentaje */
+    margin-bottom: 1%; /* 10px */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.contenedorPropiedad:hover {
+    background-color: rgba(255, 107, 107, 0.8); /* Cambia el color de fondo al pasar el cursor */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+.contenedorPropiedad:active {
+    transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic */
+    background-color: rgba(255, 107, 107, 0.8); /* Color más oscuro al hacer clic */
+}
+
+
+.button {
+    margin-left: 35%; /* -60px */
+}
+
+.nuevaProp{
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 8px;
+
+}
+
+.main {
+    margin-bottom: 0.5%; /* 5px */
+    padding: 2%; /* 20px */
+    border-radius: 10px; /* 10px */
+    width: 90%; /* No cambia, ya es un porcentaje */
+    margin-bottom: -2%; /* 10px */
+    margin-left: 5%; /* 50px */
+    margin-right: 5%; /* 50px */
+}
+
+
+.ButtonChat {
+    margin-top: 2% ;
+    margin-left: 35%;
+}

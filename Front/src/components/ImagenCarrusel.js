@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import React, { useState } from "react";
+import styles from "./ImageCarousel.module.css"; // Archivo CSS para los estilos
 
 const ImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,34 +18,39 @@ const ImageCarousel = ({ images }) => {
   };
 
   return (
-    <div>
-      {/* Botón para retroceder */}
-      <button onClick={prevImage} disabled={images.length === 0}>
-        Anterior
-      </button>
-
-      {/* Mostrar imagen actual */}
-      {images.length > 0 ? (
-        <img
-          src={"data:image/jfif;base64," + Object(images)[currentIndex].imagen} // Accede a la propiedad `imagen`
-          alt={`Imagen ${currentIndex + 1}`}
-          style={{ width: "300px", height: "200px", objectFit: "cover" }}
-        />
-      ) : (
-        <p>No hay imágenes disponibles</p>
-      )}
-
-      {/* Botón para avanzar */}
-      <button onClick={nextImage} disabled={images.length === 0}>
-        Siguiente
-      </button>
-
-      {/* Indicador */}
-      <p>
-        {currentIndex + 1} de {images.length}
-      </p>
-    </div>
+    <>
+      <div className={styles.carousel}>
+        {images.length > 0 ? (
+          <>
+            {/* Flecha izquierda */}
+            <div className={styles.arrowLeft} onClick={prevImage}>
+              &#8249; {/* Símbolo de flecha izquierda */}
+            </div>
+  
+            {/* Imagen actual */}
+            <img
+              src={"data:image/jfif;base64," + Object(images)[currentIndex].imagen}
+              alt={`Imagen ${currentIndex + 1}`}
+              className={styles.image}
+            />
+  
+            {/* Flecha derecha */}
+            <div className={styles.arrowRight} onClick={nextImage}>
+              &#8250; {/* Símbolo de flecha derecha */}
+            </div>
+  
+            {/* Indicador */}
+            <p className={styles.indicator}>
+              {currentIndex + 1} de {images.length}
+            </p>
+          </>
+        ) : (
+          <p className={styles.noImages}>No hay imágenes disponibles</p>
+        )}
+      </div>
+    </>
   );
 };
+
 
 export default ImageCarousel;

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Button from './Button';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./Sesión.module.css";
+import styles from "./ChangeUser.module.css";
 import Text from './Text';
 
 
@@ -123,9 +123,12 @@ const ChangeUser = () => {
                 <div className={styles.usuario}>
                     <Text textoH2="Nombre y Apellido" placeholder="Nombre completo" onChange={setNombreApellido}></Text>
                 </div>
-                <Button className={styles.boton} onClick={changeContraseña} text="Cambiar Contraseña"/>
+                <div className={styles.botones}>
+                    <Button className={styles.boton} onClick={changeContraseña} text="Cambiar Contraseña"/>
                 
-                <Button className={styles.boton} onClick={changeNombreApellido} text="Cambiar Nombre completo"/>
+                    <Button className={styles.boton} onClick={changeNombreApellido} text="Cambiar Nombre completo"/>
+                </div>
+
         </div>
         </>
     )

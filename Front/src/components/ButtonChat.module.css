@@ -1,6 +1,6 @@
 .button {
-    background-color: #814444; /* Color de fondo */
-    color: white; /* Color del texto */
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black; /* Color del texto */
     padding: 15px 30px; /* Espaciado interno */
     border: 1px solid #69645f; /* Borde gris claro */
     border-radius: 25px; /* Bordes redondeados */

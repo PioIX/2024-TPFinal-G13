@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import Image from "next/image";
-import styles from "../page.modules.css";
+import styles from "./page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Registro from "../../../components/Registro";
@@ -74,27 +74,27 @@ export default function propiedades() {
   }
 
   return (
-    //<>
-    //<div className={styles.chatContainer}>
-    //  <Chat></Chat>
-    //</div>
-    //</>
-    <div className={styles.container}>
-      {
-          vector.map((propiedad,index) => (
-              <div key={index}>
-                <Propiedad key={index} onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}} idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} ambientes={propiedad.ambientes} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
-                <a onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}}>
-                  <Image src={"data:image/jfif;base64," + handleImage(propiedad.idPropiedad)} width={100} height={100} alt="imagen-de-propiedad"></Image>
-                </a>
-                <br></br>
-              </div>
+    
+    <>
+       <div className={styles.contenedor}>
+        {
+            vector.map((propiedad,index) => (
+              <div key={index} className={styles.contenedorPropiedad} onClick={() => handleClickPropiedad(propiedad.idPropiedad)} role="button">   
+                  <a onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}}>
+                    <Image src={"data:image/jfif;base64," + handleImage(propiedad.idPropiedad)} width={100} height={100} alt="imagen-de-propiedad"></Image>
+                  </a>
+                  <Propiedad key={index} onClick={() => {handleClickPropiedad(propiedad.idPropiedad)}} idPropiedad={propiedad.idPropiedad} direccion={propiedad.direccion} tipoVivienda={propiedad.tipoVivienda} ambientes={propiedad.ambientes} alquiler={propiedad.alquiler} precio={propiedad.precio}/>
+                  
+                  <br></br>
+                </div>
             ))
-      }
-      <div className={styles.button}>
-        <Button className={styles.button} onClick={redirigir} text="Agregar Propiedad" />
+        }
       </div>
-    </div>
+
+      <div className={styles.button}>
+          <Button className={styles.button} onClick={redirigir} text="Agregar Propiedad" />
+        </div>
+    </>
 
   );
 }

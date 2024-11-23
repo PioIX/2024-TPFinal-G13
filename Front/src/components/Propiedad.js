@@ -10,15 +10,26 @@ export default function Propiedad (props){
         var alquiler = "NO"
     }
 
-    return(
+    return (
         <article onClick={props.onClick}>
-            <div key={props.idPropiedad}>
-              <p>Dirección: {props.direccion}</p>
-              <p>Tipo de vivienda: {props.tipoVivienda}</p>
-              <p>Ambientes: {props.ambientes}</p>
-              <p>Para alquilar: {alquiler}</p>
-              <p>Precio: {props.precio}</p>
-            </div>
+          <div key={props.idPropiedad}>
+            <p>
+              <strong>Dirección:</strong> {props.direccion}
+            </p>
+            <p>
+              <strong>Tipo de vivienda:</strong> {props.tipoVivienda}
+            </p>
+            <p>
+              <strong>Ambientes:</strong> {props.ambientes}
+            </p>
+            <p>
+              <strong>Para alquilar:</strong> {alquiler}
+            </p>
+            <p>
+              <strong>Precio:</strong> {props.precio}
+            </p>
+          </div>
         </article>
-    )
+      );
+      
 }

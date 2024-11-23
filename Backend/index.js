@@ -67,9 +67,10 @@ io.on("connection", (socket) => {
 	const req = socket.request;
 
 	socket.on('joinRoom', data => {
-		if (req.session.room != undefined && req.session.room.length > 0)
-			socket.leave(req.session.room);
 		req.session.room = data.room;
+        if (req.session.room != undefined && req.session.room.length > 0)
+			socket.leave(req.session.room);
+		
 		socket.join(req.session.room);
         console.log("🚀 ~ io.on ~ req.session.room:", req.session.room)
 		

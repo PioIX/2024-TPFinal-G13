@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import Image from "next/image";
-import styles from "../page.modules.css";
+import styles from "./page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Registro from "../../../components/Registro";
@@ -13,6 +13,7 @@ import Chat from "../../../components/Chat";
 import VerPropiedad from "../../../components/VerPropiedad";
 import VerUsuario from "../../../components/VerUsuario";
 import ButtonChat from "../../../components/ButtonChat";
+
 
 export default function Usuario() {
   const [vector, setVector] = useState(null);
@@ -48,29 +49,34 @@ export default function Usuario() {
     router.push("user/modificar")
   }
 
+  function login(){
+    router.replace("/"); // Evita recargar la página
+    localStorage.setItem("idUsuario", 0);
+  }
   
-
-
-function login(){
-  router.replace("/")
-  localStorage.setItem("idUsuario", 0)
-}
 
   return (
     <div className={styles.container}>
-      {console.log(vector)}
-      { vector != null &&
-        <VerUsuario 
-        idUsuario={vector.idUsuario}
-        nombre={vector.nombre}
-        contraseña={vector.contraseña}
-        nombreApellido={vector.nombreApellido}
-      />
-      }     
-      <ButtonChat onClick={redirigir} text={"Modificar Usuario"}/>
-      {/*<ButtonChat onClick={deleteUser} text={"Eliminar Usuario"}/>*/}
-      
-      <ButtonChat onClick={login} text={"Cerrar Sesión"}/>
+      <div className={styles.perfil}>
+        <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" className={styles.img}/>
+
+        {console.log(vector)}
+        { vector != null &&
+          <VerUsuario 
+          idUsuario={vector.idUsuario}
+          nombre={vector.nombre}
+          contraseña={vector.contraseña}
+          nombreApellido={vector.nombreApellido}
+        />
+        }     
+      </div>
+      <div className={styles.botones}>
+        <ButtonChat onClick={redirigir} text={"Modificar Usuario"} className={styles.boton}/>
+        {/*<ButtonChat onClick={deleteUser} text={"Eliminar Usuario"}/>*/}
+        
+        <ButtonChat onClick={login} text={"Cerrar Sesión"} className={styles.boton}/>
+      </div>
+
     </div>
   );
 }
